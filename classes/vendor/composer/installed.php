@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f01f725e13a92d5f737e650b13736b769e90263a',
+        'reference' => '34ab49d28a111fdaaf56a557006988bd4f5f9155',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,16 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f01f725e13a92d5f737e650b13736b769e90263a',
+            'reference' => '34ab49d28a111fdaaf56a557006988bd4f5f9155',
+            'dev_requirement' => false,
+        ),
+        'capsule/di' => array(
+            'pretty_version' => '2.2.0',
+            'version' => '2.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../capsule/di',
+            'aliases' => array(),
+            'reference' => '45f2c75f0d42b991a3a29bc2a65212500fb2f152',
             'dev_requirement' => false,
         ),
         'nesbot/carbon' => array(
@@ -27,6 +36,21 @@
             'aliases' => array(),
             'reference' => '4a54375c21eea4811dbd1149fe6b246517554e78',
             'dev_requirement' => false,
+        ),
+        'psr/container' => array(
+            'pretty_version' => '1.1.2',
+            'version' => '1.1.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/container',
+            'aliases' => array(),
+            'reference' => '513e0666f7216c7459170d56df27dfcefe1689ea',
+            'dev_requirement' => false,
+        ),
+        'psr/container-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0.0',
+            ),
         ),
         'symfony/deprecation-contracts' => array(
             'pretty_version' => 'v2.5.1',
