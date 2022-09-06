@@ -55,7 +55,7 @@ if($_POST){
 		<div class="container">
 
 			<div class="row mb-4">
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
 						<div class="card-header">
 							<h6 class="card-header-title">Agregar movimiento</h6>
