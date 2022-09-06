@@ -139,51 +139,67 @@ $wallet = new myWallet();
 
 			</div>
 
-			<div class="row mb-4">		
-				<div class="col-md-6">
-					<div class="row mb-4">
-						<div class="col-md-6">
-							<div class="card border-custom shadow-sm">
-								<div class="card-body">
-									<div class="align-items-center row">
-										<div class="col">
-									    	<h6 class="card-title text-muted text-uppercase fs-7">
-									    		Total Ingresos
-									    	</h6>
-									    	<h5 class="card-subtitle mb-2 fs-6">
-									    		<?='$'.$wallet->getBalanceTotal(); ?>
-									    	</h5>
-								    	</div>
-								    	<div class="col-auto">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-										</div>							    	
-							    	</div>
-							  	</div>													
+			<div class="row mb-4">
+				<div class="col">
+					<div class="card border-custom shadow-sm">
+						<div class="card-body">
+							<div class="align-items-center row">
+								<div class="col">
+									<h6 class="card-title text-muted text-uppercase fs-7">
+										Total Ingresos
+									</h6>
+									<h5 class="card-subtitle mb-2 fs-6">
+										<?='$'.$wallet->getBalanceTotal(); ?>
+									</h5>
+								</div>
+								<div class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+								</div>							    	
 							</div>
-						</div>								
-						
-						<div class="col-md-6">
-							<div class="card border-custom shadow-sm">
-								<div class="card-body">
-									<div class="align-items-center row">
-										<div class="col">
-									    	<h6 class="card-title text-muted text-uppercase fs-7">
-									    		Total Egresos
-									    	</h6>
-									    	<h5 class="card-subtitle mb-2 fs-6">
-									    		<?='$'.$wallet->getBalanceTotal('egreso'); ?>
-									    	</h5>
-								    	</div>
-								    	<div class="col-auto">
-								    		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d60f0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-down"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
-										</div>							    	
-							    	</div>
-							  	</div>													
+						</div>													
+					</div>
+				</div>								
+				
+				<div class="col">
+					<div class="card border-custom shadow-sm">
+						<div class="card-body">
+							<div class="align-items-center row">
+								<div class="col">
+									<h6 class="card-title text-muted text-uppercase fs-7">
+										Total Egresos
+									</h6>
+									<h5 class="card-subtitle mb-2 fs-6">
+										<?='$'.$wallet->getBalanceTotal('egreso'); ?>
+									</h5>
+								</div>
+								<div class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d60f0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-down"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+								</div>							    	
 							</div>
-						</div>	<!-- Col-6 -->
-					</div>		<!-- Row -->
-					
-				</div>	<!-- Col -->
+						</div>													
+					</div>
+				</div>	<!-- Col-6 -->
+
+				<div class="col">
+					<div class="card border-custom shadow-sm">
+						<div class="card-body">
+							<div class="align-items-center row">
+								<div class="col">
+									<h6 class="card-title text-muted text-uppercase fs-7">
+										Ingresos vs Egresos
+									</h6>
+									<h5 class="card-subtitle mb-2 fs-6">
+										<?='$'.$wallet->getBalanceTotal('egreso'); ?>
+									</h5>
+								</div>
+								<div class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d60f0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-down"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+								</div>							    	
+							</div>
+						</div>													
+					</div>
+				</div>	<!-- Col-6 -->				
+
 			</div>	<!-- Row -->
 		</div> 	<!-- Container -->	
 		

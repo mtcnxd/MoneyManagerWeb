@@ -61,7 +61,7 @@ class myWallet
 	public function selectTable($table = 'wallet_saving')
 	{
 		$mysql  = new MySQL();
-		$query  = "SELECT * FROM `$table` ORDER BY amount";
+		$query  = "SELECT * FROM $table";
 		$result = $mysql->mySQLquery($query);
 		
 		return $result;

@@ -55,7 +55,7 @@ if($_POST){
 		<div class="container">
 
 			<div class="row mb-4">
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
 						<div class="card-header">
 							<h6 class="card-header-title">Agregar Categoria</h6>
@@ -68,6 +68,7 @@ if($_POST){
 							    	<select class="form-select" name="type">
 								  		<option value="ingreso">Ingreso</option>
 								  		<option value="egreso">Egreso</option>
+										<option value="inversion">Inversion</option>
 									</select>
 							  	</div>
 							  	<div class="mb-3">
@@ -90,41 +91,67 @@ if($_POST){
 				</div>	<!-- Col -->
 
 				<div class="col">
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<h6 class="card-header-title">Ingresos</h6>
-							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-						</div>				
-						<div class="card-body">
-							<div class="list-group">
-								<?php
-								$data = $wallet->selectCategory('ingreso');
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card rounded border border-custom shadow-sm mb-4">
+								<div class="card-header">
+									<h6 class="card-header-title">Ingresos</h6>
+									<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+								</div>				
+								<div class="card-body">
+									<div class="list-group">
+										<?php
+										$data = $wallet->selectCategory('ingreso');
 
-								foreach ($data as $key => $value) {
-									echo "<a href='#'' class='list-group-item list-group-item-action'>".$value->name."</a>";
-								}
-								?>
-							</div>
-						</div>	
-					</div> 	<!-- Card -->
-
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<h6 class="card-header-title">Egresos</h6>
-							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-						</div>
-						<div class="card-body">
-							<div class="list-group">
-								<?php
-								$data = $wallet->selectCategory('egreso');
-
-								foreach ($data as $key => $value) {
-									echo "<a href='#'' class='list-group-item list-group-item-action'>".$value->name."</a>";
-								}
-								?>
-							</div>
+										foreach ($data as $key => $value) {
+											echo "<a href='#'' class='list-group-item list-group-item-action'>".$value->name."</a>";
+										}
+										?>
+									</div>
+								</div>	
+							</div>						
 						</div>
 
+						<div class="col-md-6">
+							<div class="card rounded border border-custom shadow-sm mb-4">
+								<div class="card-header">
+									<h6 class="card-header-title">Egresos</h6>
+									<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+								</div>
+								<div class="card-body">
+									<div class="list-group">
+										<?php
+										$data = $wallet->selectCategory('egreso');
+
+										foreach ($data as $key => $value) {
+											echo "<a href='#'' class='list-group-item list-group-item-action'>".$value->name."</a>";
+										}
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="card rounded border border-custom shadow-sm mb-4">
+								<div class="card-header">
+									<h6 class="card-header-title">Inversiones</h6>
+									<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+								</div>
+								<div class="card-body">
+									<div class="list-group">
+										<?php
+										$data = $wallet->selectCategory('inversion');
+
+										foreach ($data as $key => $value) {
+											echo "<a href='#'' class='list-group-item list-group-item-action'>".$value->name."</a>";
+										}
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+					
 					</div>
 
 				</div>
