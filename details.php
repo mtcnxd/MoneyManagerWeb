@@ -93,72 +93,21 @@ if($_POST){
 						<div class="card-body">
 							<table class="table table-hover">
 								<?php
-								$balance = 0;
-								$saveData[] = array();
-								$data = $wallet->loadCurrentInvestments();
+								$data = $wallet->loadListbyItem($_REQUEST['q']);
 
 								foreach ($data as $key => $value) {
-									$balance += $value;
-								}
+                                    $dateTime = new DateTime($value->date);
 
-								foreach ($data as $key => $value) {
-									$percentage = ($value/$balance) * 100;
 									echo "<tr>";
-									echo "	<td><a href='details.php?q=$key' class='table-link-item link-primary'>".$key."</a></td>";
-									echo "	<td class='text-end'> $". number_format($value, 2)."</td>";
-									echo "	<td class='text-end'>  ". number_format($percentage, 2)."%</td>";
+									echo "	<td>". $value->concept."</td>";
+                                    echo "	<td>". $dateTime->format('d-m-Y')."</td>";
+									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
 									echo "</tr>";
-								}								
+								}
 								?>
 							</table>
 						</div>	
 					</div> 	<!-- Card -->
-						
-					<div class="row">
-						<div class="col-md-6">
-							<div class="card border-custom shadow-sm">
-								<div class="card-body">
-									<div class="align-items-center row">
-										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">
-												Total invertido
-											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">
-												<?php
-												echo '$'. number_format($balance, 2);
-												?>
-											</h5>
-										</div>
-										<div class="col-auto">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-										</div>							    	
-									</div>
-								</div>													
-							</div>
-						</div>	
-						
-						<div class="col-md-6">
-							<div class="card border-custom shadow-sm">
-								<div class="card-body">
-									<div class="align-items-center row">
-										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">
-												Total ahorros
-											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">
-												<?php
-												echo '$'. number_format($wallet->getBalanceFrom('wallet_invest'), 2);
-												?>
-											</h5>
-										</div>
-										<div class="col-auto">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-										</div>							    	
-									</div>
-								</div>													
-							</div>
-						</div>						
-					</div>
 
 				</div>
 

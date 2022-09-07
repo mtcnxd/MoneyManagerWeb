@@ -15,7 +15,6 @@ if($_POST){
 
 	$wallet->insertData('wallet_category', $values);
 }
-
 ?>
 
 <html>
@@ -102,7 +101,6 @@ if($_POST){
 									<div class="list-group">
 										<?php
 										$data = $wallet->selectCategory('ingreso');
-
 										foreach ($data as $key => $value) {
 											echo "<a href='#'' class='list-group-item list-group-item-action'>".$value->name."</a>";
 										}
@@ -122,7 +120,6 @@ if($_POST){
 									<div class="list-group">
 										<?php
 										$data = $wallet->selectCategory('egreso');
-
 										foreach ($data as $key => $value) {
 											echo "<a href='#'' class='list-group-item list-group-item-action'>".$value->name."</a>";
 										}

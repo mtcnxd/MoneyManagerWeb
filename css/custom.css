@@ -15,6 +15,10 @@ body {
 	background: #daedfc;
 }
 
+.table-link-item {
+	text-decoration: none !important;
+}
+
 .fs-7 {
 	font-size:11px;
 }

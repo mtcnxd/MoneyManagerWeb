@@ -65,5 +65,28 @@ class myWallet
 		$result = $mysql->mySQLquery($query);
 		
 		return $result;
-	}		
+	}
+
+	public function loadCurrentInvestments()
+	{
+		$mysql = new MySQL();
+		$query = "select * from wallet_invest where date in (select max(date) max_date 
+			from wallet_invest group by concept) order by concept";
+
+		$result = array();
+		foreach($mysql->mySQLquery($query) as $row){
+			$result[$row->concept] = $row->amount;
+		}
+
+		return $result ;
+	}
+
+	public function loadListbyItem($concept)
+	{
+		$mysql  = new MySQL();
+		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' ORDER BY date DESC";
+		
+		return $mysql->mySQLquery($query);
+	}
+
 }
