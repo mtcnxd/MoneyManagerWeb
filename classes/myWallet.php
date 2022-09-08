@@ -53,18 +53,14 @@ class myWallet
 		$mysql  = new MySQL();
 		$query  = "SELECT SUM(amount) as total FROM `$from`";
 		$result = $mysql->mySQLquery($query);
-		$result = $result[0]->total;
-		
-		return $result;
+		return $result[0]->total;
 	}	
 
 	public function selectTable($table = 'wallet_saving')
 	{
 		$mysql  = new MySQL();
-		$query  = "SELECT * FROM $table";
-		$result = $mysql->mySQLquery($query);
-		
-		return $result;
+		$query  = "SELECT * FROM $table";		
+		return $mysql->mySQLquery($query);
 	}
 
 	public function loadCurrentInvestments()
@@ -85,7 +81,6 @@ class myWallet
 	{
 		$mysql  = new MySQL();
 		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' ORDER BY date DESC";
-		
 		return $mysql->mySQLquery($query);
 	}
 

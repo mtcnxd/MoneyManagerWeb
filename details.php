@@ -87,7 +87,7 @@ if($_POST){
 				<div class="col">
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
-							<h6 class="card-header-title">Inversiones</h6>
+							<h6 class="card-header-title">Rendimientos</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
 						<div class="card-body">
@@ -97,6 +97,8 @@ if($_POST){
 
 								foreach ($data as $key => $value) {
                                     $dateTime = new DateTime($value->date);
+									$values[$key]  = $value->amount;
+									$labels[$key]  = $dateTime->format('d-m-Y');
 
 									echo "<tr>";
 									echo "	<td>". $value->concept."</td>";
@@ -108,6 +110,16 @@ if($_POST){
 							</table>
 						</div>	
 					</div> 	<!-- Card -->
+
+					<div class="card rounded border border-custom shadow-sm mb-4">
+						<div class="card-header">
+							<h6 class="card-header-title">Grafica</h6>
+							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+						</div>				
+						<div class="card-body">
+							<canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
+						</div>	
+					</div> 	<!-- Card -->					
 
 				</div>
 
@@ -123,4 +135,39 @@ if($_POST){
 		crossorigin="anonymous">
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script>
+const currentChart = document.getElementById('currentChart').getContext('2d');
+const myChart = new Chart(currentChart, {
+    type: 'line',
+    data: {
+        labels: <?=json_encode( $labels );?>,
+        datasets: [{
+            label: 'Wallet Balance',
+            data: <?=json_encode( $values );?>,
+            borderColor: 'rgba(255, 202, 40, 1)',
+            backgroundColor: 'rgba(255, 202, 40, 0.5)',
+            borderWidth:1,
+            pointRadius:2,
+            hoverOffset:5,
+            fill: true
+       }]
+    },
+    options: {
+		responsive: true,
+    	plugins: {
+	      	legend: {
+	        	position:'none',
+	        	align:'center',
+	        	labels:{
+	        		padding:25,
+	        		boxWidth:18,
+	        		boxHeight:17
+	        	}
+	      	}
+      }
+    }
+});
 </script>
