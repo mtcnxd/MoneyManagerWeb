@@ -90,17 +90,29 @@ if($_POST){
 							<h6 class="card-header-title">Rendimientos</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
-						<div class="card-body">
+						<div class="card-body p-0">
 							<table class="table table-hover">
+								<thead>
+									<tr class="table-custom text-uppercase fs-7">
+										<th scope="col">#</td>
+										<th scope="col">Instrumento</td>
+										<th scope="col">Fecha</td>
+										<th scope="col" class="text-end">Saldo</td>
+									</tr>
+								</thead>								
+
 								<?php
-								$data = $wallet->loadListbyItem($_REQUEST['q']);
+								$count = 0;
+								$data  = $wallet->loadListbyItem($_REQUEST['q']);
 
 								foreach ($data as $key => $value) {
+									$count++;
                                     $dateTime = new DateTime($value->date);
 									$values[$key]  = $value->amount;
 									$labels[$key]  = $dateTime->format('d-m-Y');
 
 									echo "<tr>";
+									echo "	<td>". $count."</td>";
 									echo "	<td>". $value->concept."</td>";
                                     echo "	<td>". $dateTime->format('d-m-Y')."</td>";
 									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";

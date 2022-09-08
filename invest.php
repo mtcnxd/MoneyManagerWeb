@@ -90,23 +90,34 @@ if($_POST){
 							<h6 class="card-header-title">Inversiones</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
-						<div class="card-body">
+						<div class="card-body p-0">
 							<table class="table table-hover">
+								<thead>
+									<tr class="table-custom text-uppercase fs-7">
+										<th scope="col">#</td>
+										<th scope="col">Intrumento</td>
+										<th scope="col" class="text-end">Porcentaje</td>
+										<th scope="col" class="text-end">Saldo</td>
+									</tr>
+								</thead>								
 								<?php
+								$count = 0;
 								$balance = 0;
-								$saveData[] = array();
 								$data = $wallet->loadCurrentInvestments();
 
 								foreach ($data as $key => $value) {
 									$balance += $value;
 								}
-
+								
 								foreach ($data as $key => $value) {
+									$count++;
 									$percentage = ($value/$balance) * 100;
+									
 									echo "<tr>";
+									echo "	<td>".$count."</td>";
 									echo "	<td><a href='details.php?q=$key' class='table-link-item link-primary'>".$key."</a></td>";
-									echo "	<td class='text-end'> $". number_format($value, 2)."</td>";
 									echo "	<td class='text-end'>  ". number_format($percentage, 2)."%</td>";
+									echo "	<td class='text-end'> $". number_format($value, 2)."</td>";
 									echo "</tr>";
 								}								
 								?>
@@ -147,7 +158,7 @@ if($_POST){
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 												<?php
-												echo '$'. number_format($wallet->getBalanceFrom('wallet_invest'), 2);
+												echo '$'. number_format($wallet->getBalanceFrom('wallet_saving'), 2);
 												?>
 											</h5>
 										</div>
