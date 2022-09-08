@@ -39,16 +39,7 @@ if($_POST){
 	<body>
 		<header class="p-3 mb-3 border-bottom border-custom bg-white shadow-sm">
 			<div class="container">
-		    	<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-			        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-			        	<li><a href="index.php" class="nav-link px-3 link-dark">Balance</a></li>
-			        	<li><a href="wallet.php" class="nav-link px-3 link-dark">Cartera</a></li>			        	
-						<li><a href="saving.php" class="nav-link px-3 link-dark">Ahorros</a></li>
-						<li><a href="invest.php" class="nav-link px-3 link-dark">Inversiones</a></li>
-			          	<li><a href="categories.php" class="nav-link px-3 link-dark">Categorias</a></li>
-			          	<li><a href="profile.php" class="nav-link px-3 link-dark">Profile</a></li>
-			        </ul>
-		      	</div>
+				<?php include ('includes/main_menu.php'); ?>
 			</div>
 		</header>		
 		
