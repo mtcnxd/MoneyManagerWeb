@@ -37,7 +37,7 @@ if($_POST){
 	</head>
 
 	<body>
-		<header class="p-3 mb-3 border-bottom border-custom bg-white shadow-sm">
+		<header class="p-3 mb-3 border-bottom border-custom bg-custom-menu shadow-sm">
 			<div class="container">
 				<?php include ('includes/main_menu.php'); ?>
 			</div>

@@ -35,7 +35,7 @@ if($_POST){
 	</head>
 
 	<body>
-		<header class="p-3 mb-3 border-bottom border-custom bg-white shadow-sm">
+		<header class="p-3 mb-3 border-bottom border-custom bg-custom-menu shadow-sm">
 			<div class="container">
 				<?php include ('includes/main_menu.php'); ?>
 			</div>
@@ -150,8 +150,8 @@ const myChart = new Chart(currentChart, {
         datasets: [{
             label: 'Wallet Balance',
             data: <?=json_encode( $values );?>,
-            borderColor: 'rgba(255, 202, 40, 1)',
-            backgroundColor: 'rgba(255, 202, 40, 0.5)',
+            borderColor: 'rgba(102, 187, 106, 1)',
+            backgroundColor: 'rgba(102, 187, 106, 0.5)',
             borderWidth:1,
             pointRadius:2,
             hoverOffset:5,

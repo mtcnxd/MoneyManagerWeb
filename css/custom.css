@@ -15,6 +15,10 @@ body {
 	background: #daedfc;
 }
 
+.bg-custom-menu {
+	background: #f6f8fa;
+}
+
 .table-link-item {
 	text-decoration: none !important;
 }
