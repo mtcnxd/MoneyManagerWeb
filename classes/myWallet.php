@@ -41,7 +41,7 @@ class myWallet
 	public function getBalanceTotal($type = 'ingreso')
 	{
 		$mysql  = new MySQL();
-		$query  = "SELECT SUM(amount) as total FROM `wallet_movements` WHERE type = '$type'; ";
+		$query  = "SELECT SUM(amount) as total FROM `wallet_movements` WHERE type = '$type'";
 		$result = $mysql->mySQLquery($query);
 		$result = $result[0]->total;
 		
@@ -51,7 +51,8 @@ class myWallet
 	public function getBalanceFrom($from = 'wallet_saving')
 	{
 		$mysql  = new MySQL();
-		$query  = "SELECT SUM(amount) as total FROM `$from`";
+		$query  = "select SUM(amount) as total from wallet_invest where date in (select max(date) max_date 
+			from wallet_invest group by concept) order by concept";
 		$result = $mysql->mySQLquery($query);
 		return $result[0]->total;
 	}	
@@ -80,7 +81,7 @@ class myWallet
 	public function loadListbyItem($concept)
 	{
 		$mysql  = new MySQL();
-		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' ORDER BY date DESC";
+		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' ORDER BY date DESC LIMIT 7";
 		return $mysql->mySQLquery($query);
 	}
 

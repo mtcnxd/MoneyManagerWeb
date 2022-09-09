@@ -90,6 +90,24 @@ if($_POST){
 				</div>	<!-- Col -->
 
 				<div class="col">
+
+					<div class="card rounded border border-custom shadow-sm mb-4">
+						<div class="card-header">
+							<ul class="nav nav-tabs card-header-tabs">
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="true" href="#">Egresos</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link">Ingresos</a>
+								</li>
+							</ul>
+						</div>
+						<div class="card-body">
+							<h6 class="card-title">Lista de movimientos del dia</h6>
+							<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+						</div>
+					</div> <!-- Card -->
+
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
 							<h6 class="card-header-title">Movimientos del dia</h6>
@@ -112,7 +130,7 @@ if($_POST){
 								?>
 							</table>
 						</div>	
-					</div> 	<!-- Card -->
+					</div> 	<!-- Card -->					
 
 				</div>	<!-- Col -->
 

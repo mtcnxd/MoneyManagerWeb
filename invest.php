@@ -47,14 +47,14 @@ if($_POST){
 				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
 						<div class="card-header">
-							<h6 class="card-header-title">Saldo al dia de hoy</h6>
+							<h6 class="card-header-title">Ingresar saldo de cuenta</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
 						<div class="card-body">
 							<form action="invest.php" method="post">
 							  	<div class="mb-3">
 							    	<label for="" class="form-label">Concepto</label>
-							    	<select type="text" class="form-control" name="concept">
+							    	<select type="text" class="form-select" name="concept">
 									<?php
 										$data = $wallet->selectCategory('inversion');
 
@@ -66,7 +66,10 @@ if($_POST){
 							  	</div>								
 							  	<div class="mb-3">
 							    	<label for="" class="form-label">Cantidad</label>
-							    	<input type="text" class="form-control" name="amount">
+									<div class="input-group">
+										<div class="input-group-text">$</div>
+										<input type="text" class="form-control" name="amount" placeholder="0.00">
+									</div>
 							  	</div>
 
 							  <button type="submit" class="btn btn-primary">Guardar</button>
@@ -78,7 +81,7 @@ if($_POST){
 				<div class="col">
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
-							<h6 class="card-header-title">Inversiones</h6>
+							<h6 class="card-header-title">Saldos de inversiones</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
 						<div class="card-body p-0">
@@ -116,7 +119,7 @@ if($_POST){
 						</div>	
 					</div> 	<!-- Card -->
 						
-					<div class="row">
+					<div class="row mb-4">
 						<div class="col-md-6">
 							<div class="card border-custom shadow-sm">
 								<div class="card-body">
@@ -162,11 +165,11 @@ if($_POST){
 						</div>						
 					</div>
 
-				</div>
+				</div> <!-- Col -->
 
-			</div>	<!-- Row -->			
+			</div>	<!-- Row -->
 
-		</div> 	<!-- Container -->	
+		</div> 	<!-- Container -->
 		
 	</body>
 </html>

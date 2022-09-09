@@ -114,22 +114,18 @@ if($_POST){
 						</div>	
 					</div> 	<!-- Card -->
 
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<h6 class="card-header-title">Grafica</h6>
-							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-						</div>				
+					<div class="card border-custom shadow-sm">
 						<div class="card-body">
 							<canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
-						</div>	
-					</div> 	<!-- Card -->					
+						</div>
+					</div>				
 
 				</div>
 
 			</div>	<!-- Row -->			
 
 		</div> 	<!-- Container -->	
-		
+
 	</body>
 </html>
 
@@ -151,7 +147,7 @@ const myChart = new Chart(currentChart, {
             label: 'Wallet Balance',
             data: <?=json_encode( $values );?>,
             borderColor: 'rgba(102, 187, 106, 1)',
-            backgroundColor: 'rgba(102, 187, 106, 0.5)',
+            backgroundColor: 'rgba(102, 187, 106, 0.8)',
             borderWidth:1,
             pointRadius:2,
             hoverOffset:5,
