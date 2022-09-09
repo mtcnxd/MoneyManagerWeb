@@ -27,6 +27,12 @@ body {
 	font-size:11px;
 }
 
+.alert-custom {
+	background-color:  #fffae6;
+	border-left: 5px solid #ffdb4d;
+	border-radius: 0%;
+}
+
 .card-header {
 	background-color:#f6f8fa;
 }
