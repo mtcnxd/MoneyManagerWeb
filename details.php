@@ -146,8 +146,8 @@ const myChart = new Chart(currentChart, {
         datasets: [{
             label: 'Wallet Balance',
             data: <?=json_encode( $values );?>,
-            borderColor: 'rgba(102, 187, 106, 1)',
-            backgroundColor: 'rgba(102, 187, 106, 0.8)',
+            borderColor: 'rgba(0, 153, 204, 1)',
+            backgroundColor: 'rgba(0, 172, 230, 0.2)',
             borderWidth:1,
             pointRadius:2,
             hoverOffset:5,

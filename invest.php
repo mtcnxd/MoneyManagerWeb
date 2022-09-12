@@ -45,7 +45,7 @@ if($_POST){
 
 			<div class="row mb-4">
 				<div class="col-md-5">
-					<div class="card rounded border border-custom shadow-sm">
+					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
 							<h6 class="card-header-title">Ingresar saldo de cuenta</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -76,9 +76,62 @@ if($_POST){
 							</form>	
 						</div>	
 					</div> 	<!-- Card -->
+
+					<div class="row mb-4">
+						<div class="col-md-6">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Inversion total
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">
+												<?php
+												echo '$ 95,000';
+												?>
+											</h5>
+										</div>
+										<div class="col-auto">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+										</div>							    	
+									</div>
+								</div>													
+							</div>
+						</div>	
+						
+						<div class="col-md-6">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Tasa promedio mes
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">
+												<?php
+												echo number_format(1.43, 2) ."%";
+												?>
+											</h5>
+										</div>
+										<div class="col-auto">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+										</div>							    	
+									</div>
+								</div>													
+							</div>
+						</div>						
+					</div>
+
 				</div>	<!-- Col -->
 
 				<div class="col">
+					<div class="card border-custom shadow-sm mb-4">
+						<div class="card-body">
+							<canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
+						</div>
+					</div>	
+
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
 							<h6 class="card-header-title">Saldos de inversiones</h6>
@@ -116,54 +169,17 @@ if($_POST){
 								}								
 								?>
 							</table>
+
+							<div class="container px-4 text-center mb-3">
+								<div class="row gx-5">
+									<div class="col-md-4">
+										<button type="button" class="btn btn-sm btn-outline-success">Actualizar Inversion</button>
+									</div>
+								</div>
+							</div>
+
 						</div>	
 					</div> 	<!-- Card -->
-						
-					<div class="row mb-4">
-						<div class="col-md-6">
-							<div class="card border-custom shadow-sm">
-								<div class="card-body">
-									<div class="align-items-center row">
-										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">
-												Total invertido
-											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">
-												<?php
-												echo '$'. number_format($balance, 2);
-												?>
-											</h5>
-										</div>
-										<div class="col-auto">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-										</div>							    	
-									</div>
-								</div>													
-							</div>
-						</div>	
-						
-						<div class="col-md-6">
-							<div class="card border-custom shadow-sm">
-								<div class="card-body">
-									<div class="align-items-center row">
-										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">
-												Total ahorros
-											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">
-												<?php
-												echo '$'. number_format($wallet->getBalanceFrom('wallet_saving'), 2);
-												?>
-											</h5>
-										</div>
-										<div class="col-auto">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-										</div>							    	
-									</div>
-								</div>													
-							</div>
-						</div>						
-					</div>
 
 				</div> <!-- Col -->
 

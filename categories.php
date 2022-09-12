@@ -43,7 +43,6 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-
 			<div class="row mb-4">
 				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
@@ -81,7 +80,9 @@ if($_POST){
 				</div>	<!-- Col -->
 
 				<div class="col">
+					
 					<div class="row">
+						
 						<div class="col-md-6">
 							<div class="card rounded border border-custom shadow-sm mb-4">
 								<div class="card-header">
@@ -137,7 +138,9 @@ if($_POST){
 								</div>
 							</div>
 						</div>
+					</div>
 
+					<div class="row">
 						<div class="col-md-6">
 							<div class="card rounded border border-custom shadow-sm mb-4">
 								<div class="card-header">
@@ -167,15 +170,16 @@ if($_POST){
 							</div>
 						</div>
 					
-					</div>
+					</div> <!-- Row -->
+				
+				</div> <!-- Col -->
 
-				</div>
-
-			</div>	<!-- Row -->			
+			</div>	<!-- Row -->
 
 		</div> 	<!-- Container -->	
 		
 	</body>
+
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
