@@ -28,7 +28,7 @@ class myWallet
 		$query  = "select * from `wallet_movements` a JOIN `wallet_category` b 
 				   ON a.category = b.id WHERE date between '$start' and '$end'
 				   ORDER by a.date ASC, a.type";
-		$result = $mysql->mySQLquery($query);
+		$result = $mysql->get($query);
 		return $result;
 	}
 
@@ -49,7 +49,7 @@ class myWallet
 		$mysql  = new QueryBuilder();
 		$query  = "select SUM(amount) as total from wallet_invest where date in (select max(date) max_date 
 			from wallet_invest group by concept) order by concept";
-		$result = $mysql->mySQLquery($query);
+		$result = $mysql->get($query);
 		return $result[0]->total;
 	}
 
@@ -57,7 +57,7 @@ class myWallet
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "select * from $table";		
-		return $mysql->mySQLquery($query);
+		return $mysql->get($query);
 	}
 
 	public function loadCurrentInvestments()
@@ -73,6 +73,13 @@ class myWallet
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "select * from wallet_invest where concept = '$concept' ORDER BY date DESC LIMIT 7";
+		return $mysql->get($query);
+	}
+
+	public function dataChart()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "select date, sum(amount) as amount from wallet_cron_balances group by date";
 		return $mysql->get($query);
 	}
 

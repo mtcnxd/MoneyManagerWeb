@@ -133,6 +133,15 @@ if($_POST){
 				<div class="col">
 					<div class="card border-custom shadow-sm mb-4">
 						<div class="card-body">
+							<?php
+							$chartData = $wallet->dataChart();
+
+							foreach ($chartData as $key => $value) {
+		 						$labels[] = $value->date;
+		 						$values[] = $value->amount;
+							}
+
+							?>
 							<canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
 						</div>
 					</div>	
@@ -194,4 +203,39 @@ if($_POST){
 		crossorigin="anonymous">
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script>
+const currentChart = document.getElementById('currentChart').getContext('2d');
+const myChart = new Chart(currentChart, {
+    type: 'line',
+    data: {
+        labels: <?=json_encode( $labels );?>,
+        datasets: [{
+            label: 'Wallet Balance',
+            data: <?=json_encode( $values );?>,
+            borderColor: 'rgba(0, 153, 204, 1)',
+            backgroundColor: 'rgba(0, 172, 230, 0.2)',
+            borderWidth:1,
+            pointRadius:2,
+            hoverOffset:5,
+            fill: true
+       }]
+    },
+    options: {
+		responsive: true,
+    	plugins: {
+	      	legend: {
+	        	position:'none',
+	        	align:'center',
+	        	labels:{
+	        		padding:25,
+	        		boxWidth:18,
+	        		boxHeight:17
+	        	}
+	      	}
+      }
+    }
+});
 </script>
