@@ -7,8 +7,8 @@ $wallet = new myWallet();
 
 if($_POST){
 	$values = [
-		'concept' => "'".$_POST['concept']."'",
-		'amount'  => "'".$_POST['amount']."'",
+		'concept' => $_POST['concept'],
+		'amount'  => $_POST['amount'],
 	];
 
 	$wallet->insertData('wallet_invest', $values);

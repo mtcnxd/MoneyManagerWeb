@@ -7,10 +7,9 @@ $wallet = new myWallet();
 
 if($_POST){
 	$values = [
-		'type'  => "'".$_POST['type']."'",
-		'name'  => "'".$_POST['name']."'",
-		'color' => "'".$_POST['color']."'",
-		'icon'  => "'".$_POST['icon']."'",
+		'type'  => $_POST['type'],
+		'name'  => $_POST['name'],
+		'color' => $_POST['color'],
 	];
 
 	$wallet->insertData('wallet_category', $values);
@@ -80,9 +79,7 @@ if($_POST){
 				</div>	<!-- Col -->
 
 				<div class="col">
-					
 					<div class="row">
-						
 						<div class="col-md-6">
 							<div class="card rounded border border-custom shadow-sm mb-4">
 								<div class="card-header">
@@ -93,6 +90,7 @@ if($_POST){
 									<div class="list-group">
 										<?php
 										$data = $wallet->selectCategory('ingreso');
+
 										foreach ($data as $key => $value) {
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">

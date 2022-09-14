@@ -7,13 +7,12 @@ $wallet = new myWallet();
 
 if($_POST){
 	$values = [
-		'concept' => "'".$_POST['concept']."'",
-		'amount'  => "'".$_POST['amount']."'",
+		'concept' => $_POST['concept'],
+		'amount'  => $_POST['amount'],
 	];
 
 	$wallet->insertData('wallet_invest', $values);
 }
-
 ?>
 
 <html>
@@ -88,7 +87,13 @@ if($_POST){
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 												<?php
-												echo '$ 95,000';
+												$balance = 0;
+												$data = $wallet->loadCurrentInvestments();
+
+												foreach ($data as $value) {
+													$balance += $value->amount;
+												}
+												echo '$'. number_format($balance, 2);
 												?>
 											</h5>
 										</div>
@@ -149,22 +154,16 @@ if($_POST){
 								</thead>								
 								<?php
 								$count = 0;
-								$balance = 0;
-								$data = $wallet->loadCurrentInvestments();
-
-								foreach ($data as $key => $value) {
-									$balance += $value;
-								}
 								
-								foreach ($data as $key => $value) {
+								foreach ($data as $value) {
 									$count++;
-									$percentage = ($value/$balance) * 100;
+									$percentage = ($value->amount/$balance) * 100;
 									
 									echo "<tr>";
 									echo "	<td>".$count."</td>";
-									echo "	<td><a href='details.php?q=$key' class='table-link-item link-primary'>".$key."</a></td>";
+									echo "	<td><a href='details.php?q=".$value->concept."' class='table-link-item link-primary'>".$value->concept."</a></td>";
 									echo "	<td class='text-end'>  ". number_format($percentage, 2)."%</td>";
-									echo "	<td class='text-end'> $". number_format($value, 2)."</td>";
+									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
 									echo "</tr>";
 								}								
 								?>
