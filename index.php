@@ -45,36 +45,32 @@ $wallet = new myWallet();
 							<thead>
 								<tr class="table-custom text-uppercase fs-7">
 									<th scope="col">#</td>
-									<th scope="col">Tipo</td>
-									<th scope="col">Categoria</td>
-									<th scope="col">Concepto</td>										
-									<th scope="col">Fecha</td>					
+									<th scope="col">Nombre</td>
+									<th scope="col">Descripcion</td>										
+									<th scope="col">Categoria</td>					
 									<th scope="col" class='text-end'>Cantidad</td>
 								</tr>
 							</thead>
 							
 							<?php
-							$start = '2022-03-01 00:00:00';
-							$end   = '2022-03-30 23:59:59';
-							$data  = $wallet->selectMovementsRange($start, $end);
+							$data  = $wallet->selectFixedPayments();
 
 							foreach ($data as $key => $value) {
 								$datef = new DateTime($value->date);
 
 								echo "<tr>";
 								echo "	<td>". ($key+1) ."</td>";
-								echo "	<td>". $datef->format('d-m-Y') ."</td>";								
-								echo "	<td>". ucfirst($value->type) ."</td>";
-								echo "	<td>". $value->name ."</td>";
-								echo "	<td>". $value->concept ."</td>";
+								echo "	<td>". ucfirst($value->name) ."</td>";
+								echo "	<td>". $value->description ."</td>";
+								echo "	<td>". $value->category ."</td>";
 								echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
 								echo "</tr>";
 							}
 							?>
 						</table>
 					</div>		<!-- Table-responsive -->
-				</div> 			<!-- Card -->
-			</div>				<!-- Col-12 -->
+				</div>		<!-- Card -->
+			</div>		<!-- Col-12 -->
 			
 			<div class="row mb-4">
 

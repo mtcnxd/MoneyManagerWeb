@@ -7,10 +7,10 @@ $wallet = new myWallet();
 
 if($_POST){
 	$values = [
-		'type'     => "'".$_POST['type']."'",
-		'category' => "'".$_POST['category']."'",
-		'concept'  => "'".$_POST['concept']."'",
-		'amount'   => "'".$_POST['amount']."'",
+		'type'     => $_POST['type'],
+		'category' => $_POST['category'],
+		'concept'  => $_POST['concept'],
+		'amount'   => $_POST['amount'],
 	];
 
 	$wallet->insertData('wallet_movements', $values);
@@ -58,8 +58,8 @@ if($_POST){
 							    	<label for="" class="form-label">Tipo</label>
 							    	<select class="form-select" name="type" id="type" onchange="loadCategories(this.value);">
 							    		<option value="">Seleccionar tipo</option>
-								  		<option value="ingreso">Ingreso</option>
-								  		<option value="egreso">Egreso</option>
+								  		<option value="Ingreso">Ingreso</option>
+								  		<option value="Egreso">Egreso</option>
 									</select>
 							  	</div>
 								<div class="mb-3">
@@ -69,7 +69,7 @@ if($_POST){
 										$data = $wallet->selectCategory('ingreso');
 
 										foreach ($data as $key => $value) {
-											echo "<option>".$value->name."</option>";
+											echo "<option>".$value->category."</option>";
 										}
 										?>
 									</select>

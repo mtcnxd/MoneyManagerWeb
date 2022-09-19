@@ -19,7 +19,7 @@ class myWallet
 		$query = new QueryBuilder();
         $query->table('wallet_category');
         $query->where(['type' => $type]);
-        return $query->get();	
+        return $query->get();
 	}
 
 	public function selectMovementsRange($start, $end)
@@ -64,7 +64,7 @@ class myWallet
 	{
 		$mysql = new QueryBuilder();
 		$query = "select * from wallet_invest where date in (select max(date) max_date 
-			from wallet_invest group by concept) order by concept";
+			from wallet_invest where concept not in ('Bitso') group by concept) order by concept";
 
 		return $mysql->get($query);
 	}
@@ -79,7 +79,7 @@ class myWallet
 	public function dataChart()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select date, sum(amount) as amount from wallet_cron_balances group by date";
+		$query  = "select date, sum(amount) as amount from wallet_cron_balances where concept not in ('Bitso') group by date";
 		return $mysql->get($query);
 	}
 

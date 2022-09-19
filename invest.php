@@ -41,7 +41,6 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-
 			<div class="row mb-4">
 				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm mb-4">
@@ -93,6 +92,7 @@ if($_POST){
 												foreach ($data as $value) {
 													$balance += $value->amount;
 												}
+
 												echo '$'. number_format($balance, 2);
 												?>
 											</h5>
