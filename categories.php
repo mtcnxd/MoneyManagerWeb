@@ -6,13 +6,11 @@ use classes\myWallet;
 $wallet = new myWallet();
 
 if($_POST){
-	$values = [
+	$wallet->insertData('wallet_category', [
 		'type'  => $_POST['type'],
 		'name'  => $_POST['name'],
 		'color' => $_POST['color'],
-	];
-
-	$wallet->insertData('wallet_category', $values);
+	]);
 }
 ?>
 
@@ -135,7 +133,7 @@ if($_POST){
 									</div>
 								</div>	
 							</div>						
-						</div>
+						</div>s
 					</div>
 
 					<div class="row">

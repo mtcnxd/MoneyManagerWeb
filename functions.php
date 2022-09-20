@@ -13,4 +13,8 @@ switch($_POST['option'])
 			echo "<option value='".$category->id."'>". $category->category ."</option>";
 		}
 		break;
+
+	case 'default':
+
+	break;
 }

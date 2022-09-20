@@ -9,12 +9,10 @@ $balances = $wallet->loadCurrentInvestments();
 $total = 0;
 
 foreach ($balances as $row) {
-	$values = [
+	$wallet->insertData('wallet_cron_balances', [
 		"concept" => $row->concept,
 		"amount"  => $row->amount,
 		"date" 	  => date("Y-m-d"),
-	];
+	]);
 	
-	$wallet->insertData('wallet_cron_balances', $values);
-
 }

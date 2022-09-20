@@ -6,12 +6,10 @@ use classes\myWallet;
 $wallet = new myWallet();
 
 if($_POST){
-	$values = [
+	$wallet->insertData('wallet_invest', [
 		'concept' => $_POST['concept'],
 		'amount'  => $_POST['amount'],
-	];
-
-	$wallet->insertData('wallet_invest', $values);
+	]);
 }
 
 ?>
@@ -90,8 +88,7 @@ if($_POST){
 										<th scope="col">Fecha</td>
 										<th scope="col" class="text-end">Saldo</td>
 									</tr>
-								</thead>								
-
+								</thead>
 								<?php
 								$count = 0;
 								$data  = $wallet->loadListbyItem($_REQUEST['q']);
@@ -103,12 +100,15 @@ if($_POST){
 									$labels[$key]  = $dateTime->format('d-m-Y');
 
 									echo "<tr>";
-									echo "	<td>". $count."</td>";
-									echo "	<td>". $value->concept."</td>";
-                                    echo "	<td>". $dateTime->format('d-m-Y')."</td>";
-									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
+									echo "	<td>". $count ."</td>";
+									echo "	<td>". $value->concept ."</td>";
+                                    echo "	<td>". $dateTime->format('d-m-Y') ."</td>";
+									echo "	<td class='text-end'> $". number_format($value->amount, 2) ."</td>";
 									echo "</tr>";
 								}
+
+								sort($values);
+								sort($labels);
 								?>
 							</table>
 						</div>	

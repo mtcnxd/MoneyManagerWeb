@@ -6,14 +6,11 @@ use classes\myWallet;
 $wallet = new myWallet();
 
 if($_POST){
-	$values = [
-		'concept' => "'".$_POST['concept']."'",
-		'amount'  => "'".$_POST['amount']."'",
-	];
-
-	$wallet->insertData('wallet_saving', $values);
+	$wallet->insertData('wallet_saving', [
+		'concept' => $_POST['concept'],
+		'amount'  => $_POST['amount'],
+	]);
 }
-
 ?>
 
 <html>
