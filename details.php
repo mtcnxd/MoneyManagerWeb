@@ -107,8 +107,6 @@ if($_POST){
 									echo "</tr>";
 								}
 
-								sort($values);
-								sort($labels);
 								?>
 							</table>
 						</div>	

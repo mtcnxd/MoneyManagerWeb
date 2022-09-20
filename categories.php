@@ -133,7 +133,7 @@ if($_POST){
 									</div>
 								</div>	
 							</div>						
-						</div>s
+						</div>
 					</div>
 
 					<div class="row">

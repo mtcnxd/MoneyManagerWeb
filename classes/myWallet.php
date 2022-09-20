@@ -6,6 +6,14 @@ use classes\QueryBuilder;
 
 class myWallet 
 {
+
+	static function thisMonth()
+	{
+		$thisMonth = date('n');
+		$months = ['enero', 'febrero', 'marzo', 'abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+		return $months[$thisMonth-1];
+	}
+
 	public function insertData($table, $data)
 	{
 		$query = new QueryBuilder();
@@ -32,10 +40,11 @@ class myWallet
 		return $result;
 	}
 
-	public function selectFixedPayments()
+	public function selectFixedPayments($startDate, $endDate)
 	{
         $query = new QueryBuilder();
-        return $query->get("select * from `wallet_fixed_payments`");
+        return $query->get("select * from wallet_fixed_payments where date between '$startDate' and '$endDate'
+		union select * from wallet_month_payments where date between '$startDate' and '$endDate'");
 	}
 
 	public function getBalanceTotal($type = 'ingreso')

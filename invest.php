@@ -51,7 +51,7 @@ if($_POST){
 							  	<div class="mb-3">
 							    	<label for="" class="form-label">Concepto</label>
 							    	<select type="text" class="form-select" name="concept">
-									<?php
+										<?php
 										$data = $wallet->selectCategory('inversion');
 
 										foreach ($data as $key => $value) {
@@ -83,16 +83,16 @@ if($_POST){
 												Inversion total
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
-												<?php
-												$balance = 0;
-												$data = $wallet->loadCurrentInvestments();
+											<?php
+											$balance = 0;
+											$data = $wallet->loadCurrentInvestments();
 
-												foreach ($data as $value) {
-													$balance += $value->amount;
-												}
+											foreach ($data as $value) {
+												$balance += $value->amount;
+											}
 
-												echo '$'. number_format($balance, 2);
-												?>
+											echo '$'. number_format($balance, 2);
+											?>
 											</h5>
 										</div>
 										<div class="col-auto">
@@ -112,9 +112,9 @@ if($_POST){
 												Tasa promedio mes
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
-												<?php
-												echo number_format(1.43, 2) ."%";
-												?>
+											<?php
+											echo number_format(1.43, 2) ."%";
+											?>
 											</h5>
 										</div>
 										<div class="col-auto">

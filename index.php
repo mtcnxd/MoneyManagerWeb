@@ -36,7 +36,7 @@ $wallet = new myWallet();
 			<div class="col-md-12 shadow-sm mb-4 bg-white">
 				<div class="card border-custom">
 					<div class="card-header">
-						<h6 class="card-header-title">Movimientos del mes</h6>
+						<h6 class="card-header-title">Egresos programados <?=myWallet::thisMonth();?></h6>
 						<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 					</div>				
 					
@@ -47,16 +47,20 @@ $wallet = new myWallet();
 									<th scope="col">#</td>
 									<th scope="col">Nombre</td>
 									<th scope="col">Descripcion</td>										
-									<th scope="col">Categoria</td>					
+									<th scope="col">Categoria</td>
 									<th scope="col" class='text-end'>Cantidad</td>
+									<th scope="col" class='text-end'>Fecha</td>
 								</tr>
 							</thead>
-							
 							<?php
-							$data  = $wallet->selectFixedPayments();
+							$totalEgresos  = 0;
+							$startDate = date('Y-m-01'); 
+							$endDate   = date('Y-m-t');
+							$fixedPayments = $wallet->selectFixedPayments($startDate, $endDate);
 
-							foreach ($data as $key => $value) {
+							foreach ($fixedPayments as $key => $value) {
 								$datef = new DateTime($value->date);
+								$totalEgresos += $value->amount;
 
 								echo "<tr>";
 								echo "	<td>". ($key+1) ."</td>";
@@ -64,8 +68,10 @@ $wallet = new myWallet();
 								echo "	<td>". $value->description ."</td>";
 								echo "	<td>". $value->category ."</td>";
 								echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
+								echo "	<td class='text-end'>". $datef->format('d-m-Y') ."</td>";
 								echo "</tr>";
-							}
+							}						
+
 							?>
 						</table>
 					</div>		<!-- Table-responsive -->
@@ -78,13 +84,12 @@ $wallet = new myWallet();
 					<div class="col-md-12">
 						<div class="card rounded border border-custom shadow-sm">
 							<div class="card-header">
-								<h6 class="card-header-title">Ahorros</h6>
+								<h6 class="card-header-title">Egresos <?=myWallet::thisMonth();?></h6>
 								<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
 							</div>
 							<div class="card-body">
 								<?php
-								$saving = $wallet->getBalanceFrom();
-								echo '$'. number_format($saving, 2);
+								echo '$'. number_format($totalEgresos, 2);
 								?>
 							</div>
 						</div>
@@ -117,7 +122,7 @@ $wallet = new myWallet();
 							</div>
 							<div class="card-body">
 								<?php
-								echo '$'. number_format($saving + $invest, 2);
+								echo '$'. number_format($invest, 2);
 								?>								
 							</div>
 						</div>
@@ -136,7 +141,10 @@ $wallet = new myWallet();
 										Total Ingresos
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
-										<?='$'.$wallet->getBalanceTotal(); ?>
+										<?php
+										$totalActivos = $wallet->getBalanceTotal();
+										echo '$'. number_format($totalActivos[0]->total, 2);
+										?>
 									</h5>
 								</div>
 								<div class="col-auto">
@@ -156,7 +164,9 @@ $wallet = new myWallet();
 										Total Egresos
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
-										<?='$'.$wallet->getBalanceTotal('egreso'); ?>
+										<?php
+										echo '$'. number_format($totalActivos[0]->total, 2);
+										?>
 									</h5>
 								</div>
 								<div class="col-auto">
@@ -176,7 +186,9 @@ $wallet = new myWallet();
 										Ingresos vs Egresos
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
-										<?='$'.$wallet->getBalanceTotal('egreso'); ?>
+										<?php 
+										echo '$'. number_format($totalActivos[0]->total, 2);
+										?>
 									</h5>
 								</div>
 								<div class="col-auto">
