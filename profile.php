@@ -97,10 +97,11 @@ use classes\myWallet;
 						</div>
 
 					</div>	<!-- Card -->
+					
 				</div>	<!-- Col -->	
 
-
 			</div>	<!-- row -->
+
 		</div>	<!-- Container -->
 		
 	</body>

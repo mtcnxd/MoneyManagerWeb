@@ -79,7 +79,6 @@ $wallet = new myWallet();
 			</div>		<!-- Col-12 -->
 			
 			<div class="row mb-4">
-
 				<div class="col">
 					<div class="col-md-12">
 						<div class="card rounded border border-custom shadow-sm">

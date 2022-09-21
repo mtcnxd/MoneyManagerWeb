@@ -6,7 +6,7 @@ use classes\myWallet;
 $wallet = new myWallet();
 
 if($_POST){
-	$wallet->insertData('wallet_invest', [
+	$wallet->insert('wallet_invest', [
 		'concept' => $_POST['concept'],
 		'amount'  => $_POST['amount'],
 	]);
@@ -40,7 +40,6 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-
 			<div class="row mb-4">
 				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
@@ -59,7 +58,7 @@ if($_POST){
 										foreach ($data as $key => $value) {
 											echo "<option>".$value->name."</option>";
 										}
-										?>
+									?>
 									</select>
 							  	</div>								
 							  	<div class="mb-3">

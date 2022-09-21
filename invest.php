@@ -6,7 +6,7 @@ use classes\myWallet;
 $wallet = new myWallet();
 
 if($_POST){
-	$wallet->insertData('wallet_invest', [
+	$wallet->insert('wallet_invest', [
 		'concept' => $_POST['concept'],
 		'amount'  => $_POST['amount'],
 	]);
@@ -125,7 +125,6 @@ if($_POST){
 							</div>
 						</div>						
 					</div>
-
 				</div>	<!-- Col -->
 
 				<div class="col">

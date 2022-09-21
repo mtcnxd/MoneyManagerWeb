@@ -6,7 +6,7 @@ use classes\myWallet;
 $wallet = new myWallet();
 
 if($_POST){
-	$wallet->insertData('wallet_movements', [
+	$wallet->insert('wallet_movements', [
 		'type'     => $_POST['type'],
 		'category' => $_POST['category'],
 		'concept'  => $_POST['concept'],
@@ -41,7 +41,6 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-
 			<div class="row mb-4">
 				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
@@ -87,7 +86,6 @@ if($_POST){
 				</div>	<!-- Col -->
 
 				<div class="col">
-
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
 							<ul class="nav nav-tabs card-header-tabs">

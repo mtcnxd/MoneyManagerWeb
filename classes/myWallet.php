@@ -14,7 +14,7 @@ class myWallet
 		return $months[$thisMonth-1];
 	}
 
-	public function insertData($table, $data)
+	public function insert($table, $data)
 	{
 		$query = new QueryBuilder();
 		$query->table($table);

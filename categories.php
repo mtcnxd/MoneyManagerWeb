@@ -6,7 +6,7 @@ use classes\myWallet;
 $wallet = new myWallet();
 
 if($_POST){
-	$wallet->insertData('wallet_category', [
+	$wallet->insert('wallet_category', [
 		'type'  => $_POST['type'],
 		'name'  => $_POST['name'],
 		'color' => $_POST['color'],
