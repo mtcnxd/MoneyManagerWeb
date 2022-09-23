@@ -84,14 +84,37 @@ if($_POST){
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
-											$balance = 0;
+											$currentBalance = 0;
 											$data = $wallet->loadCurrentInvestments();
 
 											foreach ($data as $value) {
-												$balance += $value->amount;
+												$currentBalance += $value->amount;
 											}
 
-											echo '$'. number_format($balance, 2);
+											echo '$'. number_format($currentBalance, 2);
+											?>
+											</h5>
+										</div>
+										<div class="col-auto">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+										</div>							    	
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 8 dias</h6>
+											<h5 class="card-subtitle mb-2 fs-6">
+											<?php
+											$lastBalance = myWallet::amountDiff('2022-09-15');
+											$diff = $currentBalance - $lastBalance;
+
+											echo '$'. number_format($diff, 2);
 											?>
 											</h5>
 										</div>
@@ -102,18 +125,19 @@ if($_POST){
 								</div>													
 							</div>
 						</div>	
-						
+					</div> <!-- row -->
+
+					<div class="row mb-4">
 						<div class="col-md-6">
 							<div class="card border-custom shadow-sm">
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">
-												Tasa promedio mes
-											</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Tasa promedio mes</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
-											echo number_format(1.43, 2) ."%";
+											$percentage = ($diff/$currentBalance) *100;
+											echo number_format($percentage, 2) ."%";
 											?>
 											</h5>
 										</div>
@@ -123,8 +147,9 @@ if($_POST){
 									</div>
 								</div>													
 							</div>
-						</div>						
+						</div>	
 					</div>
+
 				</div>	<!-- Col -->
 
 				<div class="col">
@@ -163,7 +188,7 @@ if($_POST){
 								
 								foreach ($data as $value) {
 									$count++;
-									$percentage = ($value->amount/$balance) * 100;
+									$percentage = ($value->amount/$currentBalance) * 100;
 									
 									echo "<tr>";
 									echo "	<td>".$count."</td>";

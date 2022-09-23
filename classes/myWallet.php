@@ -14,6 +14,14 @@ class myWallet
 		return $months[$thisMonth-1];
 	}
 
+	static function amountDiff($date)
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "select SUM(amount) amount from wallet_cron_balances where concept not in ('Bitso') and date = '$date'";
+        $result = $mysql->get($query);
+        return $result[0]->amount;
+	}
+
 	public function insert($table, $data)
 	{
 		$query = new QueryBuilder();
