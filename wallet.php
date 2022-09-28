@@ -7,10 +7,11 @@ $wallet = new myWallet();
 
 if($_POST){
 	$wallet->insert('wallet_movements', [
-		'type'     => $_POST['type'],
-		'category' => $_POST['category'],
-		'concept'  => $_POST['concept'],
-		'amount'   => $_POST['amount'],
+		'type'        => $_POST['type'],
+		'category'    => $_POST['category'],
+		'description' => $_POST['description'],
+		'date'        => date('Y-m-d'),
+		'amount'      => $_POST['amount'],
 	]);
 }
 ?>
@@ -64,19 +65,22 @@ if($_POST){
 								  		<?php
 										$data = $wallet->selectCategory('ingreso');
 
-										foreach ($data as $key => $value) {
-											echo "<option>".$value->category."</option>";
+										foreach ($data as $value) {
+											echo "<option value=".$value->category.">".$value->category."</option>";
 										}
 										?>
 									</select>
-							  	</div>							  	
-							  	<div class="mb-3">
-							    	<label for="" class="form-label">Concepto</label>
-							    	<input type="text" class="form-control" name="concept" id="concept">
-							  	</div>
+								</div>
+								<div class="mb-3">
+							    	<label for="" class="form-label">Descripcion</label>
+							    	<input type="text" class="form-control" name="description" id="description">
+							  	</div>								
 							  	<div class="mb-3">
 							    	<label for="" class="form-label">Importe</label>
-							    	<input type="text" class="form-control" name="amount" id="amount">
+									<div class="input-group">
+										<div class="input-group-text">$</div>
+										<input type="text" class="form-control" name="amount" placeholder="0.00">
+									</div>
 							  	</div>
 
 							  <button type="submit" class="btn btn-primary">Guardar</button>
@@ -108,6 +112,18 @@ if($_POST){
 											<td>Fecha</td>
 											<td class="text-end">Importe</td>
 										</tr>
+										<?php  
+										$data = $wallet->getIngresos('Egreso');
+
+										foreach ($data as $row => $value) {
+											echo "<tr>";
+											echo "	<td>".($row + 1)."</td>";
+											echo "	<td>".$value->description."</td>";
+											echo "	<td>".$value->date."</td>";
+											echo "	<td class='text-end'>$".number_format($value->amount,2)."</td>";
+											echo "</tr>";
+										}										
+										?>										
 									</table>
 								</div>
 							  	<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
@@ -115,19 +131,19 @@ if($_POST){
 							  		<table class="table">
 										<tr>
 											<td>#</td>
-											<td>Concepto</td>
+											<td>Descripcion</td>
 											<td>Fecha</td>
 											<td class="text-end">Importe</td>
 										</tr>
 										<?php  
-										$data = $wallet->selectCategory('inversion');
+										$data = $wallet->getIngresos('Ingreso');
 
-										foreach ($data as $value) {
+										foreach ($data as $row => $value) {
 											echo "<tr>";
-											echo "	<td>".$value->name."</td>";
-											echo "	<td>".$value->name."</td>";
-											echo "	<td>".$value->name."</td>";
-											echo "	<td class='text-end'>".$value->name."</td>";
+											echo "	<td>".($row + 1)."</td>";
+											echo "	<td>".$value->description."</td>";
+											echo "	<td>".$value->date."</td>";
+											echo "	<td class='text-end'>$".number_format($value->amount,2)."</td>";
 											echo "</tr>";
 										}										
 										?>

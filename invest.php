@@ -53,7 +53,6 @@ if($_POST){
 							    	<select type="text" class="form-select" name="concept">
 										<?php
 										$data = $wallet->selectCategory('inversion');
-
 										foreach ($data as $key => $value) {
 											echo "<option>".$value->name."</option>";
 										}
@@ -61,7 +60,7 @@ if($_POST){
 									</select>
 							  	</div>								
 							  	<div class="mb-3">
-							    	<label for="" class="form-label">Cantidad</label>
+							    	<label for="" class="form-label">Importe</label>
 									<div class="input-group">
 										<div class="input-group-text">$</div>
 										<input type="text" class="form-control" name="amount" placeholder="0.00">
@@ -86,11 +85,9 @@ if($_POST){
 											<?php
 											$currentBalance = 0;
 											$data = $wallet->loadCurrentInvestments();
-
 											foreach ($data as $value) {
 												$currentBalance += $value->amount;
 											}
-
 											echo '$'. number_format($currentBalance, 2);
 											?>
 											</h5>
@@ -108,7 +105,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 8 dias</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 30 dias</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$lastBalance = myWallet::amountDiff('2022-09-15');
@@ -133,7 +130,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Tasa promedio mes</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Tasa ultimo mes</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$percentage = ($diff/$currentBalance) *100;

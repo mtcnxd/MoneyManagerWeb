@@ -38,6 +38,14 @@ class myWallet
         return $query->get();
 	}
 
+	public function getIngresos($type)
+	{
+		$query = new QueryBuilder();
+        $query->table('wallet_movements');
+        $query->where(['type' => $type]);
+        return $query->get();
+	}
+
 	public function selectMovementsRange($start, $end)
 	{
 		$mysql  = new QueryBuilder();
@@ -64,8 +72,11 @@ class myWallet
 	public function getBalanceFrom($from = 'wallet_saving')
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select SUM(amount) as total from wallet_invest where date in (select max(date) max_date 
-			from wallet_invest group by concept) order by concept";
+		$query  = "select SUM(amount) as total from wallet_invest 
+			where date in (select max(date) max_date from wallet_invest group by concept) 
+			and include = true
+			order by concept";
+
 		$result = $mysql->get($query);
 		return $result[0]->total;
 	}

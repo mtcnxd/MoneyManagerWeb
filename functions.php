@@ -10,7 +10,7 @@ switch($_POST['option'])
 	case 'loadCategories':
 		$data = $wallet->selectCategory($_POST['category']);
 		foreach ($data as $category){
-			echo "<option value='".$category->id."'>". $category->category ."</option>";
+			echo "<option value='".$category->name."'>". $category->name ."</option>";
 		}
 		break;
 
