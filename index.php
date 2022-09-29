@@ -59,8 +59,12 @@ $wallet = new myWallet();
 
 							foreach ($fixedPayments as $key => $value) {
 								$datef = new DateTime($value->date);
-
-								echo "<tr>";
+								
+								if ($value->type == 'Ingreso'){
+									echo "<tr class='table-success'>";
+								} else {
+									echo "<tr>";
+								}
 								echo "	<td>". ($key+1) ."</td>";
 								echo "	<td>". $value->type ."</td>";
 								echo "	<td>". $value->category ."</td>";

@@ -118,4 +118,11 @@ class myWallet
 		return $mysql->get($query);
 	}
 
+	public function loadUserData($id)
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "select * from wallet_users where id = $id";
+		return $mysql->get($query);
+	}
+
 }
