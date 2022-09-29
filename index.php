@@ -36,7 +36,7 @@ $wallet = new myWallet();
 			<div class="col-md-12 shadow-sm mb-4 bg-white">
 				<div class="card border-custom">
 					<div class="card-header">
-						<h6 class="card-header-title">Gastos programados <?=myWallet::thisMonth();?></h6>
+						<h6 class="card-header-title">Movimientos del mes</h6>
 						<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 					</div>				
 					
@@ -83,7 +83,24 @@ $wallet = new myWallet();
 					<div class="col-md-12">
 						<div class="card rounded border border-custom shadow-sm">
 							<div class="card-header">
-								<h6 class="card-header-title">Egresos <?=myWallet::thisMonth();?></h6>
+								<h6 class="card-header-title">Ingresos</h6>
+								<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+							</div>
+							<div class="card-body">
+								<?php
+								$ingresos = $wallet->getTotalIngresoEgreso('Ingreso');
+								echo '$'. number_format($ingresos->amount, 2);
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="col-md-12">
+						<div class="card rounded border border-custom shadow-sm">
+							<div class="card-header">
+								<h6 class="card-header-title">Egresos</h6>
 								<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
 							</div>
 							<div class="card-body">
@@ -92,7 +109,7 @@ $wallet = new myWallet();
 								?>
 							</div>
 						</div>
-					</div>					
+					</div>
 				</div>
 
 				<div class="col">
@@ -104,29 +121,13 @@ $wallet = new myWallet();
 							</div>
 							<div class="card-body">
 								<?php
-								$invest = $wallet->getBalanceFrom('wallet_invest');
+								$invest = $wallet->getTotalInvest();
 								echo '$'. number_format($invest, 2);
-								?>								
+								?>
 							</div>
 						</div>
-					</div>					
+					</div>
 				</div>
-
-				<div class="col">
-					<div class="col-md-12">
-						<div class="card rounded border border-custom shadow-sm">
-							<div class="card-header">
-								<h6 class="card-header-title">Ahorros e inversiones</h6>
-								<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-							</div>
-							<div class="card-body">
-								<?php
-								echo '$'. number_format($invest, 2);
-								?>								
-							</div>
-						</div>
-					</div>					
-				</div>				
 
 			</div>
 
@@ -137,12 +138,12 @@ $wallet = new myWallet();
 							<div class="align-items-center row">
 								<div class="col">
 									<h6 class="card-title text-muted text-uppercase fs-7">
-										Total Ingresos
+										Egresos vs Ingresos
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php
-										$totalActivos = $wallet->getBalanceTotal();
-										echo '$'. number_format($totalActivos[0]->total, 2);
+										$versus = ($totalEgresos/$ingresos->amount) *100;
+										echo number_format($versus, 2) .'%';
 										?>
 									</h5>
 								</div>
@@ -164,7 +165,7 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php
-										echo '$'. number_format($totalActivos[0]->total, 2);
+										echo '$'. number_format($totalEgresos, 2);
 										?>
 									</h5>
 								</div>
@@ -186,7 +187,7 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php 
-										echo '$'. number_format($totalActivos[0]->total, 2);
+										echo '$'. number_format($totalEgresos, 2);
 										?>
 									</h5>
 								</div>

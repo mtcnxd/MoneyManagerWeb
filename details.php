@@ -4,20 +4,12 @@ require_once ('classes/autoload.php');
 use classes\myWallet;
 
 $wallet = new myWallet();
-
-if($_POST){
-	$wallet->insert('wallet_invest', [
-		'concept' => $_POST['concept'],
-		'amount'  => $_POST['amount'],
-	]);
-}
-
 ?>
 
 <html>
 	<head>
 		<title>My Wallet</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- CSS only -->		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
 				rel="stylesheet" 
@@ -41,38 +33,7 @@ if($_POST){
 		
 		<div class="container">
 			<div class="row mb-4">
-				<div class="col-md-5">
-					<div class="card rounded border border-custom shadow-sm">
-						<div class="card-header">
-							<h6 class="card-header-title">Saldo al dia de hoy</h6>
-							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-						</div>				
-						<div class="card-body">
-							<form action="invest.php" method="post">
-							  	<div class="mb-3">
-							    	<label for="" class="form-label">Concepto</label>
-							    	<select type="text" class="form-control" name="concept">
-									<?php
-										$data = $wallet->selectCategory('inversion');
-
-										foreach ($data as $key => $value) {
-											echo "<option>".$value->name."</option>";
-										}
-									?>
-									</select>
-							  	</div>								
-							  	<div class="mb-3">
-							    	<label for="" class="form-label">Cantidad</label>
-							    	<input type="text" class="form-control" name="amount">
-							  	</div>
-
-							  <button type="submit" class="btn btn-primary">Guardar</button>
-							</form>	
-						</div>	
-					</div> 	<!-- Card -->
-				</div>	<!-- Col -->
-
-				<div class="col">
+				<div class="col-md-6">
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
 							<h6 class="card-header-title">Rendimientos</h6>
@@ -110,16 +71,17 @@ if($_POST){
 							</table>
 						</div>	
 					</div> 	<!-- Card -->
+				</div>	<!-- Col -->
 
+				<div class="col">
 					<div class="card border-custom shadow-sm">
 						<div class="card-body">
 							<canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
 						</div>
-					</div>				
-
+					</div>
 				</div>
 
-			</div>	<!-- Row -->			
+			</div>	<!-- Row -->
 
 		</div> 	<!-- Container -->	
 
