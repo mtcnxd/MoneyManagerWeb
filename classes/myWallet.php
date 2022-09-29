@@ -56,13 +56,11 @@ class myWallet
 		return $result;
 	}
 
-	public function selectFixedPayments($startDate, $endDate)
+	public function selectThisMonth($startDate, $endDate)
 	{
         $query = new QueryBuilder();
-		$sql = "select * from wallet_fixed_payments where date between '$startDate' and '$endDate'
-			union select * from wallet_month_payments where date between '$startDate' and '$endDate'";
-        
-			return $query->get($sql);
+		$sql = "select * from wallet_movements where date between '$startDate' and '$endDate'";
+		return $query->get($sql);
 	}
 
 	public function getBalanceTotal($type = 'ingreso')

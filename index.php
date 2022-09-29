@@ -30,7 +30,7 @@ $wallet = new myWallet();
 			<div class="container">
 				<?php include ('includes/main_menu.php'); ?>
 			</div>
-		</header>		
+		</header>
 		
 		<div class="container">		
 			<div class="col-md-12 shadow-sm mb-4 bg-white">
@@ -46,27 +46,25 @@ $wallet = new myWallet();
 								<tr class="table-custom text-uppercase fs-7">
 									<th scope="col">#</td>
 									<th scope="col">Nombre</td>
-									<th scope="col">Descripcion</td>										
 									<th scope="col">Categoria</td>
+									<th scope="col">Descripcion</td>
 									<th scope="col" class='text-end'>Cantidad</td>
 									<th scope="col" class='text-end'>Fecha</td>
 								</tr>
 							</thead>
 							<?php
-							$totalEgresos  = 0;
 							$startDate = date('Y-m-01'); 
 							$endDate   = date('Y-m-t');
-							$fixedPayments = $wallet->selectFixedPayments($startDate, $endDate);
+							$fixedPayments = $wallet->selectThisMonth($startDate, $endDate);
 
 							foreach ($fixedPayments as $key => $value) {
 								$datef = new DateTime($value->date);
-								$totalEgresos += $value->amount;
 
 								echo "<tr>";
 								echo "	<td>". ($key+1) ."</td>";
-								echo "	<td>". ucfirst($value->name) ."</td>";
-								echo "	<td>". $value->description ."</td>";
+								echo "	<td>". $value->type ."</td>";
 								echo "	<td>". $value->category ."</td>";
+								echo "	<td>". $value->description ."</td>";
 								echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
 								echo "	<td class='text-end'>". $datef->format('d-m-Y') ."</td>";
 								echo "</tr>";
@@ -105,7 +103,8 @@ $wallet = new myWallet();
 							</div>
 							<div class="card-body">
 								<?php
-								echo '$'. number_format($totalEgresos, 2);
+								$egresos = $wallet->getTotalIngresoEgreso('Egreso');
+								echo '$'. number_format($egresos->amount, 2);
 								?>
 							</div>
 						</div>
@@ -142,7 +141,7 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php
-										$versus = ($totalEgresos/$ingresos->amount) *100;
+										$versus = ($egresos->amount/$ingresos->amount) *100;
 										echo number_format($versus, 2) .'%';
 										?>
 									</h5>
@@ -165,7 +164,7 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php
-										echo '$'. number_format($totalEgresos, 2);
+										echo '$'. number_format(100, 2);
 										?>
 									</h5>
 								</div>
@@ -187,7 +186,7 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php 
-										echo '$'. number_format($totalEgresos, 2);
+										echo '$'. number_format(100, 2);
 										?>
 									</h5>
 								</div>
