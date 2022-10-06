@@ -108,7 +108,9 @@ if($_POST){
 											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 30 dias</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
-											$lastBalance = myWallet::amountDiff('2022-09-15');
+											$datePast = strtotime('-10 day', strtotime(date('Y-m-d')));
+											$datePast = date('Y-m-d', $datePast);
+											$lastBalance = myWallet::amountDiff($datePast);
 											$diff = $currentBalance - $lastBalance;
 
 											echo '$'. number_format($diff, 2);
@@ -130,7 +132,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Tasa ultimo mes</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 30 dias</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$percentage = ($diff/$currentBalance) *100;

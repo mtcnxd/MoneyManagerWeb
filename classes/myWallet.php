@@ -114,7 +114,8 @@ class myWallet
 	public function dataChart()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select date, sum(amount) as amount from wallet_cron_balances where concept not in ('Bitso') group by date";
+		$query  = "select date, sum(amount) as amount from wallet_cron_balances 
+			where concept not in ('Bitso') group by date limit 30";
 		return $mysql->get($query);
 	}
 
