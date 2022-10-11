@@ -3,6 +3,8 @@ require_once ('classes/autoload.php');
 
 use classes\myWallet;
 
+$startDate = date('Y-m-01'); 
+$endDate   = date('Y-m-t');
 $wallet = new myWallet();
 
 if($_POST){
@@ -113,7 +115,7 @@ if($_POST){
 											<td class="text-end">Importe</td>
 										</tr>
 										<?php  
-										$data = $wallet->getIngresos('Egreso');
+										$data = $wallet->getCashFlow('Egreso', $startDate, $endDate);
 
 										foreach ($data as $row => $value) {
 											echo "<tr>";
@@ -136,7 +138,7 @@ if($_POST){
 											<td class="text-end">Importe</td>
 										</tr>
 										<?php  
-										$data = $wallet->getIngresos('Ingreso');
+										$data = $wallet->getCashFlow('Ingreso', $startDate, $endDate);
 
 										foreach ($data as $row => $value) {
 											echo "<tr>";

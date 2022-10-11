@@ -6,7 +6,6 @@ use classes\QueryBuilder;
 
 class myWallet 
 {
-
 	static function thisMonth()
 	{
 		$thisMonth = date('n');
@@ -38,14 +37,6 @@ class myWallet
         return $query->get();
 	}
 
-	public function getIngresos($type)
-	{
-		$query = new QueryBuilder();
-        $query->table('wallet_movements');
-        $query->where(['type' => $type]);
-        return $query->get();
-	}
-
 	public function selectMovementsRange($start, $end)
 	{
 		$mysql  = new QueryBuilder();
@@ -69,11 +60,19 @@ class myWallet
         return $query->get("select SUM(amount) as total from wallet_movements where type = '$type'");
 	}
 
-	public function getTotalIngresoEgreso($type)
+	public function getTotalThisMonth($type, $startDate, $endDate)
 	{
 		$query = new QueryBuilder();
-		$sql = "select SUM(amount) amount from wallet_movements where type = '$type'";
+		$sql = "select SUM(amount) amount from wallet_movements where type = '$type' 
+			and date between '$startDate' and '$endDate'";
         return $query->get($sql)[0];
+	}
+
+	public function getCashFlow($type, $startDate, $endDate)
+	{
+		$query = new QueryBuilder();
+        $sql = "select * from wallet_movements where type = '$type' and date between '$startDate' and '$endDate'";
+        return $query->get($sql);
 	}	
 
 	public function getTotalInvest()

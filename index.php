@@ -3,6 +3,8 @@ require_once ('classes/autoload.php');
 
 use classes\myWallet;
 
+$startDate = date('Y-m-01'); 
+$endDate   = date('Y-m-t');
 $wallet = new myWallet();
 
 ?>
@@ -53,8 +55,6 @@ $wallet = new myWallet();
 								</tr>
 							</thead>
 							<?php
-							$startDate = date('Y-m-01'); 
-							$endDate   = date('Y-m-t');
 							$fixedPayments = $wallet->selectThisMonth($startDate, $endDate);
 
 							foreach ($fixedPayments as $key => $value) {
@@ -90,7 +90,7 @@ $wallet = new myWallet();
 							</div>
 							<div class="card-body">
 								<?php
-								$ingresos = $wallet->getTotalIngresoEgreso('Ingreso');
+								$ingresos = $wallet->getTotalThisMonth('Ingreso', $startDate, $endDate);
 								echo '$'. number_format($ingresos->amount, 2);
 								?>
 							</div>
@@ -107,7 +107,7 @@ $wallet = new myWallet();
 							</div>
 							<div class="card-body">
 								<?php
-								$egresos = $wallet->getTotalIngresoEgreso('Egreso');
+								$egresos = $wallet->getTotalThisMonth('Egreso',$startDate, $endDate);
 								echo '$'. number_format($egresos->amount, 2);
 								?>
 							</div>
@@ -145,7 +145,11 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php
-										$versus = ($egresos->amount/$ingresos->amount) *100;
+										if ($ingresos->amount > 0){
+											$versus = ($egresos->amount/$ingresos->amount) *100;
+										} else {
+											$versus = 0.0;
+										}
 										echo number_format($versus, 2) .'%';
 										?>
 									</h5>
