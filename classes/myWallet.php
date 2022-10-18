@@ -106,7 +106,7 @@ class myWallet
 	public function loadListbyItem($concept)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select * from wallet_invest where concept = '$concept' ORDER BY date DESC LIMIT 7";
+		$query  = "select * from wallet_invest where concept = '$concept' ORDER BY date DESC LIMIT 15";
 		return $mysql->get($query);
 	}
 
@@ -114,7 +114,7 @@ class myWallet
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "select date, sum(amount) as amount from wallet_cron_balances 
-			where concept not in ('Bitso') group by date limit 30";
+			where concept not in ('Bitso') group by date desc limit 30";
 		return $mysql->get($query);
 	}
 
