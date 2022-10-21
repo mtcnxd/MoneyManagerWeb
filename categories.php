@@ -116,7 +116,6 @@ if($_POST){
 									<div class="list-group">
 										<?php
 										$data = $wallet->selectCategory('ingreso');
-
 										foreach ($data as $key => $value) {
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">
@@ -133,7 +132,7 @@ if($_POST){
 									</div>
 								</div>	
 							</div>						
-						</div>
+						</div>						
 					</div>
 
 					<div class="row">
@@ -147,7 +146,6 @@ if($_POST){
 									<div class="list-group">
 										<?php
 										$data = $wallet->selectCategory('inversion');
-
 										foreach ($data as $key => $value) {
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">

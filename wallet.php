@@ -65,10 +65,9 @@ if($_POST){
 							    	<label for="" class="form-label">Categoria</label>
 							    	<select class="form-select" name="category" id="category">
 								  		<?php
-										$data = $wallet->selectCategory('ingreso');
-
+										$data = $wallet->selectCategory('Ingreso');
 										foreach ($data as $value) {
-											echo "<option value=".$value->category.">".$value->category."</option>";
+											echo "<option value=".$value->name.">".$value->name."</option>";
 										}
 										?>
 									</select>
@@ -85,7 +84,7 @@ if($_POST){
 									</div>
 							  	</div>
 
-							  <button type="submit" class="btn btn-primary">Guardar</button>
+								<button type="submit" class="btn btn-primary">Guardar</button>
 							</form>	
 						</div>	
 					</div> 	<!-- Card -->

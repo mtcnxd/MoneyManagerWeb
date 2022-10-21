@@ -43,57 +43,34 @@ if($_POST){
 				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
 						<div class="card-header">
-							<h6 class="card-header-title">Agregar ahorro</h6>
+							<h6 class="card-header-title">Aportacion</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
 						<div class="card-body">
 							<form action="saving.php" method="post">
 							  	<div class="mb-3">
-							    	<label for="" class="form-label">Concepto</label>
-							    	<input type="text" class="form-control" name="concept">
-							  	</div>								
-							  	<div class="mb-3">
-							    	<label for="" class="form-label">Cantidad</label>
-							    	<input type="text" class="form-control" name="amount">
+							    	<label for="" class="form-label">Importe</label>
+									<div class="input-group">
+										<div class="input-group-text">$</div>
+										<input type="text" class="form-control" name="amount" placeholder="0.00">
+									</div>
 							  	</div>
 
-							  <button type="submit" class="btn btn-primary">Guardar</button>
+								<button type="submit" class="btn btn-primary">Guardar</button>
 							</form>	
 						</div>	
 					</div> 	<!-- Card -->
 				</div>	<!-- Col -->
 
 				<div class="col">
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<ul class="nav nav-tabs card-header-tabs">
-								<li class="nav-item">
-									<a class="nav-link active" aria-current="true" href="#">Egresos</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link">Ingresos</a>
-								</li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<h6 class="card-title">Lista de movimientos del dia</h6>
-							<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-							<div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-								<button type="button" class="btn btn-outline-secondary hstack gap-2">
-									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-									Notificaciones
-								</button>
-								<button type="button" class="btn btn-outline-secondary hstack gap-2">
-								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-									Agregar nuevo
-								</button>
-							</div>
-						</div>
-					</div> <!-- Card -->
+					<div class="alert alert-warning alert-custom" role="alert">
+						<h6>$40,000.00 de Enganche Automovil</h6>
+						Volkswagen Vento 2015
+					</div>
 
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
-							<h6 class="card-header-title">Movimientos del dia</h6>
+							<h6 class="card-header-title">Aportaciondes</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
 						<div class="card-body">
@@ -111,15 +88,10 @@ if($_POST){
 									echo "</tr>";
 								}
 								?>
-								<small class="d-inline-flex mb-3 px-2 py-1 fw-semibold text-success bg-success bg-opacity-10 border border-success border-opacity-10 rounded-2">Added in v5.2.0</small>
+								<small class="d-inline-flex mb-3 px-2 py-1 fw-semibold text-success bg-success bg-opacity-10 border border-success border-opacity-10 rounded-2">Faltante</small>
 							</table>
 						</div>	
 					</div> 	<!-- Card -->
-					
-					<div class="alert alert-warning alert-custom" role="alert">
-						<h6>Titulo del alert</h6>
-						A simple warning alert—check it out!
-					</div>
 
 				</div>	<!-- Col -->
 

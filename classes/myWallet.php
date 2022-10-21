@@ -118,6 +118,14 @@ class myWallet
 		return $mysql->get($query);
 	}
 
+	public function dataChartReport($startDate)
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "select category, sum(amount) amount from wallet_movements 
+			where type = 'Egreso' and date between '$startDate' and now() group by category";
+		return $mysql->get($query);
+	}	
+
 	public function loadUserData($id)
 	{
 		$mysql  = new QueryBuilder();
