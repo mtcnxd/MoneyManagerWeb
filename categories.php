@@ -7,9 +7,9 @@ $wallet = new myWallet();
 
 if($_POST){
 	$wallet->insert('wallet_category', [
-		'type'  => $_POST['type'],
-		'name'  => $_POST['name'],
-		'color' => $_POST['color'],
+		'type'     => $_POST['type'],
+		'category' => $_POST['category'],
+		'color'    => $_POST['color'],
 	]);
 }
 ?>
@@ -58,8 +58,8 @@ if($_POST){
 									</select>
 							  	</div>
 							  	<div class="mb-3">
-							    	<label for="" class="form-label">Nombre</label>
-							    	<input type="text" class="form-control" name="name">
+							    	<label for="" class="form-label">Categoria</label>
+							    	<input type="text" class="form-control" name="category">
 							  	</div>
 							  	<div class="mb-3">
 							    	<label for="" class="form-label">Color</label>
@@ -92,7 +92,7 @@ if($_POST){
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">
 												<div class="col-md-8">
-												'.$value->name.'
+												'.$value->category.'
 												</div>
 												<div class="col text-end">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
@@ -120,7 +120,7 @@ if($_POST){
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">
 												<div class="col">
-												'.$value->name.'
+												'.$value->category.'
 												</div>
 												<div class="col text-end">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
@@ -150,7 +150,7 @@ if($_POST){
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">
 												<div class="col-md-8">
-												'.$value->name.'
+												'.$value->category.'
 												</div>
 												<div class="col text-end">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>

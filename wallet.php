@@ -67,7 +67,7 @@ if($_POST){
 								  		<?php
 										$data = $wallet->selectCategory('Ingreso');
 										foreach ($data as $value) {
-											echo "<option value=".$value->name.">".$value->name."</option>";
+											echo "<option value=".$value->category.">".$value->category."</option>";
 										}
 										?>
 									</select>
@@ -105,7 +105,9 @@ if($_POST){
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-									<h6 class="card-title">Lista de egresos del mes</h6>
+									<p class="fs-7 fw-bolder text-uppercase text-muted">
+										Listado de egresos del mes
+									</p>
 									<table class="table">
 										<tr>
 											<td>#</td>
@@ -128,7 +130,9 @@ if($_POST){
 									</table>
 								</div>
 							  	<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-							  		<h6 class="card-title">Lista de ingresos del mes</h6>
+								  	<p class="fs-7 fw-bolder text-uppercase text-muted">
+										Listado de ingresos del mes
+									</p>
 							  		<table class="table">
 										<tr>
 											<td>#</td>

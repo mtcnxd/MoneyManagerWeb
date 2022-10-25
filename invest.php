@@ -54,7 +54,7 @@ if($_POST){
 										<?php
 										$data = $wallet->selectCategory('inversion');
 										foreach ($data as $key => $value) {
-											echo "<option>".$value->name."</option>";
+											echo "<option>".$value->category."</option>";
 										}
 										?>
 									</select>
@@ -71,6 +71,10 @@ if($_POST){
 							</form>	
 						</div>	
 					</div> 	<!-- Card -->
+
+					<p class="fs-7 fw-bolder text-uppercase text-muted">
+						Indicadores de rendimiento basado en los ultimos 30 dias
+					</p>
 
 					<div class="row mb-4">
 						<div class="col-md-6">
@@ -105,7 +109,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 30 dias</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Incremento</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$datePast = strtotime('-30 day', strtotime(date('Y-m-d')));
@@ -132,7 +136,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 30 dias</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Incremento</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$percentage = ($diff/$currentBalance) *100;
@@ -154,14 +158,13 @@ if($_POST){
 				<div class="col">
 					<div class="card border-custom shadow-sm mb-4">
 						<div class="card-body">
+							<p class="fs-7 fw-bolder text-uppercase text-muted">Grafica Rendimiento</p>
 							<?php
 							$chartData = $wallet->dataChart();
-
 							foreach ($chartData as $key => $value) {
 		 						$labels[] = $value->date;
 		 						$values[] = $value->amount;
 							}
-
 							?>
 							<canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
 						</div>
@@ -184,7 +187,6 @@ if($_POST){
 								</thead>								
 								<?php
 								$count = 0;
-								
 								foreach ($data as $value) {
 									$count++;
 									$percentage = ($value->amount/$currentBalance) * 100;

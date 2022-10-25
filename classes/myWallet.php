@@ -50,7 +50,8 @@ class myWallet
 	public function selectThisMonth($startDate, $endDate)
 	{
         $query = new QueryBuilder();
-		$sql = "select * from wallet_movements where date between '$startDate' and '$endDate'";
+		$sql = "select a.*, b.icon from wallet_movements a left join wallet_category b on a.category = b.category 
+			where a.date between '$startDate' and '$endDate' order by a.date";
 		return $query->get($sql);
 	}
 

@@ -47,6 +47,7 @@ $wallet = new myWallet();
 							<thead>
 								<tr class="table-custom text-uppercase fs-7">
 									<th scope="col">#</td>
+									<th scope="col"></td>
 									<th scope="col">Nombre</td>
 									<th scope="col">Categoria</td>
 									<th scope="col">Descripcion</td>
@@ -66,6 +67,7 @@ $wallet = new myWallet();
 									echo "<tr>";
 								}
 								echo "	<td>". ($key+1) ."</td>";
+								echo "	<td><img src='images/$value->icon' width=20 height=20></td>";
 								echo "	<td>". $value->type ."</td>";
 								echo "	<td>". $value->category ."</td>";
 								echo "	<td>". $value->description ."</td>";
