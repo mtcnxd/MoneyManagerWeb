@@ -16,7 +16,8 @@ class myWallet
 	static function amountDiff($date)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select SUM(amount) amount from wallet_cron_balances where concept not in ('Bitso') and date = '$date'";
+		$query  = "select SUM(amount) amount from wallet_cron_balances 
+			where concept not in ('Bitso','BingX') and date = '$date'";
         $result = $mysql->get($query);
         return $result[0]->amount;
 	}
@@ -99,7 +100,7 @@ class myWallet
 	{
 		$mysql = new QueryBuilder();
 		$query = "select * from wallet_invest where date in (select max(date) max_date 
-			from wallet_invest where concept not in ('Bitso') group by concept) order by concept";
+			from wallet_invest where concept not in ('Bitso','BingX') group by concept) order by concept";
 
 		return $mysql->get($query);
 	}
@@ -115,7 +116,7 @@ class myWallet
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "select date, sum(amount) as amount from wallet_cron_balances 
-			where concept not in ('Bitso') group by date desc limit 30";
+			where concept not in ('Bitso','BingX') group by date desc limit 30";
 		return $mysql->get($query);
 	}
 
