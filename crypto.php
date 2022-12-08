@@ -40,16 +40,6 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card border-custom shadow-sm mb-4">
-                        <div class="card-body">
-                            Esta es una prueba de columna
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card rounded border border-custom shadow-sm mb-4">
@@ -94,9 +84,6 @@ if($_POST){
 						</div>
 						<div class="card-body">
 							<canvas class="p-3" id="myChart" width="250" height="100"></canvas>
-						</div>
-						<div class="card-body">
-
 						</div>	
 					</div> 	<!-- Card -->
 
