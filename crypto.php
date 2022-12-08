@@ -51,7 +51,7 @@ if($_POST){
             </div>
 
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
 							<h6 class="card-header-title">Balances</h6>
@@ -69,6 +69,7 @@ if($_POST){
 								</thead>
 							<?php
 							foreach ($balance_array as $row => $balance){
+								$chartData[$balance['currency']] = $balance['value'];
 								$totalBalance += $balance['value'];
 
 								echo "<tr>";
@@ -80,6 +81,22 @@ if($_POST){
 							}
 							?>
 							</table>
+						</div>	
+					</div> 	<!-- Card -->
+
+				</div>	<!-- Col-md-5 -->
+
+				<div class="col">
+					<div class="card rounded border border-custom shadow-sm mb-4">
+						<div class="card-header">
+							<h6 class="card-header-title">Distribucion</h6>
+							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+						</div>
+						<div class="card-body">
+							<canvas class="p-3" id="myChart" width="250" height="100"></canvas>
+						</div>
+						<div class="card-body">
+
 						</div>	
 					</div> 	<!-- Card -->
 
@@ -105,20 +122,7 @@ if($_POST){
 								</div>
 							</div>
 						</div>
-					</div>
-
-				</div>	<!-- Col-md-5 -->
-
-				<div class="col">
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<h6 class="card-header-title">Distribucion</h6>
-							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-						</div>				
-						<div class="card-body">
-
-						</div>	
-					</div> 	<!-- Card -->
+					</div>					
 
 				</div>	<!-- Col -->
 
@@ -134,4 +138,55 @@ if($_POST){
 		crossorigin="anonymous">
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const distributionChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['<?=implode("','", array_keys($chartData));?>'],
+        datasets: [{
+            label: 'Wallet Balance',
+            data: [<?=implode(",", array_values($chartData));?>],
+            backgroundColor: [
+                'rgba(235, 52, 95, 0.7)',
+                'rgba(129, 247, 166, 0.7)',
+                'rgba(252, 232, 96, 0.7)',
+                'rgba(184, 184, 184, 0.7)',
+                'rgba(235, 52, 192, 0.7)',
+                'rgba(78, 189, 245, 0.7)',
+                'rgba(59, 176, 40, 0.7)',
+                'rgba(52, 235, 122, 0.7)'
+            ],
+            borderColor: [
+                'rgba(235, 52, 95, 1)',
+                'rgba(129, 247, 166, 1)',
+                'rgba(252, 232, 96, 1)',
+                'rgba(184, 184, 184, 1)',
+                'rgba(235, 52, 192, 1)',
+                'rgba(78, 189, 245, 1)',
+                'rgba(59, 176, 40, 1)',
+                'rgba(52, 235, 122, 1)'
+            ],
+            borderWidth: 1,
+            hoverOffset: 5
+       }]
+    },
+    options: {
+		responsive: true,
+    	plugins: {
+      	legend: {
+        	position: 'none',
+        	align:'center',
+        	labels:{
+        		padding:25,
+        		boxWidth: 18,
+        		boxHeight: 17
+        	}
+      	}
+      }
+    }
+});
 </script>
