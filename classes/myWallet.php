@@ -1,11 +1,63 @@
 <?php
 
 namespace classes;
+require_once('Bitso.php');
 
 use classes\QueryBuilder;
+use classes\Bitso;
 
-class myWallet 
+class myWallet extends Bitso
 {
+	protected $bitsoKey;
+	protected $bitsoSecret;
+
+	public function __construct($user = null)
+	{
+
+		$this->bitsoKey 	= 'TMJEPCYmIv';
+		$this->bitsoSecret  = 'd181cda5b0f939ee1b42e7b45ebd93e5';
+	}
+
+	public function getWalletBalances()
+	{
+		$balances = $this->getBalance();
+		$ticker   = $this->getTicker();
+
+		$balanceValue = array();
+		foreach ($balances as $value) {
+
+			$book = $value->currency.'_mxn';
+
+			if ($value->currency == 'mxn'){
+				$balanceValue[] = [
+					'currency' => $value->currency,
+					'amount'   => $value->total,
+					'value'    => $value->total,
+				];
+			} else if ($value->total > 0.0002){
+				if( array_key_exists($book, $ticker) ){
+					$balanceValue[] = [
+						'currency' => $value->currency,
+						'amount'   => $value->total,
+						'value'    => $value->total * $ticker[$book],
+					];
+				} else {
+					$book = $value->currency.'_usd';
+					if (array_key_exists($book, $ticker)){
+						$balanceValue[] = [
+							'currency' => $value->currency,
+							'amount'   => $value->total,
+							'value'    => $value->total * $ticker[$book] * $ticker['usd_mxn'],
+						];
+					}
+				}
+			}
+		}
+
+		return $balanceValue;
+
+	}
+
 	static function thisMonth()
 	{
 		$thisMonth = date('n');
@@ -133,6 +185,6 @@ class myWallet
 		$mysql  = new QueryBuilder();
 		$query  = "select * from wallet_users where id = $id";
 		return $mysql->get($query);
-	}
+	}	
 
 }
