@@ -43,7 +43,13 @@ class QueryBuilder
         $query .= implode (' AND ',$item_where);
         
         $this->query = $query;
-        return $query;
+        return $this->query;
+    }
+
+    public function order($column)
+    {
+        $this->query = $this->query ." ORDER BY ". $column;
+        return $this->query;
     }
 
     public function update($data, $where)

@@ -87,6 +87,7 @@ class myWallet extends Bitso
 		$query = new QueryBuilder();
         $query->table('wallet_category');
         $query->where(['type' => $type]);
+		$query->order('category');
         return $query->get();
 	}
 
@@ -152,7 +153,7 @@ class myWallet extends Bitso
 	{
 		$mysql = new QueryBuilder();
 		$query = "select * from wallet_invest where date in (select max(date) max_date 
-			from wallet_invest where concept not in ('Bitso','BingX') group by concept) order by concept";
+			from wallet_invest where concept not in ('Bitso','BingX','Rentas') group by concept) order by concept";
 
 		return $mysql->get($query);
 	}

@@ -186,13 +186,11 @@ if($_POST){
 									</tr>
 								</thead>								
 								<?php
-								$count = 0;
-								foreach ($data as $value) {
-									$count++;
+								foreach ($data as $row => $value) {
 									$percentage = ($value->amount/$currentBalance) * 100;
 									
 									echo "<tr>";
-									echo "	<td>".$count."</td>";
+									echo "	<td>".($row +1)."</td>";
 									echo "	<td><a href='details.php?q=".$value->concept."' class='table-link-item link-primary'>".$value->concept."</a></td>";
 									echo "	<td class='text-end'>  ". number_format($percentage, 2)."%</td>";
 									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
@@ -204,7 +202,7 @@ if($_POST){
 							<div class="container px-4 text-center mb-3">
 								<div class="row gx-5">
 									<div class="col-md-4">
-										<button type="button" class="btn btn-sm btn-outline-success">Actualizar Inversion</button>
+										<button type="button" id="updateTable" class="btn btn-sm btn-outline-success">Actualizar Inversion</button>
 									</div>
 								</div>
 							</div>
@@ -225,10 +223,19 @@ if($_POST){
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
 		crossorigin="anonymous">
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-</script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script>
+$("#updateTable").on('click', function(){
+	$.ajax ({
+		url: 'background/ajax_request.php',
+		method: 'post',
+		success: function(response){
+			console.log('Response:' + response)
+		}
+	})
+})
+</script>
 <script>
 const currentChart = document.getElementById('currentChart').getContext('2d');
 const myChart = new Chart(currentChart, {
