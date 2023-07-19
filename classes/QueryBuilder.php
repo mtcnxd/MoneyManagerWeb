@@ -10,8 +10,8 @@ class QueryBuilder
     public $query;
 
     protected $host 	= 'localhost';
-    protected $username = 'fortechm';
-    protected $password = 'IrSW8=m)W$9U';
+    protected $username = 'root';
+    protected $password = '';
     protected $database = 'fortechm_mywallet';
     protected $connection;
 
