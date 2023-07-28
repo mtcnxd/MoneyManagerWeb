@@ -188,4 +188,16 @@ class myWallet extends Bitso
 		return $mysql->get($query);
 	}	
 
+	public function getMonthlyReturn()
+	{
+		$mysql = new QueryBuilder();
+		$query = "select SUM(amount) amount from `wallet_cron_balances` where date = '".date('Y-m-01')."'";
+		$lastAmount = $mysql->get($query)[0];
+		
+		$query = "select SUM(amount) amount from `wallet_cron_balances` where date = '".date('Y-m-d')."'";
+		$currentAmount = $mysql->get($query)[0];
+		
+		return ($currentAmount->amount - $lastAmount->amount);
+	}
+
 }
