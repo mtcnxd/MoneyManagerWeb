@@ -7,8 +7,8 @@ $wallet = new myWallet();
 
 if($_POST){
 	$wallet->insert('wallet_saving', [
-		'concept' => $_POST['concept'],
-		'amount'  => $_POST['amount'],
+		'date'   => $_POST['date'],
+		'amount' => $_POST['amount'],
 	]);
 }
 ?>
@@ -48,6 +48,11 @@ if($_POST){
 						</div>				
 						<div class="card-body">
 							<form action="saving.php" method="post">
+								<div class="mb-3">
+									<label for="" class="form-label">Fecha</label>
+									<input type="date" class="form-control" name="date" value="<?=date('Y-m-d')?>">
+								</div>
+
 							  	<div class="mb-3">
 							    	<label for="" class="form-label">Importe</label>
 									<div class="input-group">
@@ -76,14 +81,13 @@ if($_POST){
 						<div class="card-body">
 							<table class="table table-hover">
 								<?php
-								$start = date('Y-m-d 00:00:00');
-								$end   = date('Y-m-d 23:59:59');
+								$start = date('Y-m-01 00:00:00');
+								$end   = date('Y-m-t 23:59:59');
 								$data  = $wallet->selectMovementsRange($start, $end);
 
 								foreach ($data as $key => $value) {
 									echo "<tr>";
-									echo "	<td>".$value->name."</td>";
-									echo "	<td>".$value->concept."</td>";
+									echo "	<td>".$value->date."</td>";
 									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
 									echo "</tr>";
 								}

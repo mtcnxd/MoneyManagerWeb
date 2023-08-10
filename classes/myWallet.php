@@ -102,9 +102,7 @@ class myWallet extends Bitso
 	public function selectMovementsRange($start, $end)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select * from `wallet_movements` a JOIN `wallet_category` b 
-				   ON a.category = b.id WHERE date between '$start' and '$end'
-				   ORDER by a.date ASC, a.type";
+		$query  = "select * from wallet_saving WHERE date between '$start' and '$end' ORDER by date ASC";
 		$result = $mysql->get($query);
 		return $result;
 	}
