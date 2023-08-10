@@ -83,7 +83,7 @@ if($_POST){
 									<div class="align-items-center row">
 										<div class="col">
 											<h6 class="card-title text-muted text-uppercase fs-7">
-												Inversion total
+												Capital invertido
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
@@ -109,7 +109,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Incremento</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Incremento a 30 dias</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$datePast = strtotime('-30 day', strtotime(date('Y-m-d')));
@@ -136,7 +136,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Incremento</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Incremento ponderado</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$percentage = $wallet->getExchangeRate($datePast);

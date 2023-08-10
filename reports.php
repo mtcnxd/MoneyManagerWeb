@@ -100,7 +100,7 @@ $userData = $wallet->loadUserData(1)[0];
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
-											$datePast = strtotime('-14 day', strtotime(date('Y-m-d')));
+											$datePast = strtotime('-22 day', strtotime(date('Y-m-d')));
 											$datePast = date('Y-m-d', $datePast);									
 											echo number_format($wallet->getExchangeRate($datePast),2) ."%";
 											?>
@@ -145,7 +145,7 @@ $userData = $wallet->loadUserData(1)[0];
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
 											$exchangeRate = $wallet->getExchangeRate($datePast)/100;
-											echo number_format($capital * pow((1 + $exchangeRate),6), 2);
+											echo number_format($capital * pow((1 + $exchangeRate),12), 2);
 											?>
 										</div>
 									</div>
