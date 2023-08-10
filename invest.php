@@ -139,7 +139,7 @@ if($_POST){
 											<h6 class="card-title text-muted text-uppercase fs-7">Incremento</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
-											$percentage = ($diff/$currentBalance) *100;
+											$percentage = $wallet->getExchangeRate($datePast);
 											echo number_format($percentage, 2) ."%";
 											?>
 											</h5>
@@ -216,56 +216,63 @@ if($_POST){
 
 		</div> 	<!-- Container -->
 		
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
+		        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
+		        crossorigin="anonymous">
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+        <script>
+        $("#updateTable").on('click', function(){
+	        $.ajax ({
+		        url: 'background/ajax_request.php',
+		        method: 'post',
+		        success: function(response){
+			        console.log('Response:' + response)
+		        }
+	        })
+        })
+        </script>
+        <script>
+        const currentChart = document.getElementById('currentChart').getContext('2d');
+        const myChart = new Chart(currentChart, {
+            type: 'line',
+            data: {
+                labels: <?=json_encode( $labels );?>,
+                datasets: [{
+                    label: 'Wallet Balance',
+                    data: <?=json_encode( $values );?>,
+                    borderColor: 'rgba(0, 153, 204, 1)',
+                    backgroundColor: 'rgba(0, 172, 230, 0.2)',
+                    borderWidth:1,
+                    pointRadius:2,
+                    hoverOffset:5,
+                    fill: true
+               }]
+            },
+            options: {
+		        responsive: true,
+            	plugins: {
+	              	legend: {
+	                	position:'none',
+	                	align:'center',
+	                	labels:{
+	                		padding:25,
+	                		boxWidth:18,
+	                		boxHeight:17
+	                	}
+	              	}
+              }
+            }
+        });
+        </script>
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "i84qwphpao");
+        </script>
 	</body>
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
-		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
-		crossorigin="anonymous">
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-<script>
-$("#updateTable").on('click', function(){
-	$.ajax ({
-		url: 'background/ajax_request.php',
-		method: 'post',
-		success: function(response){
-			console.log('Response:' + response)
-		}
-	})
-})
-</script>
-<script>
-const currentChart = document.getElementById('currentChart').getContext('2d');
-const myChart = new Chart(currentChart, {
-    type: 'line',
-    data: {
-        labels: <?=json_encode( $labels );?>,
-        datasets: [{
-            label: 'Wallet Balance',
-            data: <?=json_encode( $values );?>,
-            borderColor: 'rgba(0, 153, 204, 1)',
-            backgroundColor: 'rgba(0, 172, 230, 0.2)',
-            borderWidth:1,
-            pointRadius:2,
-            hoverOffset:5,
-            fill: true
-       }]
-    },
-    options: {
-		responsive: true,
-    	plugins: {
-	      	legend: {
-	        	position:'none',
-	        	align:'center',
-	        	labels:{
-	        		padding:25,
-	        		boxWidth:18,
-	        		boxHeight:17
-	        	}
-	      	}
-      }
-    }
-});
-</script>

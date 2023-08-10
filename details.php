@@ -29,7 +29,7 @@ $wallet = new myWallet();
 			<div class="container">
 				<?php include ('includes/main_menu.php'); ?>
 			</div>
-		</header>		
+		</header>	
 		
 		<div class="container">
 			<div class="row mb-4">

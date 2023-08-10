@@ -74,6 +74,14 @@ class myWallet extends Bitso
         return $result[0]->amount;
 	}
 
+	public function dataChart()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "select date, sum(amount) as amount from wallet_cron_balances 
+			where concept not in ('Bitso','BingX') group by date desc limit 30";
+		return $mysql->get($query);
+	}
+
 	public function insert($table, $data)
 	{
 		$query = new QueryBuilder();
@@ -135,8 +143,7 @@ class myWallet extends Bitso
 		$mysql  = new QueryBuilder();
 		$query  = "select SUM(amount) as total from wallet_invest 
 			where date in (select max(date) max_date from wallet_invest group by concept) 
-			and include = true
-			order by concept";
+			and include = true order by concept";
 
 		$result = $mysql->get($query);
 		return $result[0]->total;
@@ -153,7 +160,7 @@ class myWallet extends Bitso
 	{
 		$mysql = new QueryBuilder();
 		$query = "select * from wallet_invest where date in (select max(date) max_date 
-			from wallet_invest where concept not in ('Bitso','BingX','Rentas') group by concept) order by concept";
+			from wallet_invest where concept not in ('Bitso','BingX','Rentas','Kubo') group by concept) order by concept";
 
 		return $mysql->get($query);
 	}
@@ -165,19 +172,10 @@ class myWallet extends Bitso
 		return $mysql->get($query);
 	}
 
-	public function dataChart()
+	public function dataChartReport()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select date, sum(amount) as amount from wallet_cron_balances 
-			where concept not in ('Bitso','BingX') group by date desc limit 30";
-		return $mysql->get($query);
-	}
-
-	public function dataChartReport($startDate)
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "select category, sum(amount) amount from wallet_movements 
-			where type = 'Egreso' and date between '$startDate' and now() group by category";
+		$query  = "SELECT concept, amount FROM `wallet_cron_balances` WHERE date = '".date('Y-m-d')."'";
 		return $mysql->get($query);
 	}	
 
@@ -198,6 +196,19 @@ class myWallet extends Bitso
 		$currentAmount = $mysql->get($query)[0];
 		
 		return ($currentAmount->amount - $lastAmount->amount);
+	}
+
+	public function getExchangeRate($datePast)
+	{
+		$currentBalance = 0.0;
+		$results = $this->loadCurrentInvestments();
+		foreach ($results as $value){
+			$currentBalance += $value->amount;
+		}
+		
+		$lastBalance = self::amountDiff($datePast);
+		$diff = $currentBalance - $lastBalance;
+		return ($diff/$currentBalance) *100;
 	}
 
 }

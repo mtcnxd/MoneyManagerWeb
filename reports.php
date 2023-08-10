@@ -60,28 +60,95 @@ $userData = $wallet->loadUserData(1)[0];
 
 						<div class="p-4">
                             <?php
-							$chartData = $wallet->dataChartReport($startDate);
+							$chartData = $wallet->dataChartReport();
 
 							foreach ($chartData as $key => $value) {
-		 						$labels[] = $value->category;
+		 						$labels[] = $value->concept;
 		 						$values[] = $value->amount;
 							}
                             ?>                        
                             <canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
 						</div>
 					</div>	<!-- Card -->
-					
-					<div class="card border-custom shadow-sm col-md-3">
-						<div class="card-body">
-							<div class="align-items-center row">
-								<div class="col">
-									<h6 class="card-title text-muted text-uppercase fs-7">
-										Ganancia mes en curso
-									</h6>
-									<h5 class="card-subtitle mb-2 fs-6">							
-									<?php
-									echo "$".number_format($wallet->getMonthlyReturn(), 2);
-									?>
+
+					<div class="row">
+						<div class="col-md-3">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Ganancia mes en curso
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">							
+											<?php
+											echo "$".number_format($wallet->getMonthlyReturn(), 2);
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Tasa Promedio Ponderada
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">							
+											<?php
+											$datePast = strtotime('-14 day', strtotime(date('Y-m-d')));
+											$datePast = date('Y-m-d', $datePast);									
+											echo number_format($wallet->getExchangeRate($datePast),2) ."%";
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Capital invertido
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">							
+											<?php
+											$capital = 0;
+											$data = $wallet->loadCurrentInvestments();
+											foreach ($data as $value) {
+												$capital += $value->amount;
+											}
+
+											echo "$ ". number_format($capital ,2);
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Retorno aprox. seis meses
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">							
+											<?php
+											$exchangeRate = $wallet->getExchangeRate($datePast)/100;
+											echo number_format($capital * pow((1 + $exchangeRate),6), 2);
+											?>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -93,63 +160,70 @@ $userData = $wallet->loadUserData(1)[0];
 
 		</div>	<!-- Container -->
 		
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
+		        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
+		        crossorigin="anonymous">
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+        <script>
+        const currentChart = document.getElementById('currentChart').getContext('2d');
+        const myChart = new Chart(currentChart, {
+            type: 'bar',
+            data: {
+                labels: <?=json_encode( $labels );?>,
+                datasets: [{
+                    label: 'Wallet Balance',
+                    data: <?=json_encode( $values );?>,
+                    borderColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 205, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(201, 203, 207, 0.7)'                
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(255, 159, 64, 0.4)',
+                        'rgba(255, 205, 86, 0.4)',
+                        'rgba(75, 192, 192, 0.4)',
+                        'rgba(54, 162, 235, 0.4)',
+                        'rgba(153, 102, 255, 0.4)',
+                        'rgba(201, 203, 207, 0.4)'
+                    ],
+                    borderWidth:1,
+                    pointRadius:2,
+                    hoverOffset:5,
+                    fill: true
+               }]
+            },
+            options: {
+		        responsive: true,
+            	plugins: {
+	              	legend: {
+	                	position:'none',
+	                	align:'center',
+	                	labels:{
+	                		padding:25,
+	                		boxWidth:18,
+	                		boxHeight:17
+	                	}
+	              	}
+              }
+            }
+        });
+        </script>
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "i84qwphpao");
+        </script>
 	</body>
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
-		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
-		crossorigin="anonymous">
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-<script>
-const currentChart = document.getElementById('currentChart').getContext('2d');
-const myChart = new Chart(currentChart, {
-    type: 'bar',
-    data: {
-        labels: <?=json_encode( $labels );?>,
-        datasets: [{
-            label: 'Wallet Balance',
-            data: <?=json_encode( $values );?>,
-            borderColor: [
-                'rgba(255, 99, 132, 0.7)',
-                'rgba(255, 159, 64, 0.7)',
-                'rgba(255, 205, 86, 0.7)',
-                'rgba(75, 192, 192, 0.7)',
-                'rgba(54, 162, 235, 0.7)',
-                'rgba(153, 102, 255, 0.7)',
-                'rgba(201, 203, 207, 0.7)'                
-            ],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.4)',
-                'rgba(255, 159, 64, 0.4)',
-                'rgba(255, 205, 86, 0.4)',
-                'rgba(75, 192, 192, 0.4)',
-                'rgba(54, 162, 235, 0.4)',
-                'rgba(153, 102, 255, 0.4)',
-                'rgba(201, 203, 207, 0.4)'
-            ],
-            borderWidth:1,
-            pointRadius:2,
-            hoverOffset:5,
-            fill: true
-       }]
-    },
-    options: {
-		responsive: true,
-    	plugins: {
-	      	legend: {
-	        	position:'none',
-	        	align:'center',
-	        	labels:{
-	        		padding:25,
-	        		boxWidth:18,
-	        		boxHeight:17
-	        	}
-	      	}
-      }
-    }
-});
-</script>
