@@ -68,8 +68,8 @@ class myWallet extends Bitso
 	static function amountDiff($date)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select SUM(amount) amount from wallet_cron_balances 
-			where concept not in ('Bitso','BingX') and date = '$date'";
+		$query  = "SELECT SUM(amount) amount FROM wallet_cron_balances 
+			WHERE concept NOT IN ('Bitso','BingX') AND date = '$date'";
         $result = $mysql->get($query);
         return $result[0]->amount;
 	}
@@ -77,8 +77,8 @@ class myWallet extends Bitso
 	public function dataChart()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select date, sum(amount) as amount from wallet_cron_balances 
-			where concept not in ('Bitso','BingX') group by date desc limit 30";
+		$query  = "SELECT date, sum(amount) AS amount FROM wallet_cron_balances 
+			WHERE concept NOT IN ('Bitso','BingX') GROUP BY date DESC LIMIT 30";
 		return $mysql->get($query);
 	}
 
@@ -102,7 +102,7 @@ class myWallet extends Bitso
 	public function selectMovementsRange($start, $end)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select * from wallet_saving WHERE date between '$start' and '$end' ORDER by date ASC";
+		$query  = "SELECT * FROM wallet_saving WHERE date BETWEEN '$start' AND '$end' ORDER BY date ASC";
 		$result = $mysql->get($query);
 		return $result;
 	}
@@ -173,7 +173,7 @@ class myWallet extends Bitso
 	public function dataChartReport()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT concept, amount FROM `wallet_cron_balances` WHERE date = '".date('Y-m-d')."'";
+		$query  = "SELECT concept, amount FROM `wallet_cron_balances` WHERE date = CURRENT_DATE - INTERVAL 1 DAY";
 		return $mysql->get($query);
 	}	
 
