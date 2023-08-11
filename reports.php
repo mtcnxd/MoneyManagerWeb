@@ -6,7 +6,6 @@ use classes\myWallet;
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
 $wallet = new myWallet();
-$userData = $wallet->selectTable('wallet_users', 1)[0];
 ?>
 
 <html>

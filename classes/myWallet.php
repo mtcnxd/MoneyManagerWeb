@@ -82,24 +82,14 @@ class myWallet extends Bitso
         return $query->get();
 	}
 
-	public function selectTable($table = 'wallet_saving', $where = null)
+	public function selectTableWithID($table = 'wallet_saving', $where = null)
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "SELECT * FROM $table";
 		if ($where){
 			$query .= " WHERE id = $where";
 		}
-		var_dump($query);
-
 		return $mysql->get($query);
-	}
-
-	public function selectMovementsRange($start, $end)
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_saving WHERE date BETWEEN '$start' AND '$end' ORDER BY date ASC";
-		$result = $mysql->get($query);
-		return $result;
 	}
 
 	public function dataChart()
@@ -118,6 +108,14 @@ class myWallet extends Bitso
 		$query->execute();
 	}
 
+	public function selectMovementsRange($start, $end)
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "SELECT * FROM wallet_saving WHERE date BETWEEN '$start' AND '$end' ORDER BY date ASC";
+		$result = $mysql->get($query);
+		return $result;
+	}
+
 	public function selectThisMonth($startDate, $endDate)
 	{
         $query = new QueryBuilder();
@@ -126,17 +124,10 @@ class myWallet extends Bitso
 		return $query->get($sql);
 	}
 
-	public function getBalanceTotal($type = 'ingreso')
-	{
-		$query = new QueryBuilder();
-        return $query->get("SELECT SUM(amount) AS total FROM wallet_movements WHERE type = '$type'");
-	}
-
 	public function getTotalThisMonth($type, $startDate, $endDate)
 	{
 		$query = new QueryBuilder();
-		$sql = "SELECT SUM(amount) amount FROM wallet_movements WHERE type = '$type' 
-			AND date BETWEEN '$startDate' AND '$endDate'";
+		$sql = "SELECT SUM(amount) amount FROM wallet_movements WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'";
         return $query->get($sql)[0];
 	}
 
@@ -147,10 +138,11 @@ class myWallet extends Bitso
         return $query->get($sql);
 	}	
 
+	# Muestra los detalles de cada inversion
 	public function loadListbyItem($concept)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "select * from wallet_invest where concept = '$concept' ORDER BY date DESC LIMIT 15";
+		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' ORDER BY date DESC LIMIT 15";
 		return $mysql->get($query);
 	}
 
