@@ -4,7 +4,7 @@ require_once ('classes/autoload.php');
 use classes\myWallet;
 
 $wallet = new myWallet();
-$userData = $wallet->loadUserData(1)[0];
+$userData = $wallet->selectTable('wallet_users', 1)[0];
 ?>
 
 <html>

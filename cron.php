@@ -5,7 +5,7 @@ require_once ("wallet.fortech.mx/classes/QueryBuilder.php");
 use classes\myWallet;
 
 $wallet = new myWallet();
-$balances = $wallet->loadCurrentInvestments();
+$balances = $wallet->getCurrentBalances();
 $total = 0;
 
 foreach ($balances as $row) {

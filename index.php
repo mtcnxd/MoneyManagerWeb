@@ -3,8 +3,6 @@ require_once ('classes/autoload.php');
 
 use classes\myWallet;
 
-$startDate = date('Y-m-01'); 
-$endDate   = date('Y-m-t');
 $wallet = new myWallet();
 
 ?>
@@ -56,6 +54,8 @@ $wallet = new myWallet();
 								</tr>
 							</thead>
 							<?php
+							$startDate = date('Y-m-01'); 
+							$endDate   = date('Y-m-t');
 							$fixedPayments = $wallet->selectThisMonth($startDate, $endDate);
 
 							foreach ($fixedPayments as $key => $value) {
@@ -133,7 +133,7 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 									<?php
-									$invest = $wallet->getTotalInvest();
+									$invest = $wallet->getFullInvest();
 									echo '$'. number_format($invest, 2);
 									?>
 									</h5>

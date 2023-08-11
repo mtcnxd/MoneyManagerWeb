@@ -6,7 +6,7 @@ use classes\myWallet;
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
 $wallet = new myWallet();
-$userData = $wallet->loadUserData(1)[0];
+$userData = $wallet->selectTable('wallet_users', 1)[0];
 ?>
 
 <html>
@@ -121,7 +121,7 @@ $userData = $wallet->loadUserData(1)[0];
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
 											$capital = 0;
-											$data = $wallet->loadCurrentInvestments();
+											$data = $wallet->getCurrentBalances();
 											foreach ($data as $value) {
 												$capital += $value->amount;
 											}

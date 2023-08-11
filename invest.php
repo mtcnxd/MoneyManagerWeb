@@ -87,11 +87,7 @@ if($_POST){
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
-											$currentBalance = 0;
-											$data = $wallet->loadCurrentInvestments();
-											foreach ($data as $value) {
-												$currentBalance += $value->amount;
-											}
+											$currentBalance = $wallet->getFullInvest();
 											echo '$'. number_format($currentBalance, 2);
 											?>
 											</h5>
@@ -114,7 +110,7 @@ if($_POST){
 											<?php
 											$datePast = strtotime('-30 day', strtotime(date('Y-m-d')));
 											$datePast = date('Y-m-d', $datePast);
-											$lastBalance = myWallet::amountDiff($datePast);
+											$lastBalance = myWallet::getAmountLastMonth();
 											$diff = $currentBalance - $lastBalance;
 
 											echo '$'. number_format($diff, 2);
@@ -186,6 +182,7 @@ if($_POST){
 									</tr>
 								</thead>								
 								<?php
+								$data = $wallet->getCurrentBalances();
 								foreach ($data as $row => $value) {
 									$percentage = ($value->amount/$currentBalance) * 100;
 									

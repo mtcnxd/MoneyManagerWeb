@@ -58,6 +58,8 @@ if($_POST){
 									</tr>
 								</thead>
 							<?php
+							$totalBalance = 0;
+							$chartData = array();
 							foreach ($balance_array as $row => $balance){
 								$chartData[$balance['currency']] = $balance['value'];
 								$totalBalance += $balance['value'];

@@ -5,7 +5,7 @@ require_once ("../classes/QueryBuilder.php");
 use classes\myWallet;
 
 $wallet = new myWallet();
-$balances = $wallet->loadCurrentInvestments();
+$balances = $wallet->getCurrentBalances();
 
 foreach ($balances as $row) {
 	$wallet->insert('wallet_cron_balances', [
