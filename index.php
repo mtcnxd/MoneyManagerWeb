@@ -93,8 +93,12 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 									<?php
-									$ingresos = $wallet->getTotalThisMonth('Ingreso', $startDate, $endDate);
-									echo '$'. number_format($ingresos->amount, 2);
+									$sumIngresos = 0;
+									$ingresos = $wallet->getFlowByDates('Ingreso', $startDate, $endDate);
+									foreach($ingresos as $ingreso){
+										$sumIngresos += $ingreso->amount;
+									}
+									echo '$'. number_format($sumIngresos, 2);
 									?>
 									</h5>
 								</div>
@@ -113,8 +117,12 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 									<?php
-									$egresos = $wallet->getTotalThisMonth('Egreso',$startDate, $endDate);
-									echo '$'. number_format($egresos->amount, 2);
+									$sumEgresos = 0;
+									$egresos = $wallet->getFlowByDates('Egreso',$startDate, $endDate);
+									foreach($egresos as $egreso){
+										$sumEgresos += $egreso->amount;
+									}
+									echo '$'. number_format($sumEgresos, 2);
 									?>
 									</h5>
 								</div>
@@ -153,8 +161,8 @@ $wallet = new myWallet();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-6">
 										<?php
-										if ($ingresos->amount > 0){
-											$versus = ($egresos->amount/$ingresos->amount) *100;
+										if ($sumIngresos > 0){
+											$versus = ($sumEgresos/$sumIngresos) *100;
 										} else {
 											$versus = 0.0;
 										}

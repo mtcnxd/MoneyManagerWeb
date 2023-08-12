@@ -117,7 +117,7 @@ if($_POST){
 											<td class="text-end"></td>
 										</tr>
 										<?php  
-										$data = $wallet->getCashFlow('Egreso', $startDate, $endDate);
+										$data = $wallet->getFlowByDates('Egreso', $startDate, $endDate);
 
 										foreach ($data as $row => $value) {
 											echo "<tr>";
@@ -146,7 +146,7 @@ if($_POST){
 											<td class="text-end"></td>
 										</tr>
 										<?php  
-										$data = $wallet->getCashFlow('Ingreso', $startDate, $endDate);
+										$data = $wallet->getFlowByDates('Ingreso', $startDate, $endDate);
 
 										foreach ($data as $row => $value) {
 											echo "<tr>";

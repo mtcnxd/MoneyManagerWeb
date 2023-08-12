@@ -124,14 +124,7 @@ class myWallet extends Bitso
 		return $query->get($sql);
 	}
 
-	public function getTotalThisMonth($type, $startDate, $endDate)
-	{
-		$query = new QueryBuilder();
-		$sql = "SELECT SUM(amount) amount FROM wallet_movements WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'";
-        return $query->get($sql)[0];
-	}
-
-	public function getCashFlow($type, $startDate, $endDate)
+	public function getFlowByDates($type, $startDate, $endDate)
 	{
 		$query = new QueryBuilder();
         $sql = "SELECT * FROM wallet_movements WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'";
