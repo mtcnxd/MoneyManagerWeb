@@ -64,15 +64,6 @@ class myWallet extends Bitso
 		return $months[$thisMonth-1];
 	}
 
-	static function getAmountLastMonth()
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT SUM(amount) amount FROM wallet_cron_balances 
-			WHERE concept NOT IN ('Bitso','BingX') AND date = CURRENT_DATE - INTERVAL 1 MONTH";
-        $result = $mysql->get($query);
-        return $result[0]->amount;
-	}
-
 	public function selectCategory($type)
 	{
 		$query = new QueryBuilder();
@@ -82,7 +73,7 @@ class myWallet extends Bitso
         return $query->get();
 	}
 
-	public function selectTableWithID($table = 'wallet_saving', $where = null)
+	public function find($table = 'wallet_saving', $where = null)
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "SELECT * FROM $table";
@@ -92,20 +83,31 @@ class myWallet extends Bitso
 		return $mysql->get($query);
 	}
 
-	public function dataChart()
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT date, sum(amount) AS amount FROM wallet_cron_balances 
-			WHERE concept NOT IN ('Bitso','BingX') GROUP BY date DESC LIMIT 30";
-		return $mysql->get($query);
-	}
-
 	public function insert($table, $data)
 	{
 		$query = new QueryBuilder();
 		$query->table($table);
 		$query->insert($data);
 		$query->execute();
+	}
+
+	static function getAmountLastMonth()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "SELECT SUM(amount) amount FROM wallet_cron_balances 
+			WHERE concept NOT IN ('Bitso','BingX') AND date = CURRENT_DATE - INTERVAL 1 MONTH";
+        $result = $mysql->get($query);
+        return $result[0]->amount;
+	}
+
+	public function dataChart()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "SELECT date, sum(amount) AS amount FROM wallet_cron_balances 
+			WHERE concept NOT IN ('Bitso','BingX') AND date >= CURRENT_DATE - INTERVAL 1 MONTH 
+			GROUP BY date DESC;";
+
+		return $mysql->get($query);
 	}
 
 	public function selectMovementsRange($start, $end)
@@ -135,7 +137,7 @@ class myWallet extends Bitso
 	public function loadListbyItem($concept)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' AND date > NOW() - INTERVAL 30 day ";
+		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' AND date > NOW() - INTERVAL 30 day ORDER BY date DESC";
 		return $mysql->get($query);
 	}
 
@@ -173,7 +175,7 @@ class myWallet extends Bitso
 		$query = "SELECT SUM(amount) amount FROM `wallet_cron_balances` WHERE date = '".date('Y-m-01')."'";
 		$lastAmount = $mysql->get($query)[0];
 		
-		$query = "SELECT SUM(amount) amount FROM `wallet_cron_balances` WHERE date = '".date('Y-m-d')."'";
+		$query = "SELECT SUM(amount) amount FROM `wallet_cron_balances` WHERE date = CURRENT_DATE";
 		$currentAmount = $mysql->get($query)[0];
 		
 		return ($currentAmount->amount - $lastAmount->amount);

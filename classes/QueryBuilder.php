@@ -10,8 +10,8 @@ class QueryBuilder
     public $query;
 
     protected $host 	= 'localhost';
-    protected $username = 'root';
-    protected $password = '';
+    protected $username = 'fortechm_web';
+    protected $password = 'Ipr}~*NrLKT?';
     protected $database = 'fortechm_mywallet';
     protected $connection;
 
@@ -80,6 +80,12 @@ class QueryBuilder
         $query .= implode (' AND ',$item_where);
 
         $this->query = $query;
+        return $query;
+    }
+
+    public function find($id)
+    {
+        $query = "SELECT * FROM";
         return $query;
     }
 

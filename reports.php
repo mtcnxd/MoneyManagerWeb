@@ -99,7 +99,7 @@ $wallet = new myWallet();
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
-											$datePast = strtotime('-30 day', strtotime(date('Y-m-d')));
+											$datePast = strtotime('-1 month', strtotime(date('Y-m-d')));
 											$datePast = date('Y-m-d', $datePast);									
 											echo number_format($wallet->getExchangeRate($datePast),2) ."%";
 											?>
@@ -139,7 +139,7 @@ $wallet = new myWallet();
 									<div class="align-items-center row">
 										<div class="col">
 											<h6 class="card-title text-muted text-uppercase fs-7">
-												Retorno aprox. seis meses
+												Retorno aprox. 12 meses
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
