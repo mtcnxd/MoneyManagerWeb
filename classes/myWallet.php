@@ -137,7 +137,7 @@ class myWallet extends Bitso
 	public function loadListbyItem($concept)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' AND date > NOW() - INTERVAL 30 day ORDER BY date DESC";
+		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' AND date > NOW() - INTERVAL 1 MONTH ORDER BY date DESC";
 		return $mysql->get($query);
 	}
 

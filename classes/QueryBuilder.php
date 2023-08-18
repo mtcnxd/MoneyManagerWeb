@@ -85,8 +85,25 @@ class QueryBuilder
 
     public function find($id)
     {
-        $query = "SELECT * FROM";
-        return $query;
+        $query = "SELECT * FROM ". $this->table . " WHERE id = ". $id;
+
+        $this->connection = new mysqli(
+            $this->host, $this->username, $this->password, $this->database
+        );
+
+        if (!$this->connection){
+            echo "Error while triying connect!";
+        }
+
+        $this->query = $query;
+        $data = array();
+        if ($result = $this->connection->query($this->query)) {
+            while ($object = $result->fetch_object()) {
+                $data[] =  $object;
+            }
+            $result->close();
+        }
+        return $data;
     }
 
     public function get($sqlString = null)
