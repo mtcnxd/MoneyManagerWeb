@@ -43,9 +43,9 @@ $wallet = new myWallet();
 						</div>
 
                         <div class="list-group p-1">
-                            <a href="#" class="list-group-item list-group-item-action active">Categorias</a>
-                            <a href="#" class="list-group-item list-group-item-action">Mes anterior</a>
-                            <a href="#" class="list-group-item list-group-item-action">Historico</a>
+                            <a href="reports.php" class="list-group-item list-group-item-action active">Mes actual</a>
+                            <a href="pastmonth.php" class="list-group-item list-group-item-action">Mes anterior</a>
+                            <a href="calendar.php" class="list-group-item list-group-item-action">Calendario</a>
                         </div>
 					</div>	
 				</div>	<!-- Col -->
@@ -225,4 +225,3 @@ $wallet = new myWallet();
         </script>
 	</body>
 </html>
-

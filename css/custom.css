@@ -8,7 +8,7 @@ body {
 }
 
 .border-custom {
-  border-color:#b0bec5 !important
+	border-color:#b0bec5 !important
 }
 
 .table-custom, .bg-custom {
@@ -49,4 +49,42 @@ body {
 
 .card-header {
 	display:flex;
+}
+
+.calendar {
+	background-color: #fff;
+	border: solid 1px #ddd;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.calendar .week {
+	display: inline-flex;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+.calendar .day {
+	border: solid 1px #ddd;
+	display: inline-flex;
+	width: 14%;
+	padding: 10px;
+	height: 70px;
+}
+
+.calendar span {
+	background-color: #dddddd;
+	border-radius: 4px;
+	text-align: center;
+	width: 50px;
+	height: 25px;
+}
+
+.calendar .day .active {
+	background-color: #ffc069;
+}
+
+a {
+	text-decoration: none;
+	color: #000;	
 }
