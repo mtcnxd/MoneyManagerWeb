@@ -7,6 +7,11 @@ body {
 	background:#edf2f9;
 }
 
+a {
+	text-decoration: none;
+	color: #000;	
+}
+
 .border-custom {
 	border-color:#b0bec5 !important
 }
@@ -70,9 +75,10 @@ body {
 	width: 14%;
 	padding: 10px;
 	height: 70px;
+	justify-content: space-between;
 }
 
-.calendar span {
+.calendar .date {
 	background-color: #dddddd;
 	border-radius: 4px;
 	text-align: center;
@@ -82,9 +88,4 @@ body {
 
 .calendar .day .active {
 	background-color: #ffc069;
-}
-
-a {
-	text-decoration: none;
-	color: #000;	
 }

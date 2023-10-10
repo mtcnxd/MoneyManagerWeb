@@ -63,13 +63,17 @@ $wallet = new myWallet();
 
 						for($i=1; $i<=$daysOfMonth; $i++){
 							echo "<div class='day'>";
-							if ($i == $currentDay){
-								echo "<span class='active'>";
-								echo "	<a href=''>". $i ."</a>";
-								echo "</span>";
+							if ( $currentDay == $i ){
+								echo "<span class='date active'>". $i ."</span>";
 							} else {
-								echo "<span>". $i ."</span>";
+								echo "<span class='date'>". $i ."</span>";
 							}
+
+							if ($response = $wallet->getExpenses(date('Y-m-').$i)){
+								echo "<div>";
+								echo "  <a href='#'><span class='badge bg-danger'>".'$'. number_format($response->amount) ."</span></a>";
+								echo "</div>";
+							}							
 							echo "</div>";
 						}
 					?>

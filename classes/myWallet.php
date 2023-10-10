@@ -189,4 +189,12 @@ class myWallet extends Bitso
 		return ($diff/$currentBalance) *100;
 	}
 
+	public function getExpenses($date)
+	{
+		$mysql = new QueryBuilder();
+		$query = "SELECT * FROM wallet_movements WHERE date = '$date'";
+		$response = $mysql->get($query)[0];
+		return $response;
+	}
+
 }
