@@ -60,7 +60,6 @@ a {
 	background-color: #fff;
 	border: solid 1px #ddd;
 	border-radius: 5px;
-	padding: 10px;
 }
 
 .calendar .week {
@@ -72,7 +71,7 @@ a {
 .calendar .day {
 	border: solid 1px #ddd;
 	display: inline-flex;
-	width: 14%;
+	width: 14.2%;
 	padding: 10px;
 	height: 70px;
 	justify-content: space-between;

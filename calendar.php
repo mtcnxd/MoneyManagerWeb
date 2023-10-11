@@ -52,31 +52,36 @@ $wallet = new myWallet();
 
 				<div class="col">
 					<div class="calendar">
-					<?php
-						$dayOfWeek = 6;
-						$daysOfMonth = date('t');
-						$currentDay  = date('d');
+						<div class="card-header pt-3">
+							<h6>Calendario de pagos</h6>
+						</div>
+						<div class="card-body">
+							<?php
+								$dayOfWeek = 6;
+								$daysOfMonth = date('t');
+								$currentDay  = date('d');
 
-						for ($i=0; $i<$dayOfWeek; $i++) { 
-							echo "<div class='day'> &nbsp; </div>";
-						}
+								for ($i=0; $i<$dayOfWeek; $i++) { 
+									echo "<div class='day'> &nbsp; </div>";
+								}
 
-						for($i=1; $i<=$daysOfMonth; $i++){
-							echo "<div class='day'>";
-							if ( $currentDay == $i ){
-								echo "<span class='date active'>". $i ."</span>";
-							} else {
-								echo "<span class='date'>". $i ."</span>";
-							}
+								for($i=1; $i<=$daysOfMonth; $i++){
+									echo "<div class='day'>";
+									if ( $currentDay == $i ){
+										echo "<span class='date active'>". $i ."</span>";
+									} else {
+										echo "<span class='date'>". $i ."</span>";
+									}
 
-							if ($response = $wallet->getExpenses(date('Y-m-').$i)){
-								echo "<div>";
-								echo "  <a href='#'><span class='badge bg-danger'>".'$'. number_format($response->amount) ."</span></a>";
-								echo "</div>";
-							}							
-							echo "</div>";
-						}
-					?>
+									if ($response = $wallet->getExpenses(date('Y-m-').$i)){
+										echo "<div>";
+										echo "  <a href='#'><span class='badge bg-danger'>".'$'. number_format($response->amount) ."</span></a>";
+										echo "</div>";
+									}							
+									echo "</div>";
+								}
+							?>
+						</div>
 					</div>
 				</div>				
 			</div>
