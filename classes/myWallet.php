@@ -152,7 +152,7 @@ class myWallet extends Bitso
 	{
 		$mysql = new QueryBuilder();
 		$query = "SELECT * FROM wallet_invest WHERE date IN (SELECT MAX(date) max_date 
-			FROM wallet_invest WHERE concept NOT IN ('Bitso','BingX','Rentas','Kubo') GROUP BY concept) 
+			FROM wallet_invest WHERE concept NOT IN ('Bitso','BingX','Rentas','Kubo','Caja Popular') GROUP BY concept) 
 			ORDER BY concept";
 
 		return $mysql->get($query);
