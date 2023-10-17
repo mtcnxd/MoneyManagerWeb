@@ -12,7 +12,7 @@ if($_POST){
 		'type'        => $_POST['type'],
 		'category'    => $_POST['category'],
 		'description' => $_POST['description'],
-		'date'        => date('Y-m-d'),
+		'date'        => $_POST['date'],
 		'amount'      => $_POST['amount'],
 	]);
 }
@@ -53,6 +53,10 @@ if($_POST){
 						</div>				
 						<div class="card-body">
 							<form action="wallet.php" method="post">
+								<div class="mb-3">
+							    	<label for="" class="form-label">Fecha</label>
+									<input type="date" class="form-control" name="date" id="date">
+							  	</div>
 								<div class="mb-3">
 							    	<label for="" class="form-label">Tipo</label>
 							    	<select class="form-select" name="type" id="type" onchange="loadCategories(this.value);">

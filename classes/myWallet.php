@@ -70,7 +70,6 @@ class myWallet extends Bitso
         $query->table('wallet_category');
         $query->where([
 			'type' 	  => $type,
-			'visible' => true
 		]);
 		$query->order('category');
         return $query->get();
