@@ -97,3 +97,15 @@ a {
 	width: 50px;
 	height: 25px;
 }
+
+.row .categories {
+    padding: 10px 0px 5px 0px;
+	margin: 0px;
+}
+
+.row .categories:hover {
+    padding: 10px 0px 5px 0px;
+	background-color: #f5f5f5;
+	border-radius: 3px;
+	margin: 0px;
+}
