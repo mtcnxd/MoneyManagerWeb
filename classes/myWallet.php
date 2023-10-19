@@ -1,6 +1,6 @@
 <?php
-
 namespace classes;
+
 require_once('Bitso.php');
 
 use classes\QueryBuilder;
@@ -55,13 +55,6 @@ class myWallet extends Bitso
 
 		return $balanceValue;
 
-	}
-
-	static function thisMonth()
-	{
-		$thisMonth = date('n');
-		$months = ['enero', 'febrero', 'marzo', 'abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-		return $months[$thisMonth-1];
 	}
 
 	public function selectCategory($type)

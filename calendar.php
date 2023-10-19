@@ -1,7 +1,8 @@
 <?php
-require_once ('classes/autoload.php'); 
+require_once('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\calendar;
 
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
@@ -56,14 +57,26 @@ $wallet = new myWallet();
 							<h6>Calendario de pagos</h6>
 						</div>
 						<div class="card-body">
+							<h4>
+								<?php
+									$calendar  = new calendar();
+									echo ucfirst($calendar->getCurrentMonth());
+								?>
+							</h4>
+							<hr>
 							<?php
-								$dayOfWeek = 6;
-								$daysOfMonth = date('t');
-								$currentDay  = date('d');
+								$daysOfWeek = $calendar->getDays();
+								foreach($daysOfWeek as $day) { 
+									echo "<div class='name'>". $day ."</div>";
+								}
 
+								$dayOfWeek = $calendar->getFirstDayOfMonth(true);
 								for ($i=0; $i<$dayOfWeek; $i++) { 
 									echo "<div class='day'> &nbsp; </div>";
 								}
+
+								$daysOfMonth = date('t');
+								$currentDay  = date('d');
 
 								for($i=1; $i<=$daysOfMonth; $i++){
 									echo "<div class='day'>";

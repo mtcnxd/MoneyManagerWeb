@@ -77,14 +77,23 @@ a {
 	justify-content: space-between;
 }
 
+.calendar .day .active {
+	background-color: blanchedalmond;
+}
+
+.calendar .name {
+	border: solid 1px #ddd;
+	display: inline-flex;
+	width: 14.2%;
+	padding: 5px;
+	justify-content: space-around;
+	background-color: blanchedalmond;
+}
+
 .calendar .date {
 	background-color: #dddddd;
 	border-radius: 4px;
 	text-align: center;
 	width: 50px;
 	height: 25px;
-}
-
-.calendar .day .active {
-	background-color: #ffc069;
 }
