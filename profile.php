@@ -129,7 +129,21 @@ $userData = $users->find(1);
 			</div>	<!-- row -->
 
 		</div>	<!-- Container -->
-		
+
+		<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  			<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000" data-bs-animation="true">
+    			<div class="toast-header">
+					<img src="images/celular.png" class="rounded me-2" width="20">
+      				<strong class="me-auto">Notificación</strong>
+					  <small class="text-body-secondary">Ahora mismo</small>
+      				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    			</div>
+    			<div class="toast-body">
+      				Los cambios han sido guardados
+    			</div>
+			</div>
+  		</div>
+
 	</body>
 </html>
 
@@ -154,7 +168,9 @@ $userData = $users->find(1);
 				status:status
 			},
 			success: function(response){
-				console.log(response)
+				console.log(response);
+				const notify = document.getElementById('liveToast');
+				bootstrap.Toast.getOrCreateInstance(notify).show();
 			}
 		})
 
