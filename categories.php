@@ -181,6 +181,19 @@ if($_POST){
 	$(".btn-category").on('click', function(e) {
 		e.preventDefault();
 		var object = $(this).attr("id");
-		console.log(object);
+
+		$.ajax({
+			url: '/background/ajax_endpoint.php',
+			method: 'post',
+			data: {
+				action:'deleteCategory',
+				object:object,
+			},
+			success: function(response){
+				console.log(response)
+				history.go(0);
+			}
+		})
+
 	})
 </script>

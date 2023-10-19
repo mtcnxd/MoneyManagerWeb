@@ -20,6 +20,19 @@ switch ($_POST['action'])
             "Result" => "Success",
         );
     break;
+
+    case 'deleteCategory':
+        $sql = new QueryBuilder();
+        $sql->table('wallet_category');
+        $sql->delete([
+            'id' => $object
+        ]);
+        $sql->execute();
+
+        $message = array(
+            "Result" => "Deleted",
+        );
+    break;
 }
 
 echo json_encode($message);
