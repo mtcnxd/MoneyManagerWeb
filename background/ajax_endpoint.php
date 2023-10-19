@@ -13,25 +13,27 @@ switch ($_POST['action'])
         $sql = new QueryBuilder();
         ($status == 'true') ? $status = 1 : $status = 0; 
         $sql->table('wallet_category');
-        $sql->update(
+        $result = $sql->update(
             ['visible' => $status], 
             ['id' => $object]
         );
 
         $message = array(
             "Result" => "Success",
+            "Response" => $result
         );
     break;
 
     case 'deleteCategory':
         $sql = new QueryBuilder();
         $sql->table('wallet_category');
-        $sql->delete(
+        $result = $sql->delete(
             ['id' => $object]
         );
 
         $message = array(
             "Result" => "Deleted",
+            "Response" => $result
         );
     break;
 }

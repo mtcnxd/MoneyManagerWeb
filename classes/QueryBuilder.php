@@ -168,6 +168,27 @@ class QueryBuilder
         return $data;
     }
 
+    public function all()
+    {
+        $this->connection = new mysqli(
+            $this->host, $this->username, $this->password, $this->database
+        );
+
+        if (!$this->connection){
+            echo "Error while triying connect!";
+        }
+
+        $data = array();
+        $this->query = "SELECT * FROM ". $this->table;
+        if ($result = $this->connection->query($this->query)) {
+            while ($object = $result->fetch_object()) {
+                $data[] =  $object;
+            }
+            $result->close();
+        }
+        return $data;
+    }    
+
     protected function execute()
     {
         $this->connection = new mysqli(

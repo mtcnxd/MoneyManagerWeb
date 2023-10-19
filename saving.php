@@ -2,12 +2,15 @@
 require_once ('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\savings;
 
-$wallet = new myWallet();
+$wallet  = new myWallet();
+$savings = new savings();
 
 if($_POST){
-	$wallet->insert('wallet_saving', [
+	$savings->insert([
 		'date'   => $_POST['date'],
+		'name'   => $_POST['name'],
 		'amount' => $_POST['amount'],
 	]);
 }
@@ -43,7 +46,7 @@ if($_POST){
 				<div class="col-md-5">
 					<div class="card rounded border border-custom shadow-sm">
 						<div class="card-header">
-							<h6 class="card-header-title">Aportacion</h6>
+							<h6 class="card-header-title">Agregar aporte</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
 						<div class="card-body">
@@ -51,6 +54,13 @@ if($_POST){
 								<div class="mb-3">
 									<label for="" class="form-label">Fecha</label>
 									<input type="date" class="form-control" name="date" value="<?=date('Y-m-d')?>">
+								</div>
+
+								<div class="mb-3">
+									<label for="" class="form-label">Proposito</label>
+									<select class="form-select" name="name">
+										<option>Spotify Premium</option>
+									</select>
 								</div>
 
 							  	<div class="mb-3">
@@ -69,31 +79,64 @@ if($_POST){
 
 				<div class="col">
 					<div class="alert alert-warning alert-custom" role="alert">
-						<h6>$40,000.00 de Enganche Automovil</h6>
-						Volkswagen Vento 2015
+						<h6>Spotify Premium con interes compuesto</h6>
+						Ahorro requerido: $6,000.00
 					</div>
 
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
-							<h6 class="card-header-title">Aportaciondes</h6>
+							<h6 class="card-header-title">Lista de aportaciones</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
 						<div class="card-body">
 							<table class="table table-hover">
 								<?php
-								$start = date('Y-m-01 00:00:00');
-								$end   = date('Y-m-t 23:59:59');
-								$data  = $wallet->selectMovementsRange($start, $end);
-
-								foreach ($data as $key => $value) {
+								$data = $savings->load();
+								foreach ($data as $row => $value) {
+									$date = new DateTime($value->date);
 									echo "<tr>";
-									echo "	<td>".$value->date."</td>";
+									echo "	<td>".$value->name ." ". ($row +1)."</td>";
+									echo "	<td>".$date->format('d-m-Y')."</td>";									
 									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
 									echo "</tr>";
 								}
 								?>
-								<small class="d-inline-flex mb-3 px-2 py-1 fw-semibold text-success bg-success bg-opacity-10 border border-success border-opacity-10 rounded-2">Faltante</small>
 							</table>
+
+							<div class="p-2">
+								<?php
+								$total    = 6000;
+								$saving   = $savings->getTotal();
+								$faltante = $total - $saving;
+								$percentage = number_format(($saving/$total) * 100, 0);
+								?>
+								<div class="progress" aria-valuenow="<?=$percentage?>" aria-valuemin="0" aria-valuemax="100">
+  									<div class="progress-bar" style="width:<?=$percentage?>%"><?=$percentage?>%</div>
+								</div>								
+							</div>
+
+							<div class="row p-2">
+								<div class="col-md-6 text-center">
+									<div class="card pt-2">
+										<h6>
+											AHORRO TOTAL: 
+											<?php 
+											echo "$".number_format($saving, 2);
+											?>
+										</h6>
+									</div>
+								</div>
+								<div class="col-md-6 text-center">
+									<div class="card pt-2">
+										<h6>
+											FALTANTE: 
+											<?php 
+											echo "$".number_format($faltante, 2);
+											?>
+										</h6>
+									</div>
+								</div>
+							</div>
 						</div>	
 					</div> 	<!-- Card -->
 
