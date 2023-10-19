@@ -54,6 +54,7 @@ class calendar {
         $query->where([
 			'date' => $date,
 		]);
+        return $query->first();
     }
 
     public function drawCalendar()

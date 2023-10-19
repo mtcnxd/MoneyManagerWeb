@@ -130,6 +130,29 @@ class QueryBuilder
         return $data;
     }
 
+    public function first($sqlString = null)
+    {
+        $this->connection = new mysqli(
+            $this->host, $this->username, $this->password, $this->database
+        );
+
+        if (!$this->connection){
+            echo "Error while triying connect!";
+        }
+
+        if ($sqlString){
+            $this->query = $sqlString;
+        }
+
+        $object = array();
+        if ($result = $this->connection->query($this->query)) {
+            $object = $result->fetch_object();
+            $result->close();
+        }
+        
+        return $object;
+    }
+
     public function execute($sqlString = null)
     {
         $this->connection = new mysqli(

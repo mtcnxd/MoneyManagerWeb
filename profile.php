@@ -2,9 +2,13 @@
 require_once ('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\users;
 
 $wallet = new myWallet();
-$userData = $wallet->find('wallet_users', 1)[0];
+
+$users = new users();
+$userData = $users->find(1);
+
 ?>
 
 <html>

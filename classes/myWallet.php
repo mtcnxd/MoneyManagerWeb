@@ -52,9 +52,7 @@ class myWallet extends Bitso
 				}
 			}
 		}
-
 		return $balanceValue;
-
 	}
 
 	public function selectCategory($type)
@@ -66,16 +64,6 @@ class myWallet extends Bitso
 		]);
 		$query->order('category');
         return $query->get();
-	}
-
-	public function find($table = 'wallet_saving', $id = null)
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM $table";
-		if ($id){
-			$query .= " WHERE id = $id";
-		}
-		return $mysql->get($query);
 	}
 
 	public function insert($table, $data)
@@ -184,13 +172,6 @@ class myWallet extends Bitso
 		$lastBalance 	= self::getAmountLastMonth($datePast);
 		$diff = $currentBalance - $lastBalance;
 		return ($diff/$currentBalance) *100;
-	}
-
-	public function getExpenses($date)
-	{
-		$mysql = new QueryBuilder();
-		$query = "SELECT * FROM `wallet_movements` WHERE date = '$date'";
-		return $mysql->get($query)[0];
 	}
 
 	public function loadInstruments()

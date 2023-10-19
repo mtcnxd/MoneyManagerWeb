@@ -86,9 +86,9 @@ $wallet = new myWallet();
 										echo "<span class='date'>". $i ."</span>";
 									}
 
-									if ($response = $wallet->getExpenses(date('Y-m-').$i)){
+									if ($response = $calendar->getEventByDate(date('Y-m-').$i)){
 										echo "<div>";
-										echo "  <a href='#'><span class='badge bg-danger'>".'$'. number_format($response->amount) ."</span></a>";
+										echo "  <a href='#' id='event'><span class='badge bg-danger'>".'$'. number_format($response->amount) ."</span></a>";
 										echo "</div>";
 									}							
 									echo "</div>";
