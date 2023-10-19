@@ -3,6 +3,7 @@ require_once ('classes/autoload.php');
 
 use classes\myWallet;
 use classes\users;
+use classes\categories;
 
 $wallet = new myWallet();
 
@@ -104,7 +105,10 @@ $userData = $users->find(1);
 						<div class="p-4">
 							<form action="" method="post" name="configuration">
 								<?php
-								$instruments = $wallet->loadInstruments();
+
+								$categories = new categories();
+								$instruments = $categories->load('Inversion');
+								
 								foreach ($instruments as $instrument){
 									echo '<div class="mb-3 form-check">';
 									if ($instrument->visible == true){

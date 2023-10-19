@@ -2,11 +2,13 @@
 require_once ('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\categories;
 
 $wallet = new myWallet();
+$categories = new categories();
 
 if($_POST){
-	$wallet->insert('wallet_category', [
+	$categories->insert([
 		'type'     => $_POST['type'],
 		'category' => $_POST['category'],
 		'color'    => $_POST['color'],
@@ -87,7 +89,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="list-group">
 										<?php
-										$data = $wallet->selectCategory('egreso');
+										$data = $categories->load('egreso');
 										foreach ($data as $key => $value) {
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">
@@ -115,7 +117,7 @@ if($_POST){
 								<div class="card-body">
 									<div class="list-group">
 										<?php
-										$data = $wallet->selectCategory('ingreso');
+										$data = $categories->load('ingreso');
 										foreach ($data as $key => $value) {
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">
@@ -145,12 +147,12 @@ if($_POST){
 								<div class="card-body">
 									<div class="list-group">
 										<?php
-										$data = $wallet->selectCategory('inversion');
+										$data = $categories->load('inversion');
 										foreach ($data as $key => $value) {
 											echo '<a href="#" class="list-group-item list-group-item-action">
 											<div class="row">
 												<div class="col-md-8">
-												'.$value->category.'
+													'.$value->category.'
 												</div>
 												<div class="col text-end">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>

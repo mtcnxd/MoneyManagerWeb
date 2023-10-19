@@ -162,12 +162,4 @@ class myWallet extends Bitso
 		$diff = $currentBalance - $lastBalance;
 		return ($diff/$currentBalance) *100;
 	}
-
-	public function loadInstruments()
-	{
-		$mysql = new QueryBuilder();
-		$query = "SELECT * FROM `wallet_category` WHERE type = 'Inversion' ORDER BY category";
-		return $mysql->get($query);
-	}
-
 }
