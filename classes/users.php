@@ -1,8 +1,6 @@
 <?php
 namespace classes;
 
-use classes\users;
-
 class users {
 
     public function find($id = null)
@@ -14,5 +12,13 @@ class users {
         ]);
 		return $mysql->first();
 	}
+
+	public function insert($data)
+	{
+		$query = new QueryBuilder();
+		$query->table('wallet_users');
+		$query->insert($data);
+		$query->execute();
+	}       
 
 }

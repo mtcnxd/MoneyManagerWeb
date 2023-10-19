@@ -55,17 +55,6 @@ class myWallet extends Bitso
 		return $balanceValue;
 	}
 
-	public function selectCategory($type)
-	{
-		$query = new QueryBuilder();
-        $query->table('wallet_category');
-        $query->where([
-			'type' 	  => $type,
-		]);
-		$query->order('category');
-        return $query->get();
-	}
-
 	public function insert($table, $data)
 	{
 		$query = new QueryBuilder();

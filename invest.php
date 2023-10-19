@@ -2,8 +2,12 @@
 require_once ('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\categories;
 
 $wallet = new myWallet();
+
+$categories = new categories();
+$list = $categories->load('inversion');
 
 if($_POST){
 	$wallet->insert('wallet_invest', [
@@ -52,8 +56,7 @@ if($_POST){
 							    	<label for="" class="form-label">Concepto</label>
 							    	<select type="text" class="form-select" name="concept">
 										<?php
-										$data = $wallet->selectCategory('inversion');
-										foreach ($data as $key => $value) {
+										foreach ($list as $value) {
 											echo "<option>".$value->category."</option>";
 										}
 										?>
