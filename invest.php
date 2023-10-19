@@ -201,7 +201,7 @@ if($_POST){
 							<div class="container px-4 text-center mb-3">
 								<div class="row gx-5">
 									<div class="col-md-4">
-										<button type="button" id="updateTable" class="btn btn-sm btn-outline-success">Actualizar Inversion</button>
+										<button type="button" class="btn btn-sm btn-outline-success">Actualizar Inversion</button>
 									</div>
 								</div>
 							</div>
@@ -221,17 +221,6 @@ if($_POST){
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-        <script>
-        $("#updateTable").on('click', function(){
-	        $.ajax ({
-		        url: 'background/ajax_request.php',
-		        method: 'post',
-		        success: function(response){
-			        console.log('Response:' + response)
-		        }
-	        })
-        })
-        </script>
         <script>
         const currentChart = document.getElementById('currentChart').getContext('2d');
         const myChart = new Chart(currentChart, {

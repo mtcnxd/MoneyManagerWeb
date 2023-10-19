@@ -20,19 +20,6 @@ class QueryBuilder
         $this->table = $tbl;
     }  
 
-    public function insert($data)
-    {
-        $query = "INSERT INTO ". $this->table;
-        $query .= " (". implode(', ', array_keys($data)) . ") VALUES (";
-        foreach($data as $values){
-            $value[] = "'". $values ."'";
-        }
-        $query .= implode (',',$value) .")";
-        
-        $this->query = $query;
-        return $query;
-    }    
-
     public function where($where)
     {
         $query = "SELECT * FROM ". $this->table;
@@ -52,6 +39,24 @@ class QueryBuilder
         return $this->query;
     }
 
+    public function insert($data)
+    {
+        $query = "INSERT INTO ". $this->table;
+        $query .= " (". implode(', ', array_keys($data)) . ") VALUES (";
+        foreach($data as $values){
+            $value[] = "'". $values ."'";
+        }
+        $query .= implode (',',$value) .")";
+        
+        $this->query = $query;
+        $result = $this->execute();
+        
+        return array(
+            "Success" => $result,
+            "Query"   => $query
+        );
+    }
+
     public function update($data, $where)
     {
         $query = 'UPDATE '. $this->table .' SET ';
@@ -67,7 +72,12 @@ class QueryBuilder
         $query .= implode (', ',$item_where);
         
         $this->query = $query;
-        return $query;
+        $result = $this->execute();
+
+        return array(
+            "Success" => $result,
+            "Query"   => $query
+        );        
     }
 
     public function delete($where)
@@ -80,7 +90,12 @@ class QueryBuilder
         $query .= implode (' AND ',$item_where);
 
         $this->query = $query;
-        return $query;
+        $result = $this->execute();
+
+        return array(
+            "Success" => $result,
+            "Query"   => $query
+        );        
     }
 
     public function find($id)
@@ -96,30 +111,6 @@ class QueryBuilder
         }
 
         $this->query = $query;
-        $data = array();
-        if ($result = $this->connection->query($this->query)) {
-            while ($object = $result->fetch_object()) {
-                $data[] =  $object;
-            }
-            $result->close();
-        }
-        return $data;
-    }
-
-    public function get($sqlString = null)
-    {
-        $this->connection = new mysqli(
-            $this->host, $this->username, $this->password, $this->database
-        );
-
-        if (!$this->connection){
-            echo "Error while triying connect!";
-        }
-
-        if ($sqlString){
-            $this->query = $sqlString;
-        }
-
         $data = array();
         if ($result = $this->connection->query($this->query)) {
             while ($object = $result->fetch_object()) {
@@ -153,7 +144,31 @@ class QueryBuilder
         return $object;
     }
 
-    public function execute($sqlString = null)
+    public function get($sqlString = null)
+    {
+        $this->connection = new mysqli(
+            $this->host, $this->username, $this->password, $this->database
+        );
+
+        if (!$this->connection){
+            echo "Error while triying connect!";
+        }
+
+        if ($sqlString){
+            $this->query = $sqlString;
+        }
+
+        $data = array();
+        if ($result = $this->connection->query($this->query)) {
+            while ($object = $result->fetch_object()) {
+                $data[] =  $object;
+            }
+            $result->close();
+        }
+        return $data;
+    }
+
+    protected function execute()
     {
         $this->connection = new mysqli(
             $this->host, $this->username, $this->password, $this->database

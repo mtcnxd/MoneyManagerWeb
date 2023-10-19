@@ -1,12 +1,12 @@
 <?php
 namespace classes;
 
-class users {
+class investments {
 
     public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_users');
+        $mysql->table('wallet_invest');
         $mysql->where([
             'id' => $id
         ]);
@@ -16,7 +16,7 @@ class users {
 	public function insert($data)
 	{
 		$query = new QueryBuilder();
-		$query->table('wallet_users');
+		$query->table('wallet_invest');
 		$query->insert($data);
 	}       
 

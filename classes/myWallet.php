@@ -60,7 +60,6 @@ class myWallet extends Bitso
 		$query = new QueryBuilder();
 		$query->table($table);
 		$query->insert($data);
-		$query->execute();
 	}
 
 	static function getAmountLastMonth()

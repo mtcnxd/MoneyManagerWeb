@@ -29,7 +29,6 @@ class categories {
 		$query = new QueryBuilder();
 		$query->table('wallet_category');
 		$query->insert($data);
-		$query->execute();
 	}
 
 	public function delete($id)
