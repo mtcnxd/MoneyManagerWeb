@@ -104,7 +104,7 @@ if($_POST){
 
 							<div class="row p-2">
 								<div class="col-md-6 text-center">
-									<div class="card pt-2">
+									<div class="card pt-2 bg-blanchedalmond">
 										<h6>
 											AHORRO TOTAL: 
 											<?php 
@@ -114,7 +114,7 @@ if($_POST){
 									</div>
 								</div>
 								<div class="col-md-6 text-center">
-									<div class="card pt-2">
+									<div class="card pt-2 bg-blanchedalmond">
 										<h6>
 											FALTANTE: 
 											<?php 

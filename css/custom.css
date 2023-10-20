@@ -32,6 +32,10 @@ a {
 	font-size:11px;
 }
 
+.bg-blanchedalmond {
+	background-color: blanchedalmond;
+}
+
 .alert-custom {
 	background-color:  #fffae6;
 	border-left: 5px solid #ffdb4d;

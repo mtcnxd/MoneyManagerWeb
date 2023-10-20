@@ -49,4 +49,19 @@ class investments
 		$result = $mysql->first($query);
 		return $result->total;
 	}
+
+	public function getCurrentBalances()
+	{
+		$mysql = new QueryBuilder();
+		$query = "SELECT b.category, a.date, a.amount, a.category_id FROM wallet_invest a
+		JOIN wallet_categories b on a.category_id = b.id
+		WHERE date IN (
+			SELECT MAX(date) max_date 
+			FROM wallet_invest WHERE category_id NOT IN (
+				SELECT id FROM wallet_categories WHERE type = 'Inversion' AND visible = false
+			) GROUP BY concept) 
+		ORDER BY concept";
+
+		return $mysql->get($query);
+	}
 }

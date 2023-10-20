@@ -11,8 +11,9 @@ $investment = new investments();
 
 if($_POST){
 	$investment->insert([
-		'concept' => $_POST['concept'],
-		'amount'  => $_POST['amount'],
+		'category_id' => $_POST['category'],
+		'concept' 	  => $_POST['concept'],
+		'amount'   	  => $_POST['amount'],
 	]);
 }
 ?>
@@ -46,7 +47,7 @@ if($_POST){
 										$list = $categories->load('inversion');
 										foreach ($list as $category) {
 											if ($category->visible == true){
-												echo "<option>".$category->category."</option>";
+												echo "<option value=".$category->id.">".$category->category."</option>";
 											}
 										}
 										?>
@@ -176,14 +177,14 @@ if($_POST){
 									</tr>
 								</thead>								
 								<?php
-								$data = $wallet->getCurrentBalances();
+								$data = $investment->getCurrentBalances();
 								foreach ($data as $row => $balance) {
 									$percentage = ($balance->amount/$currentBalance) * 100;
 									$parseDate = new dateTime($balance->date);
 									
 									echo "<tr>";
 									echo "	<td>".($row +1)."</td>";
-									echo "	<td><a href='details.php?q=".$balance->category_id."' class='table-link-item link-primary'>".$balance->concept."</a></td>";
+									echo "	<td><a href='details.php?q=".$balance->category_id."' class='table-link-item link-primary'>".$balance->category."</a></td>";
 									echo "	<td class='text-center'>  ". $parseDate->format('d-m-Y') ."</td>";
 									echo "	<td class='text-end'>  ". number_format($percentage, 2)."%</td>";
 									echo "	<td class='text-end'> $". number_format($balance->amount, 2)."</td>";
