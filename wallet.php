@@ -2,13 +2,17 @@
 require_once ('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\categories;
+use classes\bills;
 
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
 $wallet = new myWallet();
+$categories = new categories();
+$bills = new bills();
 
 if($_POST){
-	$wallet->insert('wallet_movements', [
+	$bills->insert([
 		'type'        => $_POST['type'],
 		'category'    => $_POST['category'],
 		'description' => $_POST['description'],
@@ -55,11 +59,11 @@ if($_POST){
 							<form action="wallet.php" method="post">
 								<div class="mb-3">
 							    	<label for="" class="form-label">Fecha</label>
-									<input type="date" class="form-control" name="date" id="date">
+									<input type="date" class="form-control" name="date" id="date" value="<?=date('Y-m-d')?>">
 							  	</div>
 								<div class="mb-3">
 							    	<label for="" class="form-label">Tipo</label>
-							    	<select class="form-select" name="type" id="type" onchange="loadCategories(this.value);">
+							    	<select class="form-select" name="type" id="type">
 							    		<option value="">Seleccionar tipo</option>
 								  		<option value="Ingreso">Ingreso</option>
 								  		<option value="Egreso">Egreso</option>
@@ -69,9 +73,9 @@ if($_POST){
 							    	<label for="" class="form-label">Categoria</label>
 							    	<select class="form-select" name="category" id="category">
 								  		<?php
-										$data = $wallet->selectCategory('Ingreso');
-										foreach ($data as $value) {
-											echo "<option value=".$value->category.">".$value->category."</option>";
+										$list = $categories->load('Ingreso');
+										foreach ($list as $value) {
+											echo "<option>".$value->category."</option>";
 										}
 										?>
 									</select>
@@ -121,8 +125,7 @@ if($_POST){
 											<td class="text-end"></td>
 										</tr>
 										<?php  
-										$data = $wallet->getFlowByDates('Egreso', $startDate, $endDate);
-
+										$data = $bills->getDataBetween('Egreso', $startDate, $endDate);
 										foreach ($data as $row => $value) {
 											echo "<tr>";
 											echo "	<td>".($row + 1)."</td>";
@@ -185,5 +188,26 @@ if($_POST){
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 </script>
-<script src="js/functions.js">
+<script>
+
+$("#type").on('change', function(){
+	const object = $(this).val();
+	$.ajax({
+		url: "background/ajax_endpoint.php",
+		method: 'post',
+		data: {
+			action:'loadCategory',
+			object: object
+		},
+		success: function(response) {
+			const json = JSON.parse(response);
+			// console.log(json.data);
+			
+			$("#category").empty();
+			json.data.forEach(function (row){
+				$("#category").append('<option>' + row + '</option>');
+			});
+		}
+	});
+});
 </script>

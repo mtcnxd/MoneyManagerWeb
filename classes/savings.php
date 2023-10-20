@@ -1,8 +1,8 @@
 <?php
 namespace classes;
 
-class savings {
-
+class savings 
+{
     public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();

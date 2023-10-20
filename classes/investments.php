@@ -18,6 +18,13 @@ class investments {
 		$query = new QueryBuilder();
 		$query->table('wallet_invest');
 		$query->insert($data);
-	}       
+	}
+
+	public function updateBalances($data)
+	{
+		$query = new QueryBuilder();
+		$query->table('wallet_cron_balances');
+		$query->insert($data);
+	}
 
 }

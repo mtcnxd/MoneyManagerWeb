@@ -3,12 +3,14 @@ require_once ('classes/autoload.php');
 
 use classes\myWallet;
 use classes\categories;
+use classes\investments;
 
-$wallet = new myWallet();
+$wallet 	= new myWallet();
 $categories = new categories();
+$investment = new investments();
 
 if($_POST){
-	$wallet->insert('wallet_invest', [
+	$investment->insert([
 		'concept' => $_POST['concept'],
 		'amount'  => $_POST['amount'],
 	]);

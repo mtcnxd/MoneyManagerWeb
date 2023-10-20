@@ -1,8 +1,10 @@
 <?php
 
 require_once ("../classes/QueryBuilder.php");
+require_once ("../classes/categories.php");
 
 use classes\QueryBuilder;
+use classes\categories;
 
 $object = $_POST['object'];
 $status = $_POST['status'];
@@ -19,8 +21,8 @@ switch ($_POST['action'])
         );
 
         $message = array(
-            "Result" => "Success",
-            "Response" => $result
+            "result" => "Success",
+            "data" => $result
         );
     break;
 
@@ -32,10 +34,23 @@ switch ($_POST['action'])
         );
 
         $message = array(
-            "Result" => "Deleted",
-            "Response" => $result
+            "result" => "Deleted",
+            "data" => $result
         );
     break;
+
+    case 'loadCategory':
+        $categories = new categories();
+		$data = $categories->load($_POST['object']);
+		foreach ($data as $category){
+			$result[] = $category->category;
+		}
+        $message = array(
+            "result" => true,
+            "data"   => $result
+        );
+
+	break;
 }
 
 echo json_encode($message);

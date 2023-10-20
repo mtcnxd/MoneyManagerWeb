@@ -1,8 +1,8 @@
 <?php
 namespace classes;
 
-class users {
-
+class users 
+{
     public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();

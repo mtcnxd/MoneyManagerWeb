@@ -1,12 +1,12 @@
 <?php
 namespace classes;
 
-class categories {
-
+class categories 
+{
     public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_category');
+        $mysql->table('wallet_categories');
         $mysql->where([
             'id' => $id
         ]);
@@ -16,7 +16,7 @@ class categories {
     public function load($type)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_category');
+        $mysql->table('wallet_categories');
         $mysql->where([
             'type' => $type
         ]);
@@ -27,14 +27,14 @@ class categories {
 	public function insert($data)
 	{
 		$query = new QueryBuilder();
-		$query->table('wallet_category');
+		$query->table('wallet_categories');
 		$query->insert($data);
 	}
 
 	public function delete($id)
 	{
 		$query = new QueryBuilder();
-		$query->table('wallet_category');
+		$query->table('wallet_categories');
 		$query->delete([
 			"id" => $id
 		]);
