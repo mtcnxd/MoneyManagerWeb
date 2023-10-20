@@ -6,9 +6,9 @@ class investments {
     public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_invest');
-        $mysql->where([
-            'id' => $id
+		$mysql->table('wallet_invest');
+		$mysql->where([
+			'id' => $id
         ]);
 		return $mysql->first();
 	}

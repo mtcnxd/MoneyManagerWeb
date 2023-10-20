@@ -3,13 +3,13 @@ namespace classes;
 
 class bills 
 {
-    public function find($id = null)
+	public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_bills');
-        $mysql->where([
-            'id' => $id
-        ]);
+		$mysql->table('wallet_bills');
+		$mysql->where([
+			'id' => $id
+		]);
 		return $mysql->first();
 	}
 
@@ -19,11 +19,11 @@ class bills
 		$mysql->table('wallet_bills');
 		$mysql->insert($data);
 	}
-    
+
 	public function getDataBetween($type, $startDate, $endDate)
 	{
 		$mysql = new QueryBuilder();
-        $query = "SELECT * FROM wallet_bills WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'";
-        return $mysql->get($query);
+		$query = "SELECT * FROM wallet_bills WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'";
+		return $mysql->get($query);
 	}
 }

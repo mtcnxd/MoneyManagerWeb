@@ -6,21 +6,21 @@ class categories
     public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_categories');
-        $mysql->where([
-            'id' => $id
-        ]);
+		$mysql->table('wallet_categories');
+		$mysql->where([
+			'id' => $id
+		]);
 		return $mysql->first();
 	}
 
     public function load($type)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_categories');
-        $mysql->where([
-            'type' => $type
-        ]);
-        $mysql->order('category');
+		$mysql->table('wallet_categories');
+		$mysql->where([
+			'type' => $type
+		]);
+		$mysql->order('category');
 		return $mysql->get();
 	}
 

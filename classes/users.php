@@ -3,13 +3,13 @@ namespace classes;
 
 class users 
 {
-    public function find($id = null)
+	public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();
-        $mysql->table('wallet_users');
-        $mysql->where([
-            'id' => $id
-        ]);
+		$mysql->table('wallet_users');
+		$mysql->where([
+			'id' => $id
+		]);
 		return $mysql->first();
 	}
 
@@ -18,6 +18,6 @@ class users
 		$query = new QueryBuilder();
 		$query->table('wallet_users');
 		$query->insert($data);
-	}       
+	}
 
 }
