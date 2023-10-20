@@ -44,8 +44,10 @@ if($_POST){
 							    	<select type="text" class="form-select" name="concept">
 										<?php
 										$list = $categories->load('inversion');
-										foreach ($list as $value) {
-											echo "<option>".$value->category."</option>";
+										foreach ($list as $category) {
+											if ($category->visible == true){
+												echo "<option>".$category->category."</option>";
+											}
 										}
 										?>
 									</select>
@@ -78,7 +80,7 @@ if($_POST){
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
-											$currentBalance = $wallet->getFullInvest();
+											$currentBalance = $investment->getTotal();
 											echo '$'. number_format($currentBalance, 2);
 											?>
 											</h5>
@@ -168,20 +170,23 @@ if($_POST){
 									<tr class="table-custom text-uppercase fs-7">
 										<th scope="col">#</td>
 										<th scope="col">Intrumento</td>
+										<th scope="col" class="text-center">Ultimo cambio</td>
 										<th scope="col" class="text-end">Porcentaje</td>
 										<th scope="col" class="text-end">Saldo</td>
 									</tr>
 								</thead>								
 								<?php
 								$data = $wallet->getCurrentBalances();
-								foreach ($data as $row => $value) {
-									$percentage = ($value->amount/$currentBalance) * 100;
+								foreach ($data as $row => $balance) {
+									$percentage = ($balance->amount/$currentBalance) * 100;
+									$parseDate = new dateTime($balance->date);
 									
 									echo "<tr>";
 									echo "	<td>".($row +1)."</td>";
-									echo "	<td><a href='details.php?q=".$value->concept."' class='table-link-item link-primary'>".$value->concept."</a></td>";
+									echo "	<td><a href='details.php?q=".$balance->category_id."' class='table-link-item link-primary'>".$balance->concept."</a></td>";
+									echo "	<td class='text-center'>  ". $parseDate->format('d-m-Y') ."</td>";
 									echo "	<td class='text-end'>  ". number_format($percentage, 2)."%</td>";
-									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
+									echo "	<td class='text-end'> $". number_format($balance->amount, 2)."</td>";
 									echo "</tr>";
 								}								
 								?>

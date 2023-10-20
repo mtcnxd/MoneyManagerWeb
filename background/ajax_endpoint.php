@@ -14,28 +14,38 @@ switch ($_POST['action'])
     case 'updateCheckboxStatus':
         $sql = new QueryBuilder();
         ($status == 'true') ? $status = 1 : $status = 0; 
-        $sql->table('wallet_category');
-        $result = $sql->update(
-            ['visible' => $status], 
-            ['id' => $object]
-        );
+        $sql->table('wallet_categories');
+        $result = $sql->update([
+            'visible' => $status
+        ], [
+            'id' => $object
+        ]);
+
+        $maxid = $sql->first("SELECT MAX(id) as id FROM `wallet_invest` where category_id = '$object'");
+
+        $sql->table('wallet_invest');
+        $sql->update([
+            'include' => $status
+        ], [
+            'id' => $maxid->id
+        ]);
 
         $message = array(
-            "result" => "Success",
-            "data" => $result
+            "message" => "Los cambios se guardaron con exito",
+            "data"    => $result
         );
     break;
 
     case 'deleteCategory':
         $sql = new QueryBuilder();
-        $sql->table('wallet_category');
+        $sql->table('wallet_categories');
         $result = $sql->delete(
             ['id' => $object]
         );
 
         $message = array(
-            "result" => "Deleted",
-            "data" => $result
+            "message" => "La categoria se elimino exitosamente",
+            "data"    => $result
         );
     break;
 
@@ -46,8 +56,8 @@ switch ($_POST['action'])
 			$result[] = $category->category;
 		}
         $message = array(
-            "result" => true,
-            "data"   => $result
+            "message" => "Categorias cargadas correctamente",
+            "data"    => $result
         );
 
 	break;

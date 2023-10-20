@@ -29,11 +29,11 @@ class investments
 		$query->insert($data);
 	}
 
-	public function loadLastMonth($concept)
+	public function loadLastMonth($id)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM $this->table
-			WHERE concept = '$concept' AND date > NOW() - INTERVAL 1 MONTH 
+		$query  = "SELECT * FROM wallet_invest
+			WHERE category_id = '$id' AND date > NOW() - INTERVAL 1 MONTH 
 			ORDER BY date DESC";
 
 		return $mysql->get($query);
@@ -42,11 +42,11 @@ class investments
 	public function getTotal()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT SUM(amount) as total FROM $this->table WHERE date IN (
-				SELECT max(date) max_date FROM $this->table GROUP BY concept) 
+		$query  = "SELECT SUM(amount) as total FROM wallet_invest WHERE date IN (
+			SELECT max(date) max_date FROM wallet_invest GROUP BY concept) 
 			AND include = true ORDER BY concept";
 
 		$result = $mysql->first($query);
 		return $result->total;
-	}	
+	}
 }

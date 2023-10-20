@@ -8,7 +8,6 @@ class QueryBuilder
 {
     public $table;
     public $query;
-
     protected $host 	= 'localhost';
     protected $username = 'fortechm_web';
     protected $password = 'Ipr}~*NrLKT?';
@@ -199,8 +198,13 @@ class QueryBuilder
             echo "Error while triying connect!";
         }
 
-        if ($this->connection->query($this->query)) {
-            return true;
+        try {
+            if ($this->connection->query($this->query)) {
+                return true;
+            }
+        
+        } catch(Exception $e){
+            throw new Exeption("Error: ". $e->getMessage());
         }
         
         return false;

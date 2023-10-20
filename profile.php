@@ -126,7 +126,7 @@ $userData = $users->find(1);
       				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     			</div>
     			<div class="toast-body">
-      				Los cambios han sido guardados
+      				<span id="message"></span>
     			</div>
 			</div>
   		</div>
@@ -155,8 +155,11 @@ $userData = $users->find(1);
 				status:status
 			},
 			success: function(response){
-				console.log(response);
+				const json = JSON.parse(response);
 				const notify = document.getElementById('liveToast');
+				console.log(json);
+
+				$("#message").text(json.message);
 				bootstrap.Toast.getOrCreateInstance(notify).show();
 			}
 		})

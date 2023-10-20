@@ -84,9 +84,10 @@ class myWallet extends Bitso
 	public function getCurrentBalances()
 	{
 		$mysql = new QueryBuilder();
-		$query = "SELECT * FROM wallet_invest WHERE date IN (SELECT MAX(date) max_date 
-			FROM wallet_invest WHERE concept NOT IN (
-				SELECT category FROM wallet_categories WHERE type = 'Inversion' AND visible = false
+		$query = "SELECT * FROM wallet_invest WHERE date IN (
+			SELECT MAX(date) max_date 
+			FROM wallet_invest WHERE category_id NOT IN (
+				SELECT id FROM wallet_categories WHERE type = 'Inversion' AND visible = false
 			) GROUP BY concept) 
 			ORDER BY concept";
 
@@ -100,17 +101,6 @@ class myWallet extends Bitso
 			WHERE a.date BETWEEN '$startDate' AND '$endDate' ORDER BY a.date";
 		return $query->get($sql);
 	}
-	
-	public function getFullInvest()
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT SUM(amount) as total FROM wallet_invest WHERE date IN (
-				SELECT max(date) max_date FROM wallet_invest GROUP BY concept) 
-			AND include = true ORDER BY concept";
-
-		$result = $mysql->get($query);
-		return $result[0]->total;
-	}
 
 	public function getMonthlyReturn()
 	{
@@ -123,6 +113,18 @@ class myWallet extends Bitso
 		
 		return ($currentAmount->amount - $lastAmount->amount);
 	}
+
+	// Pendiente por borrar
+	public function getFullInvest()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "SELECT SUM(amount) as total FROM wallet_invest WHERE date IN (
+				SELECT max(date) max_date FROM wallet_invest GROUP BY concept) 
+			AND include = true ORDER BY concept";
+
+		$result = $mysql->get($query);
+		return $result[0]->total;
+	}	
 
 	public function getExchangeRate($datePast)
 	{
