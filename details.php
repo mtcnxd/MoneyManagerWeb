@@ -1,9 +1,9 @@
 <?php
 require_once ('classes/autoload.php'); 
 
-use classes\myWallet;
+use classes\investments;
 
-$wallet = new myWallet();
+$investments = new investments();
 ?>
 
 <html>
@@ -39,7 +39,7 @@ $wallet = new myWallet();
 							<h6 class="card-header-title">Rendimientos</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
-						<div class="card-body overflow-scroll p-0" style="height:400px;">
+						<div class="card-body p-0" style="max-height:450px; overflow-y: scroll;">
 							<table class="table table-hover">
 								<thead>
 									<tr class="table-custom text-uppercase fs-7">
@@ -50,20 +50,17 @@ $wallet = new myWallet();
 									</tr>
 								</thead>
 								<?php
-								$count = 0;
-								$data  = $wallet->loadListbyItem($_REQUEST['q']);
-
-								foreach ($data as $key => $value) {
-									$count++;
-                                    $dateTime = new DateTime($value->date);
-									$values[$key]  = $value->amount;
+								$data  = $investments->loadLastMonth($_REQUEST['q']);
+								foreach ($data as $key => $invest) {
+                                    $dateTime = new DateTime($invest->date);
+									$values[$key]  = $invest->amount;
 									$labels[$key]  = $dateTime->format('d-m-Y');
 
 									echo "<tr>";
-									echo "	<td>". $count ."</td>";
-									echo "	<td>". $value->concept ."</td>";
+									echo "	<td>". ($key +1) ."</td>";
+									echo "	<td>". $invest->concept ."</td>";
                                     echo "	<td>". $dateTime->format('d-m-Y') ."</td>";
-									echo "	<td class='text-end'> $". number_format($value->amount, 2) ."</td>";
+									echo "	<td class='text-end'> $". number_format($invest->amount, 2) ."</td>";
 									echo "</tr>";
 								}
 
@@ -86,7 +83,7 @@ $wallet = new myWallet();
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 15 registros</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Incremento del ultimo mes</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$result = $values[0] - end($values);
@@ -107,7 +104,7 @@ $wallet = new myWallet();
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
-											<h6 class="card-title text-muted text-uppercase fs-7">Ultimos 15 registros</h6>
+											<h6 class="card-title text-muted text-uppercase fs-7">Incremento ponderado</h6>
 											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$percentage = ($result/$values[0]) * 100;
@@ -138,9 +135,7 @@ $wallet = new myWallet();
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
 		crossorigin="anonymous">
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-</script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script>
 const currentChart = document.getElementById('currentChart').getContext('2d');

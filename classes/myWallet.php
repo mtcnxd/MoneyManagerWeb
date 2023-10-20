@@ -74,24 +74,23 @@ class myWallet extends Bitso
 		return $mysql->get($query);
 	}
 
+	public function dataChartReport()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "SELECT concept, amount FROM `wallet_cron_balances` WHERE date = CURRENT_DATE - INTERVAL 1 DAY";
+		return $mysql->get($query);
+	}
+
 	public function getCurrentBalances()
 	{
 		$mysql = new QueryBuilder();
 		$query = "SELECT * FROM wallet_invest WHERE date IN (SELECT MAX(date) max_date 
 			FROM wallet_invest WHERE concept NOT IN (
-				SELECT category FROM wallet_category WHERE type = 'Inversion' AND visible = false
+				SELECT category FROM wallet_categories WHERE type = 'Inversion' AND visible = false
 			) GROUP BY concept) 
 			ORDER BY concept";
 
 		return $mysql->get($query);
-	}
-
-	public function selectMovementsRange($start, $end)
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_saving WHERE date BETWEEN '$start' AND '$end' ORDER BY date ASC";
-		$result = $mysql->get($query);
-		return $result;
 	}
 
 	public function selectThisMonth($startDate, $endDate)
@@ -100,21 +99,6 @@ class myWallet extends Bitso
 		$sql = "SELECT a.*, b.icon FROM wallet_bills a LEFT JOIN wallet_category b ON a.category = b.category 
 			WHERE a.date BETWEEN '$startDate' AND '$endDate' ORDER BY a.date";
 		return $query->get($sql);
-	}
-
-	# Muestra los detalles de cada inversion
-	public function loadListbyItem($concept)
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_invest WHERE concept = '$concept' AND date > NOW() - INTERVAL 1 MONTH ORDER BY date DESC";
-		return $mysql->get($query);
-	}
-
-	public function dataChartReport()
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT concept, amount FROM `wallet_cron_balances` WHERE date = CURRENT_DATE - INTERVAL 1 DAY";
-		return $mysql->get($query);
 	}
 	
 	public function getFullInvest()

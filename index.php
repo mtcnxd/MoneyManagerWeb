@@ -2,9 +2,11 @@
 require_once ('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\savings;
+use classes\investments;
 
-$wallet = new myWallet();
-
+$savings = new savings();
+$investments = new investments();
 ?>
 
 <html>
@@ -33,54 +35,11 @@ $wallet = new myWallet();
 		</header>
 		
 		<div class="container">		
-			<div class="col-md-12 shadow-sm mb-4 bg-white">
-				<div class="card border-custom">
-					<div class="card-header">
-						<h6 class="card-header-title">Movimientos del mes</h6>
-						<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-					</div>				
-					
-					<div class="table-responsive">
-						<table class="table table-borderless table-hover fs-6">
-							<thead>
-								<tr class="table-custom text-uppercase fs-7">
-									<th scope="col">#</td>
-									<th scope="col"></td>
-									<th scope="col">Nombre</td>
-									<th scope="col">Categoria</td>
-									<th scope="col">Descripcion</td>
-									<th scope="col" class='text-end'>Cantidad</td>
-									<th scope="col" class='text-end'>Fecha</td>
-								</tr>
-							</thead>
-							<?php
-							$startDate = date('Y-m-01'); 
-							$endDate   = date('Y-m-t');
-							$fixedPayments = $wallet->selectThisMonth($startDate, $endDate);
-
-							foreach ($fixedPayments as $key => $value) {
-								$datef = new DateTime($value->date);
-								
-								if ($value->type == 'Ingreso'){
-									echo "<tr class='table-success'>";
-								} else {
-									echo "<tr>";
-								}
-								echo "	<td>". ($key+1) ."</td>";
-								echo "	<td><img src='images/$value->icon' width=20 height=20></td>";
-								echo "	<td>". $value->type ."</td>";
-								echo "	<td>". $value->category ."</td>";
-								echo "	<td>". $value->description ."</td>";
-								echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
-								echo "	<td class='text-end'>". $datef->format('d-m-Y') ."</td>";
-								echo "</tr>";
-							}						
-
-							?>
-						</table>
-					</div>		<!-- Table-responsive -->
-				</div>		<!-- Card -->
-			</div>		<!-- Col-12 -->
+			<nav class="navbar bg-body-tertiary">
+				<div class="container-fluid">
+					<h2>Dashboard</h2>
+				</div>
+			</nav>
 			
 			<div class="row mb-4">
 				<div class="col">
@@ -88,17 +47,12 @@ $wallet = new myWallet();
 						<div class="card-body">
 							<div class="align-items-center row">
 								<div class="col">
-									<h6 class="card-title text-muted text-uppercase fs-7">
-										Ingresos
+									<h6 class="card-title mb-3 text-muted text-uppercase fs-7">
+										Cartera
 									</h6>
-									<h5 class="card-subtitle mb-2 fs-6">
+									<h5 class="card-subtitle mb-2 fs-4">
 									<?php
-									$sumIngresos = 0;
-									$ingresos = $wallet->getFlowByDates('Ingreso', $startDate, $endDate);
-									foreach($ingresos as $ingreso){
-										$sumIngresos += $ingreso->amount;
-									}
-									echo '$'. number_format($sumIngresos, 2);
+									echo "$".number_format(0, 2);
 									?>
 									</h5>
 								</div>
@@ -112,17 +66,12 @@ $wallet = new myWallet();
 						<div class="card-body">
 							<div class="align-items-center row">
 								<div class="col">
-									<h6 class="card-title text-muted text-uppercase fs-7">
-										Egresos
+									<h6 class="card-title mb-3 text-muted text-uppercase fs-7">
+										Ahorros
 									</h6>
-									<h5 class="card-subtitle mb-2 fs-6">
+									<h5 class="card-subtitle mb-2 fs-4">
 									<?php
-									$sumEgresos = 0;
-									$egresos = $wallet->getFlowByDates('Egreso',$startDate, $endDate);
-									foreach($egresos as $egreso){
-										$sumEgresos += $egreso->amount;
-									}
-									echo '$'. number_format($sumEgresos, 2);
+									echo "$".number_format($savings->getTotal(),2);
 									?>
 									</h5>
 								</div>
@@ -136,13 +85,12 @@ $wallet = new myWallet();
 						<div class="card-body">
 							<div class="align-items-center row">
 								<div class="col">
-									<h6 class="card-title text-muted text-uppercase fs-7">
+									<h6 class="card-title mb-3 text-muted text-uppercase fs-7">
 										Inversiones
 									</h6>
-									<h5 class="card-subtitle mb-2 fs-6">
+									<h5 class="card-subtitle mb-2 fs-4">
 									<?php
-									$invest = $wallet->getFullInvest();
-									echo '$'. number_format($invest, 2);
+									echo '$'. number_format($investments->getTotal(), 2);
 									?>
 									</h5>
 								</div>
@@ -156,17 +104,12 @@ $wallet = new myWallet();
 						<div class="card-body">
 							<div class="align-items-center row">
 								<div class="col">
-									<h6 class="card-title text-muted text-uppercase fs-7">
+									<h6 class="card-title mb-3 text-muted text-uppercase fs-7">
 										Egresos vs Ingresos
 									</h6>
-									<h5 class="card-subtitle mb-2 fs-6">
+									<h5 class="card-subtitle mb-2 fs-4">
 										<?php
-										if ($sumIngresos > 0){
-											$versus = ($sumEgresos/$sumIngresos) *100;
-										} else {
-											$versus = 0.0;
-										}
-										echo number_format($versus, 2) .'%';
+										echo '24%';
 										?>
 									</h5>
 								</div>
@@ -183,8 +126,7 @@ $wallet = new myWallet();
 		        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
 		        crossorigin="anonymous">
         </script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
             (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -194,4 +136,3 @@ $wallet = new myWallet();
         </script>
 	</body>
 </html>
-

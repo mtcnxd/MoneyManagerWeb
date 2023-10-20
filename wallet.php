@@ -5,8 +5,6 @@ use classes\myWallet;
 use classes\categories;
 use classes\bills;
 
-$startDate = date('Y-m-01'); 
-$endDate   = date('Y-m-t');
 $wallet = new myWallet();
 $categories = new categories();
 $bills = new bills();
@@ -124,14 +122,15 @@ if($_POST){
 											<td class="text-end">Importe</td>
 											<td class="text-end"></td>
 										</tr>
-										<?php  
-										$data = $bills->getDataBetween('Egreso', $startDate, $endDate);
-										foreach ($data as $row => $value) {
+										<?php 
+										$data = $bills->getDataBetween('Egreso', date('Y-m-01'), date('Y-m-t'));
+										foreach ($data as $row => $bill){
+											$parseDate = new dateTime($bill->date);
 											echo "<tr>";
 											echo "	<td>".($row + 1)."</td>";
-											echo "	<td>".$value->description."</td>";
-											echo "	<td>".$value->date."</td>";
-											echo "	<td class='text-end'>$".number_format($value->amount,2)."</td>";
+											echo "	<td>".$bill->description."</td>";
+											echo "	<td>".$parseDate->format('d-m-Y')."</td>";
+											echo "	<td class='text-end'>$".number_format($bill->amount,2)."</td>";
 											echo '	<td>
 														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
 													</td>';
@@ -152,9 +151,8 @@ if($_POST){
 											<td class="text-end">Importe</td>
 											<td class="text-end"></td>
 										</tr>
-										<?php  
-										$data = $wallet->getFlowByDates('Ingreso', $startDate, $endDate);
-
+										<?php
+										$data = $bills->getDataBetween('Ingreso', date('Y-m-01'), date('Y-m-t'));
 										foreach ($data as $row => $value) {
 											echo "<tr>";
 											echo "	<td>".($row + 1)."</td>";
