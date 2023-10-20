@@ -1,12 +1,14 @@
 <?php
 namespace classes;
 
-class investments {
+class investments 
+{
+	protected $table = "wallet_invest";
 
 	public function find($id = null)
 	{
 		$mysql  = new QueryBuilder();
-		$mysql->table('wallet_invest');
+		$mysql->table($this->table);
 		$mysql->where([
 			'id' => $id
 		]);
@@ -16,7 +18,7 @@ class investments {
 	public function insert($data)
 	{
 		$query = new QueryBuilder();
-		$query->table('wallet_invest');
+		$query->table($this->table);
 		$query->insert($data);
 	}
 
@@ -30,7 +32,7 @@ class investments {
 	public function loadLastMonth($concept)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_invest 
+		$query  = "SELECT * FROM $this->table
 			WHERE concept = '$concept' AND date > NOW() - INTERVAL 1 MONTH 
 			ORDER BY date DESC";
 
@@ -40,8 +42,8 @@ class investments {
 	public function getTotal()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT SUM(amount) as total FROM wallet_invest WHERE date IN (
-				SELECT max(date) max_date FROM wallet_invest GROUP BY concept) 
+		$query  = "SELECT SUM(amount) as total FROM $this->table WHERE date IN (
+				SELECT max(date) max_date FROM $this->table GROUP BY concept) 
 			AND include = true ORDER BY concept";
 
 		$result = $mysql->first($query);
