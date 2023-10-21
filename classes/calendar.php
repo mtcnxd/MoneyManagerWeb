@@ -5,15 +5,9 @@ use classes\QueryBuilder;
 
 class calendar {
 
-    protected $currentDay;
     protected $currentDate;
+    protected $currentDay;
     protected $firstDay;
-    protected $days = [
-        'lunes','martes','miercoles','jueves','viernes','sabado','domingo'
-    ];
-    protected $months = [
-        'enero', 'febrero', 'marzo', 'abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'
-    ];
 
     public function __construct()
     {
@@ -23,19 +17,26 @@ class calendar {
         $this->firstDay    = mktime(0, 0, 0, date("m"), date("d") -$current, date("Y"));
     }
 
-    public function getDays()
+    public function getWeekDays()
     {
-        return $this->days;
+        return array(
+            'lunes','martes','miercoles','jueves','viernes','sabado','domingo'
+        );
     }
 
     public function getCurrentMonth()
-    {
-        return $this->months[date('n') -1];
+    {  
+        $months = array(
+            'enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'
+        );
+
+        return $months[date('n') -1];
     }
 
     public function getCurrentDate()
     {
-        return $this->currentDate;
+        $parseDate = new DateTime($this->currentDate);
+        return $parseDate->format('d-m-Y');
     }
 
     public function getFirstDayOfMonth($text = false)
@@ -46,31 +47,4 @@ class calendar {
         }
         return $this->days[$daysElapsed];
     }
-
-    public function getEventByDate($date)
-    {
-		$query = new QueryBuilder();
-        $query->table('wallet_movements');
-        $query->where([
-			'date' => $date,
-		]);
-        return $query->first();
-    }
-
-    public function drawCalendar()
-    {
-        $daysOfMonth = date('t');
-        $currentDay  = date('d');
-
-        for($i=1; $i<=$daysOfMonth; $i++){
-            echo "<div class='day'>";
-            if ( $currentDay == $i ){
-                echo "<span class='date active'>". $i ."</span>";
-            } else {
-                echo "<span class='date'>". $i ."</span>";
-            }						
-            echo "</div>";
-        }
-    }
-
 }

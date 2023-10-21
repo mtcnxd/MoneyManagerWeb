@@ -3,10 +3,13 @@ require_once('classes/autoload.php');
 
 use classes\myWallet;
 use classes\calendar;
+use classes\bills;
 
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
-$wallet = new myWallet();
+$wallet    = new myWallet();
+$calendar  = new calendar();
+$bills     = new bills();
 ?>
 
 <html>
@@ -40,59 +43,115 @@ $wallet = new myWallet();
 
 				<div class="col">
 					<div class="calendar">
-						<div class="card-header pt-3">
-							<h6>Calendario de pagos</h6>
-						</div>
 						<div class="card-body">
-							<h4>
-								<?php
-									$calendar  = new calendar();
-									echo ucfirst($calendar->getCurrentMonth());
-								?>
+							<h4 class="mb-3">
+								<?=ucfirst($calendar->getCurrentMonth());?>
 							</h4>
-							<hr>
 							<?php
-								$daysOfWeek = $calendar->getDays();
-								foreach($daysOfWeek as $day) { 
-									echo "<div class='name'>". $day ."</div>";
+							foreach($calendar->getWeekDays() as $day) { 
+								echo "<div class='name'>". $day ."</div>";
+							}
+
+							$dayOfWeek = $calendar->getFirstDayOfMonth(true);
+							for ($i=0; $i<$dayOfWeek; $i++) { 
+								echo "<div class='day'> &nbsp; </div>";
+							}
+
+							$daysOfMonth = date('t');
+							$currentDay  = date('d');
+
+							for($i=1; $i<=$daysOfMonth; $i++){
+								echo "<div class='day'>";
+								if ( $currentDay == $i ){
+									echo "<span class='date active'>". $i ."</span>";
+								} else {
+									echo "<span class='date'>". $i ."</span>";
 								}
 
-								$dayOfWeek = $calendar->getFirstDayOfMonth(true);
-								for ($i=0; $i<$dayOfWeek; $i++) { 
-									echo "<div class='day'> &nbsp; </div>";
-								}
-
-								$daysOfMonth = date('t');
-								$currentDay  = date('d');
-
-								for($i=1; $i<=$daysOfMonth; $i++){
-									echo "<div class='day'>";
-									if ( $currentDay == $i ){
-										echo "<span class='date active'>". $i ."</span>";
-									} else {
-										echo "<span class='date'>". $i ."</span>";
-									}
-
-									if ($response = $calendar->getEventByDate(date('Y-m-').$i)){
-										echo "<div>";
-										echo "  <a href='#' id='event'><span class='badge bg-danger'>".'$'. number_format($response->amount) ."</span></a>";
-										echo "</div>";
-									}							
+								if ($bill = $bills->getBillByDate(date('Y-m-').$i)){
+									echo "<div>";
+									echo "  <a href='#' id=".$bill->id." class='btn-bill'>
+												<span class='badge bg-danger'>".'$'. number_format($bill->amount) ."</span>
+											</a>";
 									echo "</div>";
-								}
+								}							
+								echo "</div>";
+							}
 							?>
 						</div>
 					</div>
 				</div>				
 			</div>
 		</div>	<!-- Container -->
+
+		<div class="modal fade" tabindex="-1" id="billDetails">
+			<div class="modal-dialog modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row border-bottom p-2">
+							<div class="col-md-6 fw-semibold">
+								Categoria:
+							</div>
+							<div class="col text-end">
+								<span id="category"></span>
+							</div>
+						</div>
+						<div class="row border-bottom p-2">
+							<div class="col-md-6">
+								Descripción:
+							</div>
+							<div class="col text-end">
+								<span id="description"></span>
+							</div>
+						</div>
+						<div class="row border-bottom p-2">
+							<div class="col-md-6">
+								Importe:
+							</div>
+							<div class="col text-end">
+								<span id="amount"></span>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer border-0">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>		
 		
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
 		        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
 		        crossorigin="anonymous">
         </script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(".btn-bill").on('click', function(btn){
+				btn.preventDefault();
+				const id = $(this).attr('id');
+				
+				$.ajax({
+					url:'background/ajax_endpoint.php',
+					method:'post',
+					data: {
+						action: 'loadBillDetails',
+						object: id
+					},
+					success: function(response){
+						const json = JSON.parse(response);
+						// console.log(json.data);
+
+						$("#category").text(json.data.category);
+						$("#description").text(json.data.description);
+						$("#amount").text('$' + json.data.amount + '.00');
+						
+						const modal = new bootstrap.Modal(document.getElementById('billDetails'));
+						modal.show();
+					}
+				});
+
+			});
+		</script>
 	</body>
 </html>
 

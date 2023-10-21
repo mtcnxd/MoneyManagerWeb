@@ -2,12 +2,14 @@
 
 require_once ("../classes/QueryBuilder.php");
 require_once ("../classes/categories.php");
+require_once ("../classes/bills.php");
 
 use classes\QueryBuilder;
 use classes\categories;
+use classes\bills;
 
 $object = $_POST['object'];
-$status = $_POST['status'];
+$status = isset($_POST['status']) ? $_POST['status'] : '';
 
 switch ($_POST['action'])
 {
@@ -59,8 +61,24 @@ switch ($_POST['action'])
             "message" => "Categorias cargadas correctamente",
             "data"    => $result
         );
+    break;
 
-	break;
+    case 'loadBillDetails':
+        $bills = new bills();
+        $result = $bills->find($_POST['object']);
+
+        $message = array(
+            "message" => "Informacion cargada con exito",
+            "data"    => $result
+          );
+    break;
+
+    default:
+        $message = array(
+          "message" => "Action not implemented",
+          "data"    => $_POST
+        );
+    break;
 }
 
 echo json_encode($message);

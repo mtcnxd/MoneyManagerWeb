@@ -55,15 +55,6 @@ class myWallet extends Bitso
 		return $balanceValue;
 	}
 
-	static function getAmountLastMonth()
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT SUM(amount) amount FROM wallet_cron_balances 
-			WHERE concept NOT IN ('Bitso','BingX') AND date = CURRENT_DATE - INTERVAL 1 MONTH";
-        $result = $mysql->get($query);
-        return $result[0]->amount;
-	}
-
 	public function dataChart()
 	{
 		$mysql  = new QueryBuilder();
@@ -94,14 +85,6 @@ class myWallet extends Bitso
 		return $mysql->get($query);
 	}
 
-	public function selectThisMonth($startDate, $endDate)
-	{
-        $query = new QueryBuilder();
-		$sql = "SELECT a.*, b.icon FROM wallet_bills a LEFT JOIN wallet_category b ON a.category = b.category 
-			WHERE a.date BETWEEN '$startDate' AND '$endDate' ORDER BY a.date";
-		return $query->get($sql);
-	}
-
 	public function getMonthlyReturn()
 	{
 		$mysql = new QueryBuilder();
@@ -124,6 +107,15 @@ class myWallet extends Bitso
 
 		$result = $mysql->get($query);
 		return $result[0]->total;
+	}	
+
+	static function getAmountLastMonth()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "SELECT SUM(amount) amount FROM wallet_cron_balances 
+			WHERE concept NOT IN ('Bitso','BingX') AND date = CURRENT_DATE - INTERVAL 1 MONTH";
+        $result = $mysql->get($query);
+        return $result[0]->amount;
 	}	
 
 	public function getExchangeRate($datePast)

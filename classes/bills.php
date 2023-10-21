@@ -22,6 +22,16 @@ class bills
 		$mysql->insert($data);
 	}
 
+	public function getBillByDate($date)
+	{
+		$query = new QueryBuilder();
+		$query->table($this->table);
+		$query->where([
+			'date' => $date,
+		]);
+		return $query->first();
+	}		
+
 	public function getDataBetween($type, $startDate, $endDate)
 	{
 		$mysql = new QueryBuilder();
