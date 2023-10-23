@@ -58,7 +58,8 @@ $investments = new investments();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-4">
 									<?php
-									echo "$".number_format($savings->getTotal(),2);
+									$savings = $savings->getTotal();
+									echo "$".number_format($savings, 2);
 									?>
 									</h5>
 								</div>
@@ -77,7 +78,8 @@ $investments = new investments();
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-4">
 									<?php
-									echo '$'. number_format($investments->getTotal(), 2);
+									$investments = $investments->getTotal();
+									echo '$'.number_format($investments, 2);
 									?>
 									</h5>
 								</div>
@@ -92,11 +94,11 @@ $investments = new investments();
 							<div class="align-items-center row">
 								<div class="col">
 									<h6 class="card-title mb-3 text-muted text-uppercase fs-7">
-										Egresos vs Ingresos
+										Ahorros + Inversion
 									</h6>
 									<h5 class="card-subtitle mb-2 fs-4">
 										<?php
-										echo '24%';
+										echo '$'.number_format(($savings + $investments), 2);
 										?>
 									</h5>
 								</div>

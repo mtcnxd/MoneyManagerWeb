@@ -139,11 +139,12 @@ $bills     = new bills();
 					},
 					success: function(response){
 						const json = JSON.parse(response);
-						// console.log(json.data);
+						const numberOptions = { style: 'currency', currency: 'USD' };
+						const numberFormat = new Intl.NumberFormat('en-US', numberOptions);
 
 						$("#category").text(json.data.category);
 						$("#description").text(json.data.description);
-						$("#amount").text('$' + json.data.amount + '.00');
+						$("#amount").text(numberFormat.format(json.data.amount));
 						
 						const modal = new bootstrap.Modal(document.getElementById('billDetails'));
 						modal.show();

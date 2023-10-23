@@ -12,7 +12,6 @@ $investment = new investments();
 if($_POST){
 	$investment->insert([
 		'category_id' => $_POST['category'],
-		'concept' 	  => $_POST['concept'],
 		'amount'   	  => $_POST['amount'],
 	]);
 }
@@ -42,7 +41,7 @@ if($_POST){
 							<form action="invest.php" method="post">
 							  	<div class="mb-3">
 							    	<label for="" class="form-label">Concepto</label>
-							    	<select type="text" class="form-select" name="concept">
+							    	<select type="text" class="form-select" name="category">
 										<?php
 										$list = $categories->load('inversion');
 										foreach ($list as $category) {

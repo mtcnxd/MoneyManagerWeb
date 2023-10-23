@@ -23,7 +23,7 @@ switch ($_POST['action'])
             'id' => $object
         ]);
 
-        $maxid = $sql->first("SELECT MAX(id) as id FROM `wallet_invest` where category_id = '$object'");
+        $maxid = $sql->first("SELECT MAX(id) as id FROM `wallet_invest` WHERE category_id = '$object'");
 
         $sql->table('wallet_invest');
         $sql->update([

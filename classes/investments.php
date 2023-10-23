@@ -59,7 +59,7 @@ class investments
 			SELECT MAX(date) max_date 
 			FROM wallet_invest WHERE category_id NOT IN (
 				SELECT id FROM wallet_categories WHERE type = 'Inversion' AND visible = false
-			) GROUP BY concept) 
+			) GROUP BY category_id) 
 		ORDER BY concept";
 
 		return $mysql->get($query);
