@@ -7,7 +7,7 @@ class users
 
 	public function find($id = null)
 	{
-		$mysql  = new QueryBuilder();
+		$mysql = new QueryBuilder();
 		$mysql->table($this->table);
 		$mysql->where([
 			'id' => $id
@@ -22,21 +22,21 @@ class users
 		$mysql->insert($data);
 	}
 
-	public function login($username, $password) : bool
+	public function login($username, $password)
 	{
 		$mysql = new QueryBuilder();
 		$mysql->table($this->table);
 		$mysql->where([
 			'username' => $username,
-			'password' => $password
+			'password' => md5($password)
 		]);
-		
-		//var_dump($mysql->first());
 
-		if ($mysql->first()){
-			return true;
+		$result = $mysql->first();
+		if($result){
+			return $result;
 		}
-		return false;
+
+		return null;
 	}
 
 }

@@ -167,6 +167,11 @@ class QueryBuilder
         return $data;
     }
 
+    public function toSql()
+    {
+        return $this->query;
+    }
+
     public function all()
     {
         $this->connection = new mysqli(
