@@ -73,19 +73,6 @@ class myWallet extends Bitso
 		return $mysql->get($query);
 	}
 
-	public function getCurrentBalances()
-	{
-		$mysql = new QueryBuilder();
-		$query = "SELECT * FROM wallet_invest WHERE date IN (
-			SELECT MAX(date) max_date 
-			FROM wallet_invest WHERE category_id NOT IN (
-				SELECT id FROM wallet_categories WHERE type = 'Inversion' AND visible = false
-			) GROUP BY concept) 
-			ORDER BY concept";
-
-		return $mysql->get($query);
-	}
-
 	public function getMonthlyReturn()
 	{
 		$mysql = new QueryBuilder();
