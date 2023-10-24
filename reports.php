@@ -106,12 +106,7 @@ $wallet = new myWallet();
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
-											$capital = 0;
-											$data = $wallet->getCurrentBalances();
-											foreach ($data as $value) {
-												$capital += $value->amount;
-											}
-
+											$capital = $wallet->getFullInvest();
 											echo "$ ". number_format($capital ,2);
 											?>
 										</div>

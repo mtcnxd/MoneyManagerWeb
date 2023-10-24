@@ -102,8 +102,8 @@ class myWallet extends Bitso
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "SELECT SUM(amount) as total FROM wallet_invest WHERE date IN (
-				SELECT max(date) max_date FROM wallet_invest GROUP BY concept) 
-			AND include = true ORDER BY concept";
+				SELECT max(date) max_date FROM wallet_invest GROUP BY category_id) 
+			AND include = true";
 
 		$result = $mysql->get($query);
 		return $result[0]->total;
