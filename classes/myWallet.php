@@ -58,9 +58,10 @@ class myWallet extends Bitso
 	public function dataChart()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT date, sum(amount) AS amount FROM wallet_cron_balances 
+		$query  = "SELECT date, sum(amount) AS amount 
+			FROM wallet_cron_balances 
 			WHERE concept NOT IN ('Bitso','BingX') AND date >= CURRENT_DATE - INTERVAL 1 MONTH 
-			GROUP BY date DESC;";
+			GROUP BY date DESC";
 
 		return $mysql->get($query);
 	}

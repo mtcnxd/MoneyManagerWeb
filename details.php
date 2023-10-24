@@ -45,7 +45,7 @@ $investments = new investments();
 
 									echo "<tr>";
 									echo "	<td>". ($key +1) ."</td>";
-									echo "	<td>". $invest->concept ."</td>";
+									echo "	<td>". $invest->category ."</td>";
                                     echo "	<td>". $dateTime->format('d-m-Y') ."</td>";
 									echo "	<td class='text-end'> $". number_format($invest->amount, 2) ."</td>";
 									echo "</tr>";

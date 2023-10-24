@@ -40,7 +40,7 @@ if($_POST){
 						<div class="card-body">
 							<form action="invest.php" method="post">
 							  	<div class="mb-3">
-							    	<label for="" class="form-label">Concepto</label>
+							    	<label class="form-label">Instrumento</label>
 							    	<select type="text" class="form-select" name="category">
 										<?php
 										$list = $categories->load('inversion');

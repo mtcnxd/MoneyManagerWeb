@@ -32,7 +32,8 @@ class investments
 	public function loadLastMonth($id)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_invest
+		$query  = "SELECT * FROM wallet_invest a
+			JOIN wallet_categories b on a.category_id = b.id
 			WHERE category_id = '$id' AND date > NOW() - INTERVAL 1 MONTH 
 			ORDER BY date DESC";
 
@@ -60,7 +61,7 @@ class investments
 			FROM wallet_invest WHERE category_id NOT IN (
 				SELECT id FROM wallet_categories WHERE type = 'Inversion' AND visible = false
 			) GROUP BY category_id) 
-		ORDER BY concept";
+		ORDER BY b.category";
 
 		return $mysql->get($query);
 	}

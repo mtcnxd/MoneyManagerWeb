@@ -107,7 +107,7 @@ $wallet = new myWallet();
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
 											$capital = $wallet->getFullInvest();
-											echo "$ ". number_format($capital ,2);
+											echo "$".number_format($capital ,2);
 											?>
 										</div>
 									</div>
