@@ -11,8 +11,9 @@ $balances = $investments->getCurrentBalances();
 
 foreach ($balances as $balance) {
 	$investments->updateBalances([
-		"concept" => $balance->category,
-		"amount"  => $balance->amount,
-		"date" 	  => date("Y-m-d"),
+		"concept"     => $balance->category,
+		"category_id" => $balance->category_id,
+		"amount"	  => $balance->amount,
+		"date"		  => date("Y-m-d"),
 	]);
 }
