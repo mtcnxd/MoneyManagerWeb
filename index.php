@@ -26,12 +26,13 @@ if ($_POST){
 	</head>
 
 	<body class="bg-light">
-		<div class="col-md-5 p-2 position-absolute top-50 start-50 translate-middle">
-			<div class="header">
-				<h3>Iniciar sesión</h3>
-				<hr>
+		<div class="col-md-4 position-absolute top-50 start-50 translate-middle">
+			<div class="header rounded border bg-white shadow-sm">
 				<form action="index.php" method="post">
-					<div class="col-md-12 shadow-sm p-3 mb-5 rounded border bg-white">
+					<div class="card-header pt-0">
+						<h3 class="p-3 pb-0">Iniciar sesión</h3>
+					</div>					
+					<div class="card-body">
 						<p>Rellene los campos para iniciar sesion.</p>		
 						<div class="mb-3 row">
 							<label class="col-sm-2 col-form-label">Usuario</label>
