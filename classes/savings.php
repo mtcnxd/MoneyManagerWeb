@@ -1,7 +1,7 @@
 <?php
 namespace classes;
 
-class savings 
+class savings
 {
 	protected $table = "wallet_saving";
 

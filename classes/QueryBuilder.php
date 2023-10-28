@@ -17,7 +17,7 @@ class QueryBuilder
     public function table($tbl)
     {
         $this->table = $tbl;
-    }  
+    }
 
     public function where($where)
     {
@@ -27,7 +27,7 @@ class QueryBuilder
             $item_where[] = $key  ." = '". $value ."'";
         }
         $query .= implode (' AND ',$item_where);
-        
+
         $this->query = $query;
         return $this->query;
     }
@@ -46,10 +46,10 @@ class QueryBuilder
             $value[] = "'". $values ."'";
         }
         $query .= implode (',',$value) .")";
-        
+
         $this->query = $query;
         $result = $this->execute();
-        
+
         return array(
             "Success" => $result,
             "Query"   => $query
@@ -69,14 +69,14 @@ class QueryBuilder
             $item_where[] = $key  ." = '". $value ."'";
         }
         $query .= implode (', ',$item_where);
-        
+
         $this->query = $query;
         $result = $this->execute();
 
         return array(
             "Success" => $result,
             "Query"   => $query
-        );        
+        );
     }
 
     public function delete($where)
@@ -94,7 +94,7 @@ class QueryBuilder
         return array(
             "Success" => $result,
             "Query"   => $query
-        );        
+        );
     }
 
     public function find($id)
@@ -139,7 +139,7 @@ class QueryBuilder
             $object = $result->fetch_object();
             $result->close();
         }
-        
+
         return $object;
     }
 
@@ -191,7 +191,7 @@ class QueryBuilder
             $result->close();
         }
         return $data;
-    }    
+    }
 
     protected function execute()
     {
@@ -207,11 +207,11 @@ class QueryBuilder
             if ($this->connection->query($this->query)) {
                 return true;
             }
-        
+
         } catch(Exception $e){
             throw new Exeption("Error: ". $e->getMessage());
         }
-        
+
         return false;
     }
 

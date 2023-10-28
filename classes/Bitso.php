@@ -11,7 +11,7 @@ class Bitso {
 		$signature = hash_hmac('sha256', $message, $this->bitsoSecret);
 
 		$format = 'Bitso %s:%s:%s';
-		$authHeader =  sprintf($format, $this->bitsoKey, $nonce, $signature);	 
+		$authHeader =  sprintf($format, $this->bitsoKey, $nonce, $signature);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "https://api.bitso.com". $url);
@@ -49,10 +49,10 @@ class Bitso {
 	public function getFullTicker()
 	{
 		$payload = $this->getBitsoRequest("/v3/ticker/");
-		
+
 		$json   = json_decode($payload);
 		$ticker = $json->payload;
-		$currencys = array();		
+		$currencys = array();
 
 		foreach ($ticker as $value) {
 			$currencys[$value->book] = [
@@ -71,10 +71,10 @@ class Bitso {
 	public function getTicker()
 	{
 		$payload = $this->getBitsoRequest("/v3/ticker/");
-		
+
 		$json   = json_decode($payload);
 		$ticker = $json->payload;
-		$currencys = array();		
+		$currencys = array();
 
 		foreach ($ticker as $value) {
 			if( strpos($value->book, "_mxn") or strpos($value->book, "_usd") ){

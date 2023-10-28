@@ -1,7 +1,7 @@
 <?php
 namespace classes;
 
-class bills 
+class bills
 {
 	protected $table = "wallet_bills";
 
@@ -30,14 +30,14 @@ class bills
 			'date' => $date,
 		]);
 		return $query->first();
-	}		
+	}
 
 	public function getDataBetween($type, $startDate, $endDate)
 	{
 		$mysql = new QueryBuilder();
-		$query = "SELECT * FROM $this->table 
+		$query = "SELECT * FROM $this->table
 			WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'";
-			
+
 		return $mysql->get($query);
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 namespace classes;
 
-class users 
+class users
 {
 	protected $table = "wallet_users";
 

@@ -1,7 +1,7 @@
 <?php
 namespace classes;
 
-class investments 
+class investments
 {
 	protected $table = "wallet_invest";
 
@@ -34,7 +34,7 @@ class investments
 		$mysql  = new QueryBuilder();
 		$query  = "SELECT * FROM wallet_invest a
 			JOIN wallet_categories b on a.category_id = b.id
-			WHERE category_id = '$id' AND date > NOW() - INTERVAL 1 MONTH 
+			WHERE category_id = '$id' AND date > NOW() - INTERVAL 1 MONTH
 			ORDER BY date DESC";
 
 		return $mysql->get($query);
@@ -44,7 +44,7 @@ class investments
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "SELECT SUM(amount) as total FROM wallet_invest WHERE date IN (
-			SELECT max(date) max_date FROM wallet_invest GROUP BY category_id) 
+			SELECT max(date) max_date FROM wallet_invest GROUP BY category_id)
 			AND include = true";
 
 		$result = $mysql->first($query);
@@ -57,10 +57,10 @@ class investments
 		$query = "SELECT b.category, a.date, a.amount, a.category_id FROM wallet_invest a
 		JOIN wallet_categories b on a.category_id = b.id
 		WHERE date IN (
-			SELECT MAX(date) max_date 
+			SELECT MAX(date) max_date
 			FROM wallet_invest WHERE category_id NOT IN (
 				SELECT id FROM wallet_categories WHERE type = 'Inversion' AND visible = false
-			) GROUP BY category_id) 
+			) GROUP BY category_id)
 		ORDER BY b.category";
 
 		return $mysql->get($query);

@@ -1,7 +1,7 @@
 <?php
 namespace classes;
 
-class categories 
+class categories
 {
 	protected $table = "wallet_categories";
 
