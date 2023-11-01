@@ -106,8 +106,8 @@ class myWallet extends Bitso
 		$mysql  = new QueryBuilder();
 		$query  = "SELECT SUM(amount) amount FROM wallet_cron_balances
 			WHERE concept NOT IN ('Bitso','BingX') AND date = CURRENT_DATE - INTERVAL 1 MONTH";
-        $result = $mysql->get($query);
-        return $result[0]->amount;
+		$result = $mysql->get($query);
+		return $result[0]->amount;
 	}
 
 	public function getExchangeRate($datePast)
