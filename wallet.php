@@ -104,7 +104,7 @@ if($_POST){
 									<table class="table">
 										<tr>
 											<td>#</td>
-											<td>Concepto</td>
+											<td>Descripción</td>
 											<td>Fecha</td>
 											<td class="text-end">Importe</td>
 											<td class="text-end"></td>
@@ -135,7 +135,7 @@ if($_POST){
 							  		<table class="table">
 										<tr>
 											<td>#</td>
-											<td>Descripcion</td>
+											<td>Descripción</td>
 											<td>Fecha</td>
 											<td class="text-end">Importe</td>
 											<td class="text-end"></td>

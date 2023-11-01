@@ -55,17 +55,6 @@ class myWallet extends Bitso
 		return $balanceValue;
 	}
 
-	public function dataChart()
-	{
-		$mysql  = new QueryBuilder();
-		$query  = "SELECT date, sum(amount) AS amount
-			FROM wallet_cron_balances
-			WHERE concept NOT IN ('Bitso','BingX') AND date >= CURRENT_DATE - INTERVAL 1 MONTH 
-			GROUP BY date DESC";
-
-		return $mysql->get($query);
-	}
-
 	public function dataChartReport()
 	{
 		$mysql  = new QueryBuilder();
@@ -76,6 +65,16 @@ class myWallet extends Bitso
 			
 		return $mysql->get($query);
 	}
+
+	public function dataChart()
+	{
+		$mysql  = new QueryBuilder();
+		$query  = "SELECT date, sum(amount) AS amount FROM wallet_cron_balances 
+			WHERE category_id NOT IN (8, 22) AND date >= CURRENT_DATE - INTERVAL 1 MONTH 
+			GROUP BY date DESC;";
+
+		return $mysql->get($query);
+	}	
 
 	public function getMonthlyReturn()
 	{
@@ -105,7 +104,8 @@ class myWallet extends Bitso
 	{
 		$mysql  = new QueryBuilder();
 		$query  = "SELECT SUM(amount) amount FROM wallet_cron_balances
-			WHERE concept NOT IN ('Bitso','BingX') AND date = CURRENT_DATE - INTERVAL 1 MONTH";
+			WHERE category_id NOT IN (8, 22) AND date = CURRENT_DATE - INTERVAL 1 MONTH;";
+		
 		$result = $mysql->get($query);
 		return $result[0]->amount;
 	}
