@@ -69,7 +69,11 @@ class myWallet extends Bitso
 	public function dataChartReport()
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT concept, amount FROM `wallet_cron_balances` WHERE date = CURRENT_DATE - INTERVAL 1 DAY";
+		$query  = "SELECT b.color, CONCAT(b.color,'44') as border, b.category, a.amount 
+			FROM wallet_cron_balances a
+			JOIN wallet_categories b ON a.category_id = b.id
+			WHERE date = CURRENT_DATE - INTERVAL 1 DAY;";
+			
 		return $mysql->get($query);
 	}
 

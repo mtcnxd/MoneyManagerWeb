@@ -49,8 +49,10 @@ $wallet = new myWallet();
 							$chartData = $wallet->dataChartReport();
 
 							foreach ($chartData as $key => $value) {
-		 						$labels[] = $value->concept;
+		 						$labels[] = $value->category;
 		 						$values[] = $value->amount;
+								$colors[] = $value->color;
+								$borders[] = $value->border;								
 							}
                             ?>                        
                             <canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
@@ -142,13 +144,11 @@ $wallet = new myWallet();
 		</div>	<!-- Container -->
 		
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
-		        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
-		        crossorigin="anonymous">
+		        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-        </script>
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
         <script>
         const currentChart = document.getElementById('currentChart').getContext('2d');
         const myChart = new Chart(currentChart, {
@@ -158,41 +158,16 @@ $wallet = new myWallet();
                 datasets: [{
                     label: 'Wallet Balance',
                     data: <?=json_encode( $values );?>,
-                    borderColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 159, 64, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(255, 205, 86, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(201, 203, 207, 0.7)'                
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.4)',
-                        'rgba(255, 159, 64, 0.4)',
-                        'rgba(75, 192, 192, 0.4)',
-                        'rgba(255, 205, 86, 0.4)',
-                        'rgba(54, 162, 235, 0.4)',
-                        'rgba(153, 102, 255, 0.4)',
-                        'rgba(201, 203, 207, 0.4)'
-                    ],
-                    borderWidth:1,
-                    pointRadius:2,
-                    hoverOffset:5,
-                    fill: true
+					borderColor: <?=json_encode( $colors );?>,
+                    backgroundColor: <?=json_encode( $borders );?>,
+					borderWidth: 0.5
                }]
             },
             options: {
 		        responsive: true,
             	plugins: {
 	              	legend: {
-	                	position:'none',
-	                	align:'center',
-	                	labels:{
-	                		padding:25,
-	                		boxWidth:18,
-	                		boxHeight:17
-	                	}
+	                	position:'none'
 	              	}
               }
             }
