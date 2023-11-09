@@ -6,7 +6,7 @@ use classes\categories;
 use classes\investments;
 
 session_start();
-$wallet 	= new myWallet();
+$wallet		= new myWallet();
 $categories = new categories();
 $investment = new investments();
 

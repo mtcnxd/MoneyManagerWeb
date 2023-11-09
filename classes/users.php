@@ -22,7 +22,7 @@ class users
 		$mysql->where([
 			'userid' => $sesion['userData']->id
 		]);
-		return $mysql->get();		
+		return $mysql->get();
 	}
 
 	public function insert($data)
@@ -47,6 +47,17 @@ class users
 		}
 
 		return null;
+	}
+
+	public function logout()
+	{
+        $sql = new QueryBuilder();
+        $sql->table($this->table);
+        $result = $sql->update([
+            'created_at' => date('d-m-y H:m:s')
+        ], [
+            'id' => $sesion['userData']->id
+        ]);		
 	}
 
 }

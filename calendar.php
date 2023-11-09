@@ -42,7 +42,7 @@ $bills     = new bills();
 				</div>	<!-- col-md-3 -->
 
 				<div class="col">
-					<div class="calendar">
+					<div class="calendar border-custom shadow-sm mb-3">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-6">
@@ -69,6 +69,7 @@ $bills     = new bills();
 							$daysOfMonth = date('t');
 							$currentDay  = date('d');
 
+							$total = 0;
 							for($i=1; $i<=$daysOfMonth; $i++){
 								echo "<div class='day'>";
 								if ( $currentDay == $i ){
@@ -78,6 +79,7 @@ $bills     = new bills();
 								}
 
 								if ($bill = $bills->getBillByDate(date('Y-m-').$i)){
+									$total = ($total + (int) $bill->amount);
 									echo "<div>";
 									echo "  <a href='#' id=".$bill->id." class='btn-bill'>
 												<span class='badge bg-danger'>".'$'. number_format($bill->amount) ."</span>
@@ -87,6 +89,16 @@ $bills     = new bills();
 								echo "</div>";
 							}
 							?>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col-md-4">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<?='$ '.number_format($total, 2); ?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>				
