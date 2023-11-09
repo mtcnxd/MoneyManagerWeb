@@ -38,6 +38,21 @@ switch ($_POST['action'])
         );
     break;
 
+    case 'updateConfiguration':
+        $sql = new QueryBuilder();
+        $sql->table('wallet_configuration');
+        $result = $sql->update([
+            'value' => $status
+        ], [
+            'id' => $object
+        ]);
+
+        $message = array(
+            "message" => "Los cambios se guardaron con exito",
+            "data"    => $result
+        );
+    break;
+
     case 'deleteCategory':
         $sql = new QueryBuilder();
         $sql->table('wallet_categories');

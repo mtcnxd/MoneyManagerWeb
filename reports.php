@@ -2,6 +2,7 @@
 require_once ('classes/autoload.php'); 
 
 use classes\myWallet;
+use classes\users;
 
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
@@ -121,13 +122,18 @@ $wallet = new myWallet();
 								<div class="card-body">
 									<div class="align-items-center row">
 										<div class="col">
+											<?php
+											$users = new users(1);
+											$userConf = $users->loadConfiguration();
+											$months = $userConf[0]->value;
+											?>
 											<h6 class="card-title text-muted text-uppercase fs-7">
-												Retorno aprox. 12 meses
+												Retorno aprox. <?=$months?> meses
 											</h6>
 											<h5 class="card-subtitle mb-2 fs-6">							
 											<?php
 											$exchangeRate = $wallet->getExchangeRate($datePast)/100;
-											echo number_format($capital * pow((1 + $exchangeRate), 12), 2);
+											echo number_format($capital * pow((1 + $exchangeRate), $months), 2);
 											?>
 										</div>
 									</div>

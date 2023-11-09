@@ -238,13 +238,7 @@ if($_POST){
 		        responsive: true,
             	plugins: {
 	              	legend: {
-	                	position:'none',
-	                	align:'center',
-	                	labels:{
-	                		padding:25,
-	                		boxWidth:18,
-	                		boxHeight:17
-	                	}
+	                	position:'none'
 	              	}
               }
             }
