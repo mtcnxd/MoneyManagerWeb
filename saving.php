@@ -4,6 +4,7 @@ require_once ('classes/autoload.php');
 use classes\myWallet;
 use classes\savings;
 
+session_start();
 $wallet  = new myWallet();
 $savings = new savings();
 

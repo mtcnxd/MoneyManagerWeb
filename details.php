@@ -3,6 +3,7 @@ require_once ('classes/autoload.php');
 
 use classes\investments;
 
+session_start();
 $investments = new investments();
 ?>
 

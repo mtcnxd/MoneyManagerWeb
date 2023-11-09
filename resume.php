@@ -5,6 +5,7 @@ use classes\myWallet;
 use classes\savings;
 use classes\investments;
 
+session_start();
 $savings = new savings();
 $investments = new investments();
 ?>

@@ -4,9 +4,11 @@ require_once ('classes/autoload.php');
 use classes\myWallet;
 use classes\users;
 
+session_start();
+$wallet = new myWallet();
+
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
-$wallet = new myWallet();
 ?>
 
 <html>
@@ -124,7 +126,7 @@ $wallet = new myWallet();
 										<div class="col">
 											<?php
 											$users = new users(1);
-											$userConf = $users->loadConfiguration();
+											$userConf = $users->loadConfiguration($_SESSION);
 											$months = $userConf[0]->value;
 											?>
 											<h6 class="card-title text-muted text-uppercase fs-7">

@@ -5,9 +5,10 @@ use classes\myWallet;
 use classes\categories;
 use classes\bills;
 
+session_start();
+$bills  = new bills();
 $wallet = new myWallet();
 $categories = new categories();
-$bills = new bills();
 
 if($_POST){
 	$bills->insert([

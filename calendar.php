@@ -5,6 +5,7 @@ use classes\myWallet;
 use classes\calendar;
 use classes\bills;
 
+session_start();
 $startDate = date('Y-m-01'); 
 $endDate   = date('Y-m-t');
 $wallet    = new myWallet();

@@ -5,11 +5,12 @@ use classes\myWallet;
 use classes\users;
 use classes\categories;
 
+session_start();
+$users  = new users();
 $wallet = new myWallet();
 
-$users = new users(1);
-$userData = $users->find();
-$userConf = $users->loadConfiguration();
+$userData = $users->find($_SESSION);
+$userConf = $users->loadConfiguration($_SESSION);
 ?>
 
 <html>

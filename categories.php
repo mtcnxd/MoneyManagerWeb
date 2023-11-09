@@ -3,6 +3,7 @@ require_once ('classes/autoload.php');
 
 use classes\categories;
 
+session_start();
 $categories = new categories();
 
 if($_POST){

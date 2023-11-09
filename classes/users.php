@@ -4,29 +4,23 @@ namespace classes;
 class users
 {
 	protected $table  = "wallet_users";
-	protected $userid = 0;
 
-	public function __construct($userid)
-	{
-		$this->userid = $userid;
-	}
-
-	public function find()
+	public function find($sesion)
 	{
 		$mysql = new QueryBuilder();
 		$mysql->table($this->table);
 		$mysql->where([
-			'id' => $this->userid
+			'id' => $sesion['userData']->id
 		]);
 		return $mysql->first();
 	}
 
-	public function loadConfiguration()
+	public function loadConfiguration($sesion)
 	{
 		$mysql = new QueryBuilder();
 		$mysql->table('wallet_configuration');
 		$mysql->where([
-			'userid' => $this->userid
+			'userid' => $sesion['userData']->id
 		]);
 		return $mysql->get();		
 	}
