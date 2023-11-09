@@ -35,7 +35,6 @@ $bills     = new bills();
 
                         <div class="list-group p-1">
                             <a href="reports.php" class="list-group-item list-group-item-action">Mes actual</a>
-                            <a href="pastmonth.php" class="list-group-item list-group-item-action">Mes anterior</a>
                             <a href="calendar.php" class="list-group-item list-group-item-action active">Calendario</a>
                         </div>
 					</div>	
@@ -44,9 +43,18 @@ $bills     = new bills();
 				<div class="col">
 					<div class="calendar">
 						<div class="card-body">
-							<h4 class="mb-3">
-								<?=ucfirst($calendar->getCurrentMonth());?>
-							</h4>
+							<div class="row">
+								<div class="col-md-6">
+									<h4 class="mb-3">
+										<?=ucfirst($calendar->getCurrentMonth());?>
+									</h4>
+								</div>
+								<div class="col text-end">									
+									<a id="" class="btn btn-primary" href="?month=<?=date('m')-1;?>" role="button"> << </a>
+									<a id="" class="btn btn-primary" href="?month=<?=date('m')+1;?>" role="button"> >> </a>
+								</div>
+							</div>
+
 							<?php
 							foreach($calendar->getWeekDays() as $day) { 
 								echo "<div class='name'>". $day ."</div>";

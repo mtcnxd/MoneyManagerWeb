@@ -80,10 +80,10 @@ class myWallet extends Bitso
 	{
 		$mysql = new QueryBuilder();
 		$query = "SELECT SUM(amount) amount FROM wallet_cron_balances WHERE date = '".date('Y-m-01')."'";
-		$lastAmount = $mysql->get($query)[0];
+		$lastAmount = $mysql->first($query);
 
 		$query = "SELECT SUM(amount) amount FROM wallet_cron_balances WHERE date = CURRENT_DATE";
-		$currentAmount = $mysql->get($query)[0];
+		$currentAmount = $mysql->first($query);
 
 		return ($currentAmount->amount - $lastAmount->amount);
 	}

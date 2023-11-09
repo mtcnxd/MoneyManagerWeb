@@ -31,7 +31,6 @@ $wallet = new myWallet();
 
 						<div class="list-group p-1">
 							<a href="reports.php" class="list-group-item list-group-item-action active">Mes actual</a>
-							<a href="pastmonth.php" class="list-group-item list-group-item-action">Mes anterior</a>
 							<a href="calendar.php" class="list-group-item list-group-item-action">Calendario</a>
 						</div>
 					</div>	
@@ -52,10 +51,10 @@ $wallet = new myWallet();
 		 						$labels[] = $value->category;
 		 						$values[] = $value->amount;
 								$colors[] = $value->color;
-								$borders[] = $value->border;								
+								$borders[] = $value->border;
 							}
-							?>                        
-							<canvas class="p-3" id="currentChart" width="250" height="100"></canvas>
+							?>
+							<canvas class="p-3" id="barChart" width="250" height="100"></canvas>
 						</div>
 					</div>	<!-- Card -->
 
@@ -150,8 +149,8 @@ $wallet = new myWallet();
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 
 		<script>
-		const currentChart = document.getElementById('currentChart').getContext('2d');
-		const myChart = new Chart(currentChart, {
+		const barChart = document.getElementById('barChart').getContext('2d');
+		const myBar = new Chart(barChart, {
 			type: 'bar',
 			data: {
 				labels: <?=json_encode( $labels );?>,
