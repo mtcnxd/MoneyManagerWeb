@@ -22,7 +22,7 @@ class QueryBuilder
     public function where($where)
     {
         $query = "SELECT * FROM ". $this->table;
-        $query .= ' WHERE ';
+        $query .= " WHERE ";
         foreach ($where as $key => $value) {
             $item_where[] = $key  ." = '". $value ."'";
         }

@@ -7,7 +7,7 @@ use classes\users;
 session_start();
 $wallet = new myWallet();
 
-$startDate = date('Y-m-01'); 
+$startDate = date('Y-m-01');
 $endDate   = date('Y-m-t');
 ?>
 
@@ -22,7 +22,7 @@ $endDate   = date('Y-m-t');
 				<?php include ('includes/main_menu.php'); ?>
 			</div>
 		</header>
-		
+
 		<div class="container">
 			<div class="row mb-4">
 				<div class="col-md-3">
@@ -36,7 +36,7 @@ $endDate   = date('Y-m-t');
 							<a href="reports.php" class="list-group-item list-group-item-action active">Mes actual</a>
 							<a href="calendar.php" class="list-group-item list-group-item-action">Calendario</a>
 						</div>
-					</div>	
+					</div>
 				</div>	<!-- Col -->
 
 				<div class="col">
@@ -70,7 +70,7 @@ $endDate   = date('Y-m-t');
 											<h6 class="card-title text-muted text-uppercase fs-7">
 												Ganancia mes en curso
 											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">							
+											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											echo "$".number_format($wallet->getMonthlyReturn(), 2);
 											?>
@@ -88,10 +88,10 @@ $endDate   = date('Y-m-t');
 											<h6 class="card-title text-muted text-uppercase fs-7">
 												Tasa Promedio Ponderada
 											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">							
+											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$datePast = strtotime('-1 month', strtotime(date('Y-m-d')));
-											$datePast = date('Y-m-d', $datePast);									
+											$datePast = date('Y-m-d', $datePast);
 											echo number_format($wallet->getExchangeRate($datePast),2) ."%";
 											?>
 										</div>
@@ -108,7 +108,7 @@ $endDate   = date('Y-m-t');
 											<h6 class="card-title text-muted text-uppercase fs-7">
 												Capital invertido
 											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">							
+											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$capital = $wallet->getFullInvest();
 											echo "$".number_format($capital ,2);
@@ -132,7 +132,7 @@ $endDate   = date('Y-m-t');
 											<h6 class="card-title text-muted text-uppercase fs-7">
 												Retorno aprox. <?=$months?> meses
 											</h6>
-											<h5 class="card-subtitle mb-2 fs-6">							
+											<h5 class="card-subtitle mb-2 fs-6">
 											<?php
 											$exchangeRate = $wallet->getExchangeRate($datePast)/100;
 											echo number_format($capital * pow((1 + $exchangeRate), $months), 2);
@@ -143,13 +143,12 @@ $endDate   = date('Y-m-t');
 							</div>
 						</div>
 					</div>
-					
 				</div>	<!-- Col -->
 
 			</div>	<!-- row -->
 
 		</div>	<!-- Container -->
-		
+
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
 				integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
 		</script>

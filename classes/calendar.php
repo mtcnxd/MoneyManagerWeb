@@ -6,15 +6,15 @@ use classes\QueryBuilder;
 class calendar {
 
     protected $currentDate;
-    protected $currentDay;
     protected $firstDay;
+    protected $month;
 
-    public function __construct()
+    public function __construct($month)
     {
         $current = date('d');
+        $this->month = $month;
+        $this->firstDay    = mktime(0, 0, 0, $this->month, date("d") -$current, date("Y"));
         $this->currentDate = date('d-m-Y');
-        $this->currentDay  = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-        $this->firstDay    = mktime(0, 0, 0, date("m"), date("d") -$current, date("Y"));
     }
 
     public function getWeekDays()
@@ -26,11 +26,11 @@ class calendar {
 
     public function getCurrentMonth()
     {  
-        $months = array(
-            'enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'
+        $monthsList = array(
+            'none','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'
         );
 
-        return $months[date('n') -1];
+        return $monthsList[$this->month];
     }
 
     public function getCurrentDate()
@@ -39,10 +39,10 @@ class calendar {
         return $parseDate->format('d-m-Y');
     }
 
-    public function getFirstDayOfMonth($text = false)
+    public function getFirstDayOfMonth($dayName = false)
     {
         $daysElapsed = date('N', $this->firstDay);
-        if ($text){
+        if ($dayName){
             return $daysElapsed;
         }
         return $this->days[$daysElapsed];

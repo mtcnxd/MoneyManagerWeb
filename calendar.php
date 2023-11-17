@@ -6,11 +6,14 @@ use classes\calendar;
 use classes\bills;
 
 session_start();
-$startDate = date('Y-m-01'); 
-$endDate   = date('Y-m-t');
-$wallet    = new myWallet();
-$calendar  = new calendar();
-$bills     = new bills();
+$month = date('m');
+if ($_GET){
+	$month = $_GET['month'];
+}
+
+$wallet   = new myWallet();
+$calendar = new calendar($month);
+$bills    = new bills();
 ?>
 
 <html>
@@ -66,7 +69,7 @@ $bills     = new bills();
 								echo "<div class='day'> &nbsp; </div>";
 							}
 
-							$daysOfMonth = date('t');
+							$daysOfMonth = cal_days_in_month(CAL_GREGORIAN, $month, date('Y'));
 							$currentDay  = date('d');
 
 							$total = 0;
@@ -78,7 +81,7 @@ $bills     = new bills();
 									echo "<span class='date'>". $i ."</span>";
 								}
 
-								if ($bill = $bills->getBillByDate(date('Y-m-').$i)){
+								if ($bill = $bills->getBillByDate(date('Y-'.$month.'-').$i)){
 									$total = ($total + (int) $bill->amount);
 									echo "<div>";
 									echo "  <a href='#' id=".$bill->id." class='btn-bill'>
