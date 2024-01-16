@@ -6,7 +6,7 @@ use classes\calendar;
 use classes\bills;
 
 session_start();
-$month = date('m');
+$month = date('n');
 if ($_GET){
 	$month = $_GET['month'];
 }
