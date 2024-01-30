@@ -29,7 +29,8 @@ class bills
 		$query->where([
 			'date' => $date,
 		]);
-		return $query->first();
+		
+		return $query->get();
 	}
 
 	public function getDataBetween($type, $startDate, $endDate)

@@ -164,6 +164,7 @@ class QueryBuilder
             }
             $result->close();
         }
+
         return $data;
     }
 

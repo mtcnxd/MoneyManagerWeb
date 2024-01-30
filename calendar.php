@@ -81,14 +81,16 @@ $bills    = new bills();
 									echo "<span class='date'>". $i ."</span>";
 								}
 
-								if ($bill = $bills->getBillByDate(date('Y-'.$month.'-').$i)){
-									$total = ($total + (int) $bill->amount);
-									echo "<div>";
-									echo "  <a href='#' id=".$bill->id." class='btn-bill'>
-												<span class='badge bg-danger'>".'$'. number_format($bill->amount) ."</span>
-											</a>";
+								if ($object = $bills->getBillByDate(date('Y-'.$month.'-').$i)){
+									echo "<div style='text-align:end'>";
+									foreach ($object as $bill){
+										$total = ($total + (int) $bill->amount);
+										echo "  <a href='#' id=".$bill->id." class='btn-bill'>
+													<span class='badge bg-danger'>".'$'. number_format($bill->amount) ."</span>
+												</a>";
+									}
 									echo "</div>";
-								}							
+								}
 								echo "</div>";
 							}
 							?>

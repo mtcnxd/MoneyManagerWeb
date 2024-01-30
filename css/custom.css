@@ -79,6 +79,7 @@ a {
 	padding: 10px;
 	height: 70px;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 .calendar .day .active {
