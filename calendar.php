@@ -5,6 +5,7 @@ use classes\myWallet;
 use classes\calendar;
 use classes\bills;
 
+date_default_timezone_set('America/Los_Angeles');
 session_start();
 $month = date('n');
 if ($_GET){
