@@ -77,66 +77,34 @@ if($_POST){
 							</table>
 						</div>	
 					</div>
-				</div>
 
-				<div class="col">
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<h6 class="card-header-title">Distribucion</h6>
-							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-						</div>
-						<div class="card-body p-0">
-							<canvas class="p-3" id="myChart" width="250" height="100"></canvas>
-						</div>	
-					</div>
-				</div>
-			</div>
-
-			<div class="row mb-4">
-				<div class="col">
-					<div class="col-md-5">
-						<div class="card border-custom shadow-sm">
-							<div class="card-body">
-								<div class="align-items-center row">
-									<div class="col">
-										<h6 class="card-title text-muted text-uppercase fs-7">
-											Balance total
-										</h6>
-										<h5 class="card-subtitle mb-2 fs-6">
-										<?php
-										echo '$'. number_format($totalBalance, 2);
-										?>
-										</h5>
-									</div>
-									<div class="col-auto">
-										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col">
 					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th scope="col">Paridad</th scope="col">
-								<th scope="col" class="text-end">Precio Compra</th scope="col">
-								<th scope="col" class="text-end">Porcentaje G/P</th scope="col">
+								<th scope="col" class="text-end">V.Compra</th scope="col">
+								<th scope="col" class="text-end">V.Actual</th scope="col">
+								<th scope="col" class="text-end">P.Compra</th scope="col">
+								<th scope="col" class="text-end">G/P</th scope="col">
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$ShoppingList = array(57000, 56840, 53240);
+							
 							$crypto_price = $ticker['btc_usdt']['last'];
+							$ShoppingList = array(
+								['amount' => 0.00077956, 'price' => 62180]
+							);
 
 							foreach ($ShoppingList as $price) {
-								$diff = $crypto_price - $price;
+								$diff = $crypto_price - $price['price'];
 								$percentage = $diff/$crypto_price * 100;
 
 								echo "<tr>";
 								echo "<td>BTC_USDT</td>";
-								echo "<td class='text-end'>". '$'.number_format($price,2) ."</td>";
+								echo "<td class='text-end'>". '$'.number_format($price['amount'] * $price['price'], 2) ."</td>";
+								echo "<td class='text-end'>". '$'.number_format($price['amount'] * $crypto_price, 2) ."</td>";
+								echo "<td class='text-end'>". '$'.number_format($price['price'], 2) ."</td>";
 								echo "<td class='text-end'>";
 								if ($percentage < 0) {
 									echo "<span class='badge bg-danger'>". number_format($percentage, 2).'%' ."</span>";
@@ -149,6 +117,65 @@ if($_POST){
 							?>
 						</tbody>
 					</table>
+
+				</div>
+
+				<div class="col">
+					<div class="card rounded border border-custom shadow-sm mb-4">
+						<div class="card-header">
+							<h6 class="card-header-title">Distribución</h6>
+							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+						</div>
+						<div class="card-body p-0">
+							<canvas class="p-3" id="myChart" width="250" height="100"></canvas>
+						</div>	
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Balance total
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">
+											<?php
+											echo '$'. number_format($totalBalance, 2);
+											?>
+											</h5>
+										</div>
+										<div class="col-auto">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="card border-custom shadow-sm">
+								<div class="card-body">
+									<div class="align-items-center row">
+										<div class="col">
+											<h6 class="card-title text-muted text-uppercase fs-7">
+												Precio actual BTC/USDT
+											</h6>
+											<h5 class="card-subtitle mb-2 fs-6">
+											<?php
+											echo '$'. number_format($ticker['btc_usdt']['last'], 2);
+											?>
+											</h5>
+										</div>
+										<div class="col-auto">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#32a852" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
