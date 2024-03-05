@@ -37,7 +37,8 @@ class bills
 	{
 		$mysql = new QueryBuilder();
 		$query = "SELECT * FROM $this->table
-			WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'";
+			WHERE type = '$type' AND date BETWEEN '$startDate' AND '$endDate'
+			ORDER by date ASC";
 
 		return $mysql->get($query);
 	}
