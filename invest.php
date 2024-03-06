@@ -54,7 +54,7 @@ if($_POST){
 									</select>
 							  	</div>								
 							  	<div class="mb-3">
-							    	<label for="" class="form-label">Importe</label>
+							    	<label class="form-label">Importe</label>
 									<div class="input-group">
 										<div class="input-group-text">$</div>
 										<input type="text" class="form-control" name="amount" placeholder="0.00">

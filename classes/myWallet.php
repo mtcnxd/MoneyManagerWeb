@@ -24,7 +24,7 @@ class myWallet extends Bitso
 
 		$balanceValue = array();
 		foreach ($balances as $value) {
-			if ($value->total < 0.1){
+			if ($value->total < 0.0002){
 				continue;
 			}
 
@@ -43,15 +43,16 @@ class myWallet extends Bitso
 					'amount'   => $value->total,
 					'value'    => $value->total * $ticker[$book],
 				];
-			} 
+			} else {
+				$book = $value->currency.'_usd';				
+				if (array_key_exists($book, $ticker)){
+					$balanceValue[] = [
+						'currency' => $value->currency,
+						'amount'   => $value->total,
+						'value'    => $value->total * $ticker[$book] * $ticker['usd_mxn'],
+					];
+				}
 
-			$book = $value->currency.'_usd';				
-			if (array_key_exists($book, $ticker)){
-				$balanceValue[] = [
-					'currency' => $value->currency,
-					'amount'   => $value->total,
-					'value'    => $value->total * $ticker[$book] * $ticker['usd_mxn'],
-				];
 			}
 			
 		}

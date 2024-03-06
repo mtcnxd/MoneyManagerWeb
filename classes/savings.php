@@ -15,6 +15,14 @@ class savings
 		return $mysql->first();
 	}
 
+	public function delete($id){
+		$mysql  = new QueryBuilder();
+		$mysql->table($this->table);
+		return $mysql->delete([
+			'id' => $id
+		]);
+	}
+
 	public function load()
 	{
 		$mysql  = new QueryBuilder();
@@ -24,9 +32,16 @@ class savings
 
 	public function insert($data)
 	{
-		$query = new QueryBuilder();
-		$query->table($this->table);
-		$query->insert($data);
+		$mysql = new QueryBuilder();
+		$mysql->table($this->table);
+		$mysql->insert($data);
+	}
+
+	public function getAll()
+	{
+		$mysql  = new QueryBuilder();
+		$mysql->table($this->table);		
+		return $mysql->all();
 	}
 
 	public function getTotal()

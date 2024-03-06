@@ -40,19 +40,19 @@ if($_POST){
 						<div class="card-body">
 							<form action="saving.php" method="post">
 								<div class="mb-3">
-									<label for="" class="form-label">Fecha</label>
+									<label class="form-label">Fecha</label>
 									<input type="date" class="form-control" name="date" value="<?=date('Y-m-d')?>">
 								</div>
 
 								<div class="mb-3">
-									<label for="" class="form-label">Proposito</label>
+									<label class="form-label">Proposito</label>
 									<select class="form-select" name="name">
 										<option>Spotify Premium</option>
 									</select>
 								</div>
 
 							  	<div class="mb-3">
-							    	<label for="" class="form-label">Importe</label>
+							    	<label class="form-label">Importe</label>
 									<div class="input-group">
 										<div class="input-group-text">$</div>
 										<input type="text" class="form-control" name="amount" placeholder="0.00">
@@ -76,16 +76,21 @@ if($_POST){
 							<h6 class="card-header-title">Lista de aportaciones</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 						</div>				
-						<div class="card-body">
-							<table class="table table-hover">
+						<div class="card-body" id="cardbody">
+							<table class="table table-hover" id="tblsavings">
 								<?php
 								$data = $savings->load();
-								foreach ($data as $row => $value) {
+								foreach ($data as $value) {
 									$date = new DateTime($value->date);
 									echo "<tr>";
-									echo "	<td>".$value->name ." ". ($row +1)."</td>";
+									echo "	<td>".$value->name ." ". $value->id."</td>";
 									echo "	<td>".$date->format('d-m-Y')."</td>";									
 									echo "	<td class='text-end'> $". number_format($value->amount, 2)."</td>";
+									echo '	<td class="text-end">
+												<a href="#" id='.$value->id.' class="btn-delete">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+												</a>
+											</td>';
 									echo "</tr>";
 								}
 								?>
@@ -141,5 +146,35 @@ if($_POST){
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
 		crossorigin="anonymous">
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$(".btn-delete").on('click', function(e){
+	e.preventDefault();
+	const id = $(this).attr('id');
+
+	$.ajax({
+		url:'background/ajax_endpoint.php',
+		method: 'POST',
+		data: {
+			action:'deleteSaving',
+			object:id
+		}, 
+		success: function(response){
+			const jsonResponse = JSON.parse(response);
+
+			Swal.fire({
+			  title: 'Eliminado!',
+			  text: jsonResponse.message,
+			  confirmButtonText: 'Aceptar',
+			}).then((confirm) => {
+				if (confirm.isConfirmed) {
+					// $('#tblsavings').load(location.href + " #tblsavings");
+					location.reload();
+				}
+			});
+		}
+	});
+});
 </script>

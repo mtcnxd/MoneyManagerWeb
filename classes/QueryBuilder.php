@@ -87,8 +87,8 @@ class QueryBuilder
             $item_where[] = $key  ." = '". $value ."'";
         }
         $query .= implode (' AND ',$item_where);
-
         $this->query = $query;
+
         $result = $this->execute();
 
         return array(

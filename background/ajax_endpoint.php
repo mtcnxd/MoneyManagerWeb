@@ -2,10 +2,12 @@
 
 require_once ("../classes/QueryBuilder.php");
 require_once ("../classes/categories.php");
+require_once ("../classes/savings.php");
 require_once ("../classes/bills.php");
 
 use classes\QueryBuilder;
 use classes\categories;
+use classes\savings;
 use classes\bills;
 
 $object = $_POST['object'];
@@ -84,6 +86,17 @@ switch ($_POST['action'])
 
         $message = array(
             "message" => "Informacion cargada con exito",
+            "data"    => $result
+          );
+    break;
+
+    case 'deleteSaving':
+        $saving = new savings();
+        $saving->delete($_POST['object']);
+        $result  = $saving->getAll();
+
+        $message = array(
+            "message" => "El registro se elimino correctamente",
             "data"    => $result
           );
     break;
