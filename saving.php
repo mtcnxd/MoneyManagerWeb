@@ -170,8 +170,7 @@ $(".btn-delete").on('click', function(e){
 			  confirmButtonText: 'Aceptar',
 			}).then((confirm) => {
 				if (confirm.isConfirmed) {
-					// $('#tblsavings').load(location.href + " #tblsavings");
-					location.reload();
+					location.replace('saving.php');
 				}
 			});
 		}

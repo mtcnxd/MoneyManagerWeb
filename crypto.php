@@ -93,7 +93,8 @@ if($_POST){
 							
 							$crypto_price = $ticker['btc_usdt']['last'];
 							$ShoppingList = array(
-								['amount' => 0.00078839, 'price' => 63420],
+								['amount' => 0.00073142, 'price' => 68360],
+								['amount' => 0.00073260, 'price' => 68250],
 							);
 
 							foreach ($ShoppingList as $price) {
