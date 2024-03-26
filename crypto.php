@@ -42,7 +42,7 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-			<div class="row">
+			<div class="row mb-4">
 				<div class="col">
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
@@ -77,46 +77,6 @@ if($_POST){
 							</table>
 						</div>	
 					</div>
-
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Paridad</th scope="col">
-								<th scope="col" class="text-end">V.Compra</th scope="col">
-								<th scope="col" class="text-end">V.Actual</th scope="col">
-								<th scope="col" class="text-end">P.Compra</th scope="col">
-								<th scope="col" class="text-end">G/P</th scope="col">
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							
-							$crypto_price = $ticker['btc_usdt']['last'];
-							$ShoppingList = $wallet->getCriptoInvest();
-
-							foreach($ShoppingList as $currency){
-								$diff = $crypto_price - $currency->price;
-								$percentage = $diff/$crypto_price * 100;
-
-								echo "<tr>";
-								echo "<td>BTC_USDT</td>";
-								echo "<td class='text-end'>". '$'.number_format($currency->amount * $currency->price, 2) ."</td>";
-								echo "<td class='text-end'>". '$'.number_format($currency->amount * $crypto_price, 2) ."</td>";
-								echo "<td class='text-end'>". '$'.number_format($currency->price, 2) ."</td>";
-								echo "<td class='text-end'>";
-								if ($percentage < 0) {
-									echo "<span class='badge bg-danger'>". number_format($percentage, 2).'%' ."</span>";
-								} else {
-									echo "<span class='badge bg-success'>". number_format($percentage, 2).'%' ."</span>";
-								}
-								echo "</td>";
-								echo "</tr>";
-							}
-
-							?>
-						</tbody>
-					</table>
-
 				</div>
 
 				<div class="col">
@@ -177,6 +137,53 @@ if($_POST){
 
 				</div>
 			</div>
+
+			<div class="row">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Paridad</th scope="col">
+							<th scope="col" class="text-end">V.Compra</th>
+							<th scope="col" class="text-end">V.Actual</th>
+							<th scope="col" class="text-end">P.Compra</th>
+							<th scope="col" class="text-end">G/P</th>
+							<th scope="col" style="width: 30px;"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						
+						$crypto_price = $ticker['btc_usdt']['last'];
+						$ShoppingList = $wallet->getCriptoInvest();
+
+						foreach($ShoppingList as $currency){
+							$diff = $crypto_price - $currency->price;
+							$percentage = $diff/$crypto_price * 100;
+
+							echo "<tr>";
+							echo "<td>BTC_USDT</td>";
+							echo "<td class='text-end'>". '$'.number_format($currency->amount * $currency->price, 2) ."</td>";
+							echo "<td class='text-end'>". '$'.number_format($currency->amount * $crypto_price, 2) ."</td>";
+							echo "<td class='text-end'>". '$'.number_format($currency->price, 2) ."</td>";
+							echo "<td class='text-end'>";
+							if ($percentage < 0) {
+								echo "<span class='badge bg-danger'>". number_format($percentage, 2).'%' ."</span>";
+							} else {
+								echo "<span class='badge bg-success'>". number_format($percentage, 2).'%' ."</span>";
+							}
+							echo '<td class="text-end">
+									<a href="#" class="delete" id="'.$currency->id.'">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+									</a>
+								  </td>';
+							echo "</td>";
+							echo "</tr>";
+						}
+
+						?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 </html>
@@ -190,6 +197,25 @@ if($_POST){
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script>
+
+const buttonsArray = document.getElementsByClassName("delete");
+$(buttonsArray).on('click', function(event){
+	event.preventDefault();	
+
+	$.ajax({
+		url: 'background/ajax_endpoint.php',
+		method: 'POST',
+		data: {
+			action:'deleteCriptyInvest',
+			object:this.id
+		},
+		success: function(response){
+			console.log(response);
+		}
+	});
+
+});
+
 const ctx = document.getElementById('myChart').getContext('2d');
 const distributionChart = new Chart(ctx, {
     type: 'bar',

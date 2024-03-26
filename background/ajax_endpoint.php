@@ -19,20 +19,18 @@ switch ($_POST['action'])
         $sql = new QueryBuilder();
         ($status == 'true') ? $status = 1 : $status = 0; 
         $sql->table('wallet_categories');
-        $result = $sql->update([
-            'visible' => $status
-        ], [
-            'id' => $object
-        ]);
+        $result = $sql->update(
+            ['visible' => $status], 
+            ['id' => $object]
+        );
 
         $maxid = $sql->first("SELECT MAX(id) as id FROM `wallet_invest` WHERE category_id = '$object'");
 
         $sql->table('wallet_invest');
-        $sql->update([
-            'include' => $status
-        ], [
-            'id' => $maxid->id
-        ]);
+        $sql->update(
+            ['include' => $status], 
+            ['id' => $maxid->id]
+        );
 
         $message = array(
             "message" => "Los cambios se guardaron con exito",
@@ -43,11 +41,10 @@ switch ($_POST['action'])
     case 'updateConfiguration':
         $sql = new QueryBuilder();
         $sql->table('wallet_configuration');
-        $result = $sql->update([
-            'value' => $status
-        ], [
-            'id' => $object
-        ]);
+        $result = $sql->update(
+            ['value' => $status], 
+            ['id' => $object]
+        );
 
         $message = array(
             "message" => "Los cambios se guardaron con exito",
@@ -58,9 +55,9 @@ switch ($_POST['action'])
     case 'deleteCategory':
         $sql = new QueryBuilder();
         $sql->table('wallet_categories');
-        $result = $sql->delete(
-            ['id' => $object]
-        );
+        $result = $sql->delete([
+            'id' => $object
+        ]);
 
         $message = array(
             "message" => "La categoria se elimino exitosamente",
@@ -91,14 +88,27 @@ switch ($_POST['action'])
     break;
 
     case 'deleteSaving':
-        $saving = new savings();
+        $saving  = new savings();
         $saving->delete($_POST['object']);
         $result  = $saving->getAll();
 
         $message = array(
-            "message" => "El registro se elimino correctamente",
+            "message" => "Se elimino correctamente",
             "data"    => $result
           );
+    break;
+
+    case 'deleteCriptyInvest':
+        $sql = new QueryBuilder();
+        $sql->table('wallet_crypto');
+        $result = $sql->delete([
+            'id' => $object
+        ]);
+
+        $message = array(
+            "message" => "Se elimino exitosamente",
+            "data"    => $result
+        );
     break;
 
     default:
