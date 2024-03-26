@@ -92,6 +92,12 @@ class myWallet extends Bitso
 		return ($currentAmount->amount - $lastAmount->amount);
 	}
 
+	public function getCriptoInvest(){
+		$mysql = new QueryBuilder();
+		$result = $mysql->get("SELECT * FROM wallet_crypto WHERE status = TRUE ");
+		return $result;
+	}
+
 	// Pendiente por borrar
 	public function getFullInvest()
 	{

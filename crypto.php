@@ -92,20 +92,17 @@ if($_POST){
 							<?php
 							
 							$crypto_price = $ticker['btc_usdt']['last'];
-							$ShoppingList = array(
-								['amount' => 0.00073142, 'price' => 68360],
-								['amount' => 0.00073260, 'price' => 68250],
-							);
+							$ShoppingList = $wallet->getCriptoInvest();
 
-							foreach ($ShoppingList as $price) {
-								$diff = $crypto_price - $price['price'];
+							foreach($ShoppingList as $currency){
+								$diff = $crypto_price - $currency->price;
 								$percentage = $diff/$crypto_price * 100;
 
 								echo "<tr>";
 								echo "<td>BTC_USDT</td>";
-								echo "<td class='text-end'>". '$'.number_format($price['amount'] * $price['price'], 2) ."</td>";
-								echo "<td class='text-end'>". '$'.number_format($price['amount'] * $crypto_price, 2) ."</td>";
-								echo "<td class='text-end'>". '$'.number_format($price['price'], 2) ."</td>";
+								echo "<td class='text-end'>". '$'.number_format($currency->amount * $currency->price, 2) ."</td>";
+								echo "<td class='text-end'>". '$'.number_format($currency->amount * $crypto_price, 2) ."</td>";
+								echo "<td class='text-end'>". '$'.number_format($currency->price, 2) ."</td>";
 								echo "<td class='text-end'>";
 								if ($percentage < 0) {
 									echo "<span class='badge bg-danger'>". number_format($percentage, 2).'%' ."</span>";
@@ -115,6 +112,7 @@ if($_POST){
 								echo "</td>";
 								echo "</tr>";
 							}
+
 							?>
 						</tbody>
 					</table>
