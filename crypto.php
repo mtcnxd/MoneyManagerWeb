@@ -42,7 +42,7 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-			<div class="row mb-4">
+			<div class="row mb-5">
 				<div class="col">
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
@@ -139,13 +139,23 @@ if($_POST){
 			</div>
 
 			<div class="row">
+				<h5>Shopping list
+					<a href="#" style="padding-left: 3px;" data-bs-toggle="modal" data-bs-target="#addShopping">
+						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle" style="margin-bottom: 2px;">
+						<circle cx="12" cy="12" r="10"></circle>
+						<line x1="12" y1="8" x2="12" y2="16"></line>
+						<line x1="8" y1="12" x2="16" y2="12"></line></svg>
+					</a>
+				</h5>
+				<hr>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th scope="col">Paridad</th scope="col">
-							<th scope="col" class="text-end">V.Compra</th>
-							<th scope="col" class="text-end">V.Actual</th>
-							<th scope="col" class="text-end">P.Compra</th>
+							<th scope="col">Cantidad</th>
+							<th scope="col" class="text-end">Precio Compra</th>
+							<th scope="col" class="text-end">Valor Compra</th>
+							<th scope="col" class="text-end">Valor Actual</th>
 							<th scope="col" class="text-end">G/P</th>
 							<th scope="col" style="width: 30px;"></th>
 						</tr>
@@ -162,9 +172,10 @@ if($_POST){
 
 							echo "<tr>";
 							echo "<td>BTC_USDT</td>";
+							echo "<td>". $currency->amount ."</td>";
+							echo "<td class='text-end'>". '$'.number_format($currency->price, 2) ."</td>";
 							echo "<td class='text-end'>". '$'.number_format($currency->amount * $currency->price, 2) ."</td>";
 							echo "<td class='text-end'>". '$'.number_format($currency->amount * $crypto_price, 2) ."</td>";
-							echo "<td class='text-end'>". '$'.number_format($currency->price, 2) ."</td>";
 							echo "<td class='text-end'>";
 							if ($percentage < 0) {
 								echo "<span class='badge bg-danger'>". number_format($percentage, 2).'%' ."</span>";
@@ -185,6 +196,37 @@ if($_POST){
 				</table>
 			</div>
 		</div>
+
+		<div class="modal fade" id="addShopping" tabindex="-1">
+			<div class="modal-dialog">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h5 class="modal-title">Modal title</h5>
+		        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      		</div>
+			      	<div class="modal-body">
+			        	<div class="row">
+			        		<div class="col-md-12">
+			        			<label class="mb-2">Paridad</label>
+			        			<input type="text" id="parity" class="form-control">
+			        		</div>
+			        		<div class="col-md-12 mt-3">
+			        			<label class="mb-2">Cantidad</label>
+			        			<input type="text" id="amount" class="form-control">
+			        		</div>
+			        		<div class="col-md-12 mt-3">
+			        			<label class="mb-2">Precio de compra</label>
+			        			<input type="text" id="price" class="form-control">
+			        		</div>
+			        	</div>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        	<button type="button" class="btn btn-primary" id="insertData">Save changes</button>
+			      	</div>
+		    	</div>
+		  	</div>
+		</div>
 	</body>
 </html>
 
@@ -192,11 +234,40 @@ if($_POST){
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
 		crossorigin="anonymous">
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-</script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+
+function showMessageAlert(message){
+	Swal.fire({
+	  text: message,
+	  icon: "success"
+	}).then(() => {
+		location.reload();
+	});
+}
+
+$("#insertData").on('click', function(){
+	var parity = $("#parity").val();
+	var amount = $("#amount").val();
+	var price  = $("#price").val();
+
+	$.ajax ({
+		url: 'background/ajax_endpoint.php',
+		method: 'POST',
+		data: {
+			action:'insertCriptyInvest',
+			parity:parity,
+			amount:amount,
+			price:price,
+		}, 
+		success: function(result){
+			const response = JSON.parse(result);
+			showMessageAlert(response.message);
+		}
+	});
+});
 
 const buttonsArray = document.getElementsByClassName("delete");
 $(buttonsArray).on('click', function(event){
@@ -209,8 +280,9 @@ $(buttonsArray).on('click', function(event){
 			action:'deleteCriptyInvest',
 			object:this.id
 		},
-		success: function(response){
-			console.log(response);
+		success: function(result){
+			const response = JSON.parse(result);
+			showMessageAlert(response.message);
 		}
 	});
 

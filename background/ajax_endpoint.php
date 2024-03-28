@@ -111,6 +111,22 @@ switch ($_POST['action'])
         );
     break;
 
+    case 'insertCriptyInvest':
+        $sql = new QueryBuilder();
+        $sql->table('wallet_crypto');
+        $result = $sql->insert([
+            'parity' => $_POST['parity'],
+            'amount' => $_POST['amount'],
+            'price'  => $_POST['price'],
+            'status' => true
+        ]);
+
+        $message = array(
+            "message" => "Guardado correctamente",
+            "data"    => $result
+        );
+    break;
+
     default:
         $message = array(
           "message" => "Action not implemented",
