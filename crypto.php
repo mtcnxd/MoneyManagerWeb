@@ -42,7 +42,7 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-			<div class="row mb-5">
+			<div class="row mb-4">
 				<div class="col">
 					<div class="card rounded border border-custom shadow-sm mb-4">
 						<div class="card-header">
