@@ -163,15 +163,18 @@ if($_POST){
 					<tbody>
 						<?php
 						
-						$crypto_price = $ticker['btc_usdt']['last'];
 						$ShoppingList = $wallet->getCriptoInvest();
 
 						foreach($ShoppingList as $currency){
+							$crypto_price = $ticker[$currency->parity]['last'];
 							$diff = $crypto_price - $currency->price;
 							$percentage = $diff/$crypto_price * 100;
 
+							$sumValorCompra = $sumValorCompra + ($currency->amount * $currency->price);
+							$sumValorActual = $sumValorActual + ($currency->amount * $crypto_price);
+
 							echo "<tr>";
-							echo "<td>BTC_USDT</td>";
+							echo "<td>". $currency->parity ."</td>";
 							echo "<td>". $currency->amount ."</td>";
 							echo "<td class='text-end'>". '$'.number_format($currency->price, 2) ."</td>";
 							echo "<td class='text-end'>". '$'.number_format($currency->amount * $currency->price, 2) ."</td>";
@@ -193,6 +196,17 @@ if($_POST){
 
 						?>
 					</tbody>
+					<tfoot>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td class="text-end"><?= '$'.number_format($sumValorCompra,2) ?></td>
+							<td class="text-end"><?= '$'.number_format($sumValorActual,2) ?></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		</div>
