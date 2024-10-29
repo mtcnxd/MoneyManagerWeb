@@ -32,10 +32,10 @@ class investments
 	public function loadLastMonth($id)
 	{
 		$mysql  = new QueryBuilder();
-		$query  = "SELECT * FROM wallet_invest a
-			JOIN wallet_categories b on a.category_id = b.id
-			WHERE category_id = '$id' AND date > NOW() - INTERVAL 1 MONTH
-			ORDER BY date DESC";
+		$query  = "SELECT a.id, b.category, a.date, a.amount FROM wallet_invest a ".
+				  "JOIN wallet_categories b on a.category_id = b.id ".
+				  "WHERE category_id = $id AND date > NOW() - INTERVAL 1 MONTH ".
+				  "ORDER BY date DESC";
 
 		return $mysql->get($query);
 	}
