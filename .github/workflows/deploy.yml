@@ -1,4 +1,4 @@
-name: Deploy to Fortech.mx
+name: Deploy to wallet.fortech.mx
 
 on:
   push:
@@ -19,4 +19,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./  # Ruta de los archivos en el repositorio
-          server-dir: /test.fortech.mx/  # Ruta de destino en el servidor
+          server-dir: /wallet.fortech.mx/  # Ruta de destino en el servidor
