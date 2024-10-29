@@ -133,16 +133,13 @@ $investments = new investments();
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script>
 $(".btn-delete").on('click', function(btn){
-	btnId = btn.attr('id');
-	console.log("You pressed: " + btnId);
-
+	console.log(this.id);
 	Swal.fire({
   		title: 'Message',
-  		text: 'DataID '+ btnId +' was success deleted',
+  		text: 'Data: '+ this.id +' was success deleted',
   		icon: 'success',
   		confirmButtonText: 'Cool'
 	})
-
 });
 
 const currentChart = document.getElementById('currentChart').getContext('2d');
