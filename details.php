@@ -132,6 +132,10 @@ $investments = new investments();
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script>
+$(".btn-delete").on('click', function(btn){
+	console.log("You pressed: " + btn.id)
+});
+
 const currentChart = document.getElementById('currentChart').getContext('2d');
 const myChart = new Chart(currentChart, {
     type: 'line',
