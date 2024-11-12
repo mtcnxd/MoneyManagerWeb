@@ -201,8 +201,20 @@ if($_POST){
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
-							<td class="text-end"><?= '$'.number_format($sumValorCompra,2) ?></td>
-							<td class="text-end"><?= '$'.number_format($sumValorActual,2) ?></td>
+							<td class="text-end">
+								<?php
+								if (isset($sumValorCompra)){
+									echo '$'.number_format($sumValorCompra, 2);
+								}
+								?>
+							</td>
+							<td class="text-end">
+								<?php
+								if (isset($sumValorActual)){
+									echo '$'.number_format($sumValorActual, 2);
+								}
+								?>
+							</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 						</tr>
