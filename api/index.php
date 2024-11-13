@@ -13,10 +13,9 @@ $months = [
     "enero", "febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"
 ]
 
-$month = (int) date('m');
 $data = [
     "day"     => date('d'),
-    "month"   => $months[$month - 1],
+    "month"   => date('m'),
     "savings" => number_format($currentBalance, 0)
 ];
 
