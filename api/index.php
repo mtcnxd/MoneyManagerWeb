@@ -1,6 +1,6 @@
 <?php
 
-require_once ('../classes/autoload.php'); 
+require_once ('../classes/investments.php'); 
 
 use classes\investments;
 
