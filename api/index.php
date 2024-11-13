@@ -1,6 +1,7 @@
 <?php
 
 require_once ('../classes/investments.php'); 
+require_once ('../classes/QueryBuilder.php');
 
 use classes\investments;
 
