@@ -9,4 +9,9 @@ $investment = new investments();
 
 $currentBalance = $investment->getTotal();
 
-echo number_format($currentBalance, 2);
+
+$data = [
+    "savings" => number_format($currentBalance, 2)
+];
+
+echo json_encode($data);
