@@ -14,4 +14,8 @@ $data = [
     "savings" => number_format($currentBalance, 2)
 ];
 
+
+# Create response and sending headers
+
+header('Content-Type: application/json');
 echo json_encode($data);
