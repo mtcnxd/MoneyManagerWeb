@@ -14,11 +14,8 @@ $months = [
 ]
 
 $data = [
-    "day"     => date('d'),
-    "month"   => date('m'),
     "savings" => number_format($currentBalance, 0)
 ];
-
 
 # Create response and sending headers
 
