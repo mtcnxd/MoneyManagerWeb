@@ -7,6 +7,5 @@ use classes\investments;
 $investment = new investments();
 
 $currentBalance = $investment->getTotal();
-echo json_encode(
-    "amount" => '$'. number_format($currentBalance, 2)
-)
+
+echo number_format($currentBalance, 2);
