@@ -16,7 +16,7 @@ $months = [
 $data = [
     "day"     => date('d'),
     "month"   => $months[date('m') - 1],
-    "savings" => number_format($currentBalance, 0)
+    "savings" => $currentBalance
 ];
 
 # Create response and sending headers
