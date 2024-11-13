@@ -9,10 +9,13 @@ $investment = new investments();
 
 $currentBalance = $investment->getTotal();
 
+$months = [
+    "enero", "febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"
+]
 
 $data = [
     "day"     => date('d'),
-    "month"   => date('m'),
+    "month"   => $months[date('m') - 1],
     "savings" => number_format($currentBalance, 0)
 ];
 
