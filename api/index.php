@@ -11,7 +11,9 @@ $currentBalance = $investment->getTotal();
 
 
 $data = [
-    "savings" => number_format($currentBalance, 2)
+    "day"     => date('d'),
+    "month"   => date('m'),
+    "savings" => number_format($currentBalance, 0)
 ];
 
 
