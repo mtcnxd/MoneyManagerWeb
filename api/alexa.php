@@ -1,10 +1,14 @@
 <?php
 
+header('Content-Type: application/json');
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
 
 
-# Create response and sending headers
+$response = [
+    "name": "marcos",
+    "message":"hola mundo"
+];
 
-header('Content-Type: application/json');
-echo json_encode($data);
+# Create response and sending headers
+echo json_encode($response);
