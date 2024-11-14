@@ -16,9 +16,8 @@ $mysql   = new QueryBuilder();
 $results = $mysql->get($query);
 
 $response = [
-    "name"    => "marcos",
-    "message" => "hola mundo",
-    "data"    => $data
+    "category" => $data['category'],
+    "data"     => $results
 ];
 
 # Create response and sending headers
