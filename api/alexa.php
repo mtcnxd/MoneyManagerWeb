@@ -6,8 +6,8 @@ $data = json_decode($json, true);
 
 
 $response = [
-    "name": "marcos",
-    "message":"hola mundo"
+    "name"    => "marcos",
+    "message" => "hola mundo"
 ];
 
 # Create response and sending headers
