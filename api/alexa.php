@@ -1,6 +1,7 @@
 <?php
-
 require_once ('../classes/QueryBuilder.php');
+
+use classes\QueryBuilder;
 
 header('Content-Type: application/json');
 
