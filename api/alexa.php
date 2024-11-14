@@ -11,13 +11,13 @@ $query = "SELECT MAX(AMOUNT) amount FROM wallet_invest a ".
 "JOIN wallet_categories b on a.category_id = b.id ".
 "WHERE b.category = '".$data['category']."'";
 
-$mysql   = new QueryBuilder();
-$results = $mysql->get($query);
+# $mysql   = new QueryBuilder();
+# $results = $mysql->get($query);
 
 $response = [
     "name"    => "marcos",
     "message" => "hola mundo",
-    "data"    => $results
+    "data"    => $data
 ];
 
 # Create response and sending headers
