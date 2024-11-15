@@ -166,13 +166,15 @@ if($_POST){
 						$ShoppingList = $wallet->getCriptoInvest();
 
 						foreach($ShoppingList as $currency){
+							$crypto_price = $ticker[$currency->parity]['last'];
+							$diff 		  = $crypto_price - $currency->price;
+							$percentage   = $diff/$crypto_price * 100;
+
+							var_dump($ticker);
+							echo "--------------------------------------";
 							var_dump($currency);
 
 							/*
-							$crypto_price = $ticker[$currency->parity]['last'];
-							$diff = $crypto_price - $currency->price;
-							$percentage = $diff/$crypto_price * 100;
-
 							$sumValorCompra = $sumValorCompra + ($currency->amount * $currency->price);
 							$sumValorActual = $sumValorActual + ($currency->amount * $crypto_price);
 
