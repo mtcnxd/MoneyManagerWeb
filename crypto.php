@@ -1,11 +1,11 @@
 <?php
-require_once ('classes/autoload.php'); 
+require_once ('classes/autoload.php');
 
 use classes\myWallet;
 
 session_start();
 $wallet = new myWallet();
-$balance_array = $wallet->getWalletBalances(); 
+$balance_array = $wallet->getWalletBalances();
 $ticker = $wallet->getFullTicker();
 
 if($_POST){
@@ -19,19 +19,19 @@ if($_POST){
 <html>
 	<head>
 		<title>My Wallet</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- CSS only -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
-				rel="stylesheet" 
-				integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+				rel="stylesheet"
+				integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
 				crossorigin="anonymous">
-		<link href="css/custom.css" rel="stylesheet"/>				
-				
+		<link href="css/custom.css" rel="stylesheet"/>
+
 		<!-- JavaScript Bundle with Popper -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
-				integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 				crossorigin="anonymous">
-		</script>		
+		</script>
 	</head>
 
 	<body>
@@ -39,8 +39,8 @@ if($_POST){
 			<div class="container">
 				<?php include ('includes/main_menu.php'); ?>
 			</div>
-		</header>		
-		
+		</header>
+
 		<div class="container">
 			<div class="row mb-4">
 				<div class="col">
@@ -48,7 +48,7 @@ if($_POST){
 						<div class="card-header">
 							<h6 class="card-header-title">Balances</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-						</div>				
+						</div>
 						<div class="card-body p-0">
 							<table class="table table-hover">
 								<thead>
@@ -75,7 +75,7 @@ if($_POST){
 							}
 							?>
 							</table>
-						</div>	
+						</div>
 					</div>
 				</div>
 
@@ -87,7 +87,7 @@ if($_POST){
 						</div>
 						<div class="card-body p-0">
 							<canvas class="p-3" id="myChart" width="250" height="100"></canvas>
-						</div>	
+						</div>
 					</div>
 
 					<div class="row">
@@ -162,17 +162,19 @@ if($_POST){
 					</thead>
 					<tbody>
 						<?php
-						
+
 						$ShoppingList = $wallet->getCriptoInvest();
 
 						foreach($ShoppingList as $currency){
-							#$crypto_price = $ticker[$currency->parity]['last'];
-							#$diff 		  = $crypto_price - $currency->price;
-							#$percentage   = $diff/$crypto_price * 100;
+							$crypto_price = $ticker[strtolower($currency->parity)]['last'];
+							$difference   = $crypto_price - $currency->price;
+							$percentage   = $difference/$crypto_price * 100;
 
 							var_dump($ticker);
 							echo "--------------------------------------";
 							var_dump($currency);
+							echo "--------------------------------------";
+							var_dump($percentage);
 
 							/*
 							$sumValorCompra = $sumValorCompra + ($currency->amount * $currency->price);
@@ -262,8 +264,8 @@ if($_POST){
 	</body>
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
-		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 		crossorigin="anonymous">
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -293,7 +295,7 @@ $("#insertData").on('click', function(){
 			parity:parity,
 			amount:amount,
 			price:price,
-		}, 
+		},
 		success: function(result){
 			const response = JSON.parse(result);
 			showMessageAlert(response.message);
@@ -303,7 +305,7 @@ $("#insertData").on('click', function(){
 
 const buttonsArray = document.getElementsByClassName("delete");
 $(buttonsArray).on('click', function(event){
-	event.preventDefault();	
+	event.preventDefault();
 
 	$.ajax({
 		url: 'background/ajax_endpoint.php',
