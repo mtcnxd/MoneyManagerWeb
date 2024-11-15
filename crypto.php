@@ -165,6 +165,8 @@ if($_POST){
 						
 						$ShoppingList = $wallet->getCriptoInvest();
 
+						var_dump($ShoppingList);
+
 						foreach($ShoppingList as $currency){
 							$crypto_price = $ticker[$currency->parity]['last'];
 							$diff = $crypto_price - $currency->price;
