@@ -291,8 +291,10 @@ $("#insertData").on('click', function(){
 			price:price,
 		},
 		success: function(result){
-			const response = JSON.parse(result);
-			showMessageAlert(response.message);
+			console.log(result);
+			
+			// const response = JSON.parse(result);
+			// showMessageAlert(response.message);
 		}
 	});
 });
