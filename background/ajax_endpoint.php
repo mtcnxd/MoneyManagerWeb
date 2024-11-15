@@ -10,7 +10,7 @@ use classes\categories;
 use classes\savings;
 use classes\bills;
 
-$object = $_POST['object'];
+$object = isset($_POST['object']) ? $_POST['object'] : null;
 $status = isset($_POST['status']) ? $_POST['status'] : '';
 
 switch ($_POST['action'])
