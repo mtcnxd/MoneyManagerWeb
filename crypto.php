@@ -170,8 +170,11 @@ if($_POST){
 							$difference   = $crypto_price - $currency->price;
 							$percentage   = $difference/$crypto_price * 100;
 
-							$sumValorCompra = $sumValorCompra + ($currency->amount * $currency->price);
-							$sumValorActual = $sumValorActual + ($currency->amount * $crypto_price);
+							$sumValorCompra = $currency->amount * $currency->price;
+							$sumValorActual = $currency->amount * $crypto_price;
+
+							#$sumValorCompra = $sumValorCompra + ($currency->amount * $currency->price);
+							#$sumValorActual = $sumValorActual + ($currency->amount * $crypto_price);
 
 							echo "<tr>";
 							echo "<td>". $currency->parity ."</td>";
