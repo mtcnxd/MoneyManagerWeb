@@ -170,13 +170,6 @@ if($_POST){
 							$difference   = $crypto_price - $currency->price;
 							$percentage   = $difference/$crypto_price * 100;
 
-							var_dump($ticker);
-							echo "--------------------------------------";
-							var_dump($currency);
-							echo "--------------------------------------";
-							var_dump($percentage);
-
-							/*
 							$sumValorCompra = $sumValorCompra + ($currency->amount * $currency->price);
 							$sumValorActual = $sumValorActual + ($currency->amount * $crypto_price);
 
@@ -199,7 +192,6 @@ if($_POST){
 								  </td>';
 							echo "</td>";
 							echo "</tr>";
-							*/
 						}
 
 						?>
