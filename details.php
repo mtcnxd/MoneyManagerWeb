@@ -60,6 +60,7 @@ $investments = new investments();
 									echo "</tr>";
 								}
 
+								krsort($chartData);
 								var_dump($chartData);
 
 								?>
