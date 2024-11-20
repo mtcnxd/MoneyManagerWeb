@@ -45,7 +45,7 @@ $investments = new investments();
 									$values[$key]  = $invest->amount;
 									$labels[$key]  = $dateTime->format('d-m-Y');
 									
-									$data[$dateTime->format('d-m-Y')] = $invest->amount;
+									$chartData[$dateTime->format('d-m-Y')] = $invest->amount;
 
 									echo "<tr>";
 									echo "	<td>". ($key +1) ."</td>";
@@ -60,7 +60,7 @@ $investments = new investments();
 									echo "</tr>";
 								}
 
-								var_dump($data);
+								var_dump($chartData);
 
 								?>
 							</table>
