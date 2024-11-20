@@ -106,7 +106,6 @@ $investments = new investments();
 											echo number_format($percentage, 2) .'%';
 
 											krsort($values);
-											krsort($labels);											
 											?>
 											</h5>
 										</div>
