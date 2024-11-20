@@ -45,7 +45,7 @@ $investments = new investments();
 									$values[$key]  = $invest->amount;
 									$labels[$key]  = $dateTime->format('d-m-Y');
 									
-									# $data[$dateTime->format('d-m-Y')] = $invest->amount;
+									$data[$dateTime->format('d-m-Y')] = $invest->amount;
 
 									echo "<tr>";
 									echo "	<td>". ($key +1) ."</td>";
@@ -104,8 +104,6 @@ $investments = new investments();
 											<?php
 											$percentage = ($result/$values[0]) * 100;
 											echo number_format($percentage, 2) .'%';
-
-											krsort($values);
 											?>
 											</h5>
 										</div>
@@ -149,7 +147,7 @@ const currentChart = document.getElementById('currentChart').getContext('2d');
 const myChart = new Chart(currentChart, {
     type: 'line',
     data: {
-        labels: <?=json_encode( $labels );?>,
+        labels: <?=json_encode( array_keys($data) );?>,
         datasets: [{
             label: 'Wallet Balance',
             data: <?=json_encode( $values );?>,
