@@ -149,10 +149,10 @@ const currentChart = document.getElementById('currentChart').getContext('2d');
 const myChart = new Chart(currentChart, {
     type: 'line',
     data: {
-        labels: <?=json_encode( array_keys($chartData) );?>,
+        labels: <?=json_encode( $labels );?>,
         datasets: [{
             label: 'Wallet Balance',
-            data: <?=json_encode( array_values($chartData) );?>,
+            data: <?=json_encode( $values );?>,
             borderColor: 'rgba(0, 153, 204, 1)',
             backgroundColor: 'rgba(0, 172, 230, 0.2)',
             borderWidth:1,
