@@ -44,6 +44,8 @@ $investments = new investments();
                                     $dateTime = new DateTime($invest->date);
 									$values[$key]  = $invest->amount;
 									$labels[$key]  = $dateTime->format('d-m-Y');
+									
+									# $data[$dateTime->format('d-m-Y')] = $invest->amount;
 
 									echo "<tr>";
 									echo "	<td>". ($key +1) ."</td>";
@@ -57,6 +59,9 @@ $investments = new investments();
 											</td>';
 									echo "</tr>";
 								}
+
+								krsort($values);
+								krsort($labels);
 
 								?>
 							</table>
