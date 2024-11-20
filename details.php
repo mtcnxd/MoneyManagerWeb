@@ -59,6 +59,9 @@ $investments = new investments();
 											</td>';
 									echo "</tr>";
 								}
+
+								var_dump($data);
+
 								?>
 							</table>
 						</div>	
@@ -147,7 +150,7 @@ const currentChart = document.getElementById('currentChart').getContext('2d');
 const myChart = new Chart(currentChart, {
     type: 'line',
     data: {
-        labels: <?=json_encode( array_keys($data) );?>,
+        labels: <?=json_encode( $labels );?>,
         datasets: [{
             label: 'Wallet Balance',
             data: <?=json_encode( $values );?>,
