@@ -59,10 +59,6 @@ $investments = new investments();
 											</td>';
 									echo "</tr>";
 								}
-
-								krsort($values);
-								krsort($labels);
-
 								?>
 							</table>
 						</div>	
@@ -108,6 +104,9 @@ $investments = new investments();
 											<?php
 											$percentage = ($result/$values[0]) * 100;
 											echo number_format($percentage, 2) .'%';
+
+											krsort($values);
+											krsort($labels);											
 											?>
 											</h5>
 										</div>
