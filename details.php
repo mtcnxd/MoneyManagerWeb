@@ -61,8 +61,6 @@ $investments = new investments();
 								}
 
 								krsort($chartData);
-								var_dump($chartData);
-
 								?>
 							</table>
 						</div>	
@@ -151,10 +149,10 @@ const currentChart = document.getElementById('currentChart').getContext('2d');
 const myChart = new Chart(currentChart, {
     type: 'line',
     data: {
-        labels: <?=json_encode( $labels );?>,
+        labels: <?=json_encode( array_keys($chartData) );?>,
         datasets: [{
             label: 'Wallet Balance',
-            data: <?=json_encode( $values );?>,
+            data: <?=json_encode( array_values($chartData) );?>,
             borderColor: 'rgba(0, 153, 204, 1)',
             backgroundColor: 'rgba(0, 172, 230, 0.2)',
             borderWidth:1,
