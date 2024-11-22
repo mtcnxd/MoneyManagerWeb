@@ -5,7 +5,7 @@ namespace classes;
 use classes\Client;
 use classes\AbstractProfile;
 
-class Profile extends AbstractProfile implements Client
+class User extends AbstractProfile implements Client
 {
     private $name;
 

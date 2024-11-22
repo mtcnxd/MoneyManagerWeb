@@ -2,28 +2,13 @@
 
 namespace classes;
 
-class Client 
+interface Client 
 {
-    protected $name;
-    protected $age = 20;
+    public function setName(string $name): void;
 
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
+    public function getName(): string;
 
-    public function getName()
-    {
-        return $this->name;
-    }
+    public function setAge(int $age);
 
-    public function setAge($age)
-    {
-        $this->age = $age;
-    }
-
-    public function getAge()
-    {
-        return $this->age;
-    }    
+    public function getAge();
 }

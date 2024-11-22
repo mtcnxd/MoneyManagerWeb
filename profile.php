@@ -6,6 +6,7 @@ use classes\users;
 use classes\categories;
 use classes\Client;
 use classes\Profile;
+use classes\User;
 
 session_start();
 $users  = new users();
@@ -15,16 +16,16 @@ $userData = $users->find($_SESSION);
 $userConf = $users->loadConfiguration($_SESSION);
 
 
-
-
-$client = new Client();
-$client->setName("Marcos");
-$client->setAge("38");
-
-$profile = new Profile($client);
-$profile->getName();
-
+$profile = new Profile();
+$profile->setName("Juanito");
+$profile->setAge(40);
 var_dump($profile);
+
+
+$user = new User();
+$user->setName("Marcos");
+$user->setAge(38);
+var_dump($user);
 
 
 ?>
