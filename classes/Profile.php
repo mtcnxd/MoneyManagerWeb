@@ -8,7 +8,7 @@ class Profile
 {
     protected $client;
 
-    public __construct(Client $client)
+    public __construct($client)
     {
         $this->client = $client;
     }
