@@ -4,15 +4,26 @@ namespace classes;
 
 class Profile 
 {
-    protected $username;
+    protected $name;
+    protected $age = 20;
 
-    protected function setProfile($username)
+    protected function setProfile($name)
     {
-        $this->username = $username;
+        $this->name = $name;
     }
 
     protected function getProfile()
     {
-        return $this->username;
+        return $this->name;
     }
+
+    protected function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+    protected function getAge()
+    {
+        return $this->age;
+    }    
 }
