@@ -7,22 +7,22 @@ class Profile
     protected $name;
     protected $age = 20;
 
-    protected function setProfile($name)
+    public function setProfile($name)
     {
         $this->name = $name;
     }
 
-    protected function getProfile()
+    public function getProfile()
     {
         return $this->name;
     }
 
-    protected function setAge($age)
+    public function setAge($age)
     {
         $this->age = $age;
     }
 
-    protected function getAge()
+    public function getAge()
     {
         return $this->age;
     }    
