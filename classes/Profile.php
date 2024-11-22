@@ -4,26 +4,10 @@ namespace classes;
 
 class Profile 
 {
-    protected $name;
-    protected $age = 20;
+    protected $client;
 
-    public function setProfile($name)
+    public __construct(Client $client)
     {
-        $this->name = $name;
+        $this->client = $client;
     }
-
-    public function getProfile()
-    {
-        return $this->name;
-    }
-
-    public function setAge($age)
-    {
-        $this->age = $age;
-    }
-
-    public function getAge()
-    {
-        return $this->age;
-    }    
 }

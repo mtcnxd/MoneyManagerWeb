@@ -16,11 +16,11 @@ $userConf = $users->loadConfiguration($_SESSION);
 
 
 
-$profile = new Profile();
-$profile->setProfile("Marcos");
-$profile->setAge("38");
+$client = new Client();
+$client->setName("Marcos");
+$client->setAge("38");
 
-var_dump($profile);
+var_dump($client);
 
 
 ?>
