@@ -4,7 +4,8 @@ require_once ('classes/autoload.php');
 use classes\myWallet;
 use classes\users;
 use classes\categories;
-use classes\Profile;
+use classes\Client;
+# use classes\Profile;
 
 session_start();
 $users  = new users();

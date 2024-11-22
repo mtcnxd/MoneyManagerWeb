@@ -2,6 +2,8 @@
 
 namespace classes;
 
+use classes\Client;
+
 class Profile 
 {
     protected $client;
