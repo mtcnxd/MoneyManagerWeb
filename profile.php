@@ -4,6 +4,7 @@ require_once ('classes/autoload.php');
 use classes\myWallet;
 use classes\users;
 use classes\categories;
+use classes\Profile;
 
 session_start();
 $users  = new users();
@@ -11,6 +12,15 @@ $wallet = new myWallet();
 
 $userData = $users->find($_SESSION);
 $userConf = $users->loadConfiguration($_SESSION);
+
+
+
+
+$profile = new Profile();
+
+var_dump($profile);
+
+
 ?>
 
 <html>
