@@ -21,7 +21,10 @@ $client = new Client();
 $client->setName("Marcos");
 $client->setAge("38");
 
-var_dump($client);
+$profile = new Profile($client);
+$profile->getName();
+
+var_dump($profile);
 
 
 ?>

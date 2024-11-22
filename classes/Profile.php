@@ -12,4 +12,10 @@ class Profile
     {
         $this->client = $client;
     }
+
+    public function getName()
+    {
+        $this->client;
+        return "Hola mundo";
+    }
 }
