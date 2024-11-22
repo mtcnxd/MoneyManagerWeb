@@ -7,12 +7,12 @@ class Client
     protected $name;
     protected $age = 20;
 
-    public function setClient($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
 
-    public function getClient()
+    public function getName()
     {
         return $this->name;
     }

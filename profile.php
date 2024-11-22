@@ -5,7 +5,7 @@ use classes\myWallet;
 use classes\users;
 use classes\categories;
 use classes\Client;
-# use classes\Profile;
+use classes\Profile;
 
 session_start();
 $users  = new users();
