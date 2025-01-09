@@ -112,11 +112,13 @@ if($_POST){
 										</tr>
 										<?php 
 										$data = $bills->getDataBetween('Egreso', date('Y-m-01'), date('Y-m-t'));
+
 										foreach ($data as $row => $bill){
 											$parseDate = new dateTime($bill->date);
 											echo "<tr>";
 											echo "	<td>".($row + 1)."</td>";
 											echo "	<td>".$bill->description."</td>";
+											echo "	<td>".$bill->category."</td>";
 											echo "	<td>".$parseDate->format('d-m-Y')."</td>";
 											echo "	<td class='text-end'>$".number_format($bill->amount,2)."</td>";
 											echo '	<td>
