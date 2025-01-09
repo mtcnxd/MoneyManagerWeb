@@ -106,6 +106,7 @@ if($_POST){
 										<tr>
 											<td>#</td>
 											<td>Descripción</td>
+											<td>Categoria</td>
 											<td>Fecha</td>
 											<td class="text-end">Importe</td>
 											<td class="text-end"></td>
