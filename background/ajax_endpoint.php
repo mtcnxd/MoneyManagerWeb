@@ -1,6 +1,7 @@
 <?php
 
 require_once ("../classes/QueryBuilder.php");
+require_once ("../classes/investments.php");
 require_once ("../classes/categories.php");
 require_once ("../classes/savings.php");
 require_once ("../classes/bills.php");
