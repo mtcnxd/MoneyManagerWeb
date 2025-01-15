@@ -104,7 +104,7 @@ switch ($_POST['action'])
         $message = array(
             "message" => "Se elimino correctamente",
             "data"    => $result
-          );
+        );
     break;
 
     case 'deleteCriptyInvest':

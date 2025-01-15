@@ -66,8 +66,8 @@ class investments
 		return $mysql->get($query);
 	}
 
-	public function delete($investId)
+	public function delete($id)
 	{
-		return $investId;
+		return $id;
 	}
 }

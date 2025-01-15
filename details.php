@@ -154,7 +154,7 @@ $(".btn-delete").on('click', function(btn){
   		title: 'Message',
   		text: 'Data: '+ this.id +' was success deleted',
   		icon: 'success',
-  		confirmButtonText: 'Cool'
+  		confirmButtonText: 'Accept'
 	})
 });
 
