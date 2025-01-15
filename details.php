@@ -146,8 +146,7 @@ $(".btn-delete").on('click', function(btn){
 			object: this.id
 		},
 		success: function(response) {
-			const json = JSON.parse(response);
-			console.log(json.data);
+			console.log(response);
 		}
 	});
 
