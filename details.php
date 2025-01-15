@@ -154,6 +154,9 @@ $(".btn-delete").on('click', function(btn){
   		icon: 'success',
   		confirmButtonText: 'Accept'
 	})
+	.then(() => {
+		history.go();
+	})
 });
 
 const currentChart = document.getElementById('currentChart').getContext('2d');

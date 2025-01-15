@@ -92,7 +92,7 @@ switch ($_POST['action'])
     case 'deleteInvest':
         $investment = new investments();
         $message = array(
-            "message" => "Esta es una prueba",
+            "message" => "Se elimino correctamente",
             "invest"  => $investment->delete($_POST['object'])
         );
     break;

@@ -70,8 +70,10 @@ class investments
 	{
 		$mysql = new QueryBuilder();
 		$mysql->table($this->table);
-		return $mysql->delete([
+		$response = $mysql->delete([
 			'id' => $id
 		]);
+
+		return $response['Success'];
 	}
 }
