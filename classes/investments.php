@@ -68,6 +68,10 @@ class investments
 
 	public function delete($id)
 	{
-		return $id;
+		$mysql = new QueryBuilder();
+		$mysql->table($this->table);
+		return $mysql->delete([
+			'id' => $id
+		]);
 	}
 }

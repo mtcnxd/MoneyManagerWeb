@@ -136,8 +136,6 @@ $investments = new investments();
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script>
 $(".btn-delete").on('click', function(btn){
-	console.log(this.id);
-
 	$.ajax({
 		url: "background/ajax_endpoint.php",
 		method: 'post',
