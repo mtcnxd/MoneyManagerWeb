@@ -87,6 +87,13 @@ switch ($_POST['action'])
           );
     break;
 
+    case 'deleteSpend':
+        $bills = new bills();
+        $message = array(
+            "message" => $bills->delete($_POST['object'])
+        );
+    break;
+
     case 'deleteSaving':
         $saving  = new savings();
         $saving->delete($_POST['object']);

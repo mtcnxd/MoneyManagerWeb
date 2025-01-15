@@ -33,6 +33,11 @@ class bills
 		return $query->get();
 	}
 
+	public function delete($spendId)
+	{
+		return "Elemento borrado";
+	}
+
 	public function getDataBetween($type, $startDate, $endDate)
 	{
 		$mysql = new QueryBuilder();

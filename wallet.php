@@ -184,6 +184,20 @@ $(".btn-delete").on('click', function(e){
 	e.preventDefault();
 	const object = $(this).attr('id');
 	console.log(object);
+
+	$.ajax({
+		url: "background/ajax_endpoint.php",
+		method: 'post',
+		data: {
+			action:'deleteSpend',
+			object: object
+		},
+		success: function(response) {
+			const json = JSON.parse(response);
+			console.log(json.data);
+		}
+	});
+
 });
 
 $("#type").on('change', function(){
