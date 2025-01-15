@@ -137,6 +137,20 @@ $investments = new investments();
 <script>
 $(".btn-delete").on('click', function(btn){
 	console.log(this.id);
+
+	$.ajax({
+		url: "background/ajax_endpoint.php",
+		method: 'post',
+		data: {
+			action:'deleteSpend',
+			object: this.id
+		},
+		success: function(response) {
+			const json = JSON.parse(response);
+			console.log(json.data);
+		}
+	});
+
 	Swal.fire({
   		title: 'Message',
   		text: 'Data: '+ this.id +' was success deleted',
