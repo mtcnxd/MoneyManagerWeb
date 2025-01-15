@@ -142,7 +142,7 @@ $(".btn-delete").on('click', function(btn){
 		url: "background/ajax_endpoint.php",
 		method: 'post',
 		data: {
-			action:'deleteSpend',
+			action:'deleteInvest',
 			object: this.id
 		},
 		success: function(response) {

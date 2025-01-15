@@ -87,10 +87,11 @@ switch ($_POST['action'])
           );
     break;
 
-    case 'deleteSpend':
-        $bills = new bills();
+    case 'deleteInvest':
+        $investment = new investments();
         $message = array(
-            "message" => "Esta es una prueba"
+            "message" => "Esta es una prueba",
+            "invest"  => $investment->delete($_POST['object'])
         );
     break;
 
