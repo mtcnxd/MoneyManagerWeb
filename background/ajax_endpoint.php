@@ -7,6 +7,7 @@ require_once ("../classes/savings.php");
 require_once ("../classes/bills.php");
 
 use classes\QueryBuilder;
+use classes\investments;
 use classes\categories;
 use classes\savings;
 use classes\bills;
