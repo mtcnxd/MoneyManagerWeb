@@ -183,7 +183,7 @@ if($_POST){
 									echo '	<div class="ms-2 me-auto">';
 									echo '		<div class="fw-bold">'.$value->category.'</div>';
 									echo '	</div>';
-									echo '	<span class="badge text-bg-primary rounded-pill">'.$value->amount.'</span>';
+									echo '	<span class="text-bg-primary">'. number_format($value->amount, 2).'</span>';
 									echo '</li>';
 								}
 								echo "</ol>";
