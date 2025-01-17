@@ -176,9 +176,17 @@ if($_POST){
 							<div class="card-body">
 								<?php
 								$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
+
+								echo "<ol class='list-group list-group-numbered'>";
 								foreach ($data as $value) {
-									echo "<p>".$value->category."<b>".$value->amount."</b></p>";
+									echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
+									echo '	<div class="ms-2 me-auto">';
+									echo '		<div class="fw-bold">'.$value->category.'</div>';
+									echo '	</div>';
+									echo '	<span class="badge text-bg-primary rounded-pill">'.$value->amount.'</span>';
+									echo '</li>';
 								}
+								echo "</ol>";
 								?>
 							</div>
 						</div>
