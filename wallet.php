@@ -176,7 +176,10 @@ if($_POST){
 							<div class="card-body">
 								<?php
 								$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
-								var_dump($data);
+								foreach ($data as $value) {
+									echo "<p>".$value->category."</p>";
+									echo "<p>".$value->amount."</p>";
+								}
 								?>
 							</div>
 						</div>
