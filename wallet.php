@@ -166,19 +166,20 @@ if($_POST){
 
 				</div>	<!-- Col -->
 
-				<div class="card rounded border border-custom shadow-sm mb-4">
-					<div class="card-header">
-						Spends by category
-					</div>
-					<div class="card-body">
-						<?php
-						$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
 
-						foreach ($data as $key => $value) {
-							echo "<p>".$value."</p>";
-						}
-
-						?>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="card rounded border border-custom shadow-sm mb-4">
+							<div class="card-header">
+								Spends by category
+							</div>
+							<div class="card-body">
+								<?php
+								$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
+								var_dump($data);
+								?>
+							</div>
+						</div>
 					</div>
 				</div>
 
