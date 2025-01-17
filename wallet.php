@@ -177,8 +177,7 @@ if($_POST){
 								<?php
 								$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
 								foreach ($data as $value) {
-									echo "<p>".$value->category."</p>";
-									echo "<p>".$value->amount."</p>";
+									echo "<p>".$value->category."<b>".$value->amount."</b></p>";
 								}
 								?>
 							</div>

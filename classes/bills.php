@@ -46,7 +46,7 @@ class bills
 	public function spendsByCategory($startDate, $endDate)
 	{
 		$mysql = new QueryBuilder();
-		$query = "SELECT category, sum(amount) FROM wallet_bills where date between '$startDate' and '$endDate' group by category";
+		$query = "SELECT category, sum(amount) AS amount FROM wallet_bills where date between '$startDate' and '$endDate' group by category";
 		return $mysql->get($query);
 	}
 }
