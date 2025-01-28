@@ -85,27 +85,25 @@ if($_POST){
 					</div>
 
 					<div class="row">
-						<div class="col-md-5">
-							<div class="card rounded border border-custom shadow-sm mb-4">
-								<div class="card-header">
-									Spends by category
-								</div>
-									<div class="card-body">
-										<?php
-										$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
+						<div class="card rounded border border-custom shadow-sm mb-4">
+							<div class="card-header">
+								Spends by category
+							</div>
+								<div class="card-body">
+									<?php
+									$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
 
-										echo "<ol class='list-group list-group-numbered'>";
-										foreach ($data as $value) {
-											echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
-											echo '	<div class="ms-2 me-auto">';
-											echo '		<div class="fw-bold">'.$value->category.'</div>';
-											echo '	</div>';
-											echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
-											echo '</li>';
-										}
-										echo "</ol>";
-										?>
-									</div>
+									echo "<ol class='list-group list-group-numbered'>";
+									foreach ($data as $value) {
+										echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
+										echo '	<div class="ms-2 me-auto">';
+										echo '		<div class="fw-bold">'.$value->category.'</div>';
+										echo '	</div>';
+										echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
+										echo '</li>';
+									}
+									echo "</ol>";
+									?>
 								</div>
 							</div>
 						</div>
