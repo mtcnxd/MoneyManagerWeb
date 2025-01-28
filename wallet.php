@@ -34,8 +34,8 @@ if($_POST){
 		</header>		
 		
 		<div class="container">
-			<div class="row mb-4">
-				<div class="col-md-5">
+			<div class="col-md-5">
+				<div class="row">
 					<div class="card rounded border border-custom shadow-sm">
 						<div class="card-header">
 							<h6 class="card-header-title">Agregar movimiento</h6>
@@ -44,21 +44,21 @@ if($_POST){
 						<div class="card-body">
 							<form action="wallet.php" method="post">
 								<div class="mb-3">
-							    	<label for="" class="form-label">Fecha</label>
+									<label for="" class="form-label">Fecha</label>
 									<input type="date" class="form-control" name="date" id="date" value="<?=date('Y-m-d')?>">
-							  	</div>
+								</div>
 								<div class="mb-3">
-							    	<label for="" class="form-label">Tipo</label>
-							    	<select class="form-select" name="type" id="type">
-							    		<option value="">Seleccionar tipo</option>
-								  		<option value="Ingreso">Ingreso</option>
-								  		<option value="Egreso">Egreso</option>
+									<label for="" class="form-label">Tipo</label>
+									<select class="form-select" name="type" id="type">
+										<option value="">Seleccionar tipo</option>
+										<option value="Ingreso">Ingreso</option>
+										<option value="Egreso">Egreso</option>
 									</select>
-							  	</div>
+								</div>
 								<div class="mb-3">
-							    	<label for="" class="form-label">Categoria</label>
-							    	<select class="form-select" name="category" id="category">
-								  		<?php
+									<label for="" class="form-label">Categoria</label>
+									<select class="form-select" name="category" id="category">
+										<?php
 										$list = $categories->load('Ingreso');
 										foreach ($list as $value) {
 											echo "<option>".$value->category."</option>";
@@ -67,133 +67,132 @@ if($_POST){
 									</select>
 								</div>
 								<div class="mb-3">
-							    	<label for="" class="form-label">Descripcion</label>
-							    	<input type="text" class="form-control" name="description" id="description">
-							  	</div>								
-							  	<div class="mb-3">
-							    	<label for="" class="form-label">Importe</label>
+									<label for="" class="form-label">Descripcion</label>
+									<input type="text" class="form-control" name="description" id="description">
+								</div>								
+								<div class="mb-3">
+									<label for="" class="form-label">Importe</label>
 									<div class="input-group">
 										<div class="input-group-text">$</div>
 										<input type="text" class="form-control" name="amount" placeholder="0.00">
 									</div>
-							  	</div>
-
+								</div>
 								<button type="submit" class="btn btn-primary">Guardar</button>
 							</form>	
 						</div>	
-					</div> 	<!-- Card -->
-				</div>	<!-- Col -->
+					</div>
 
-				<div class="col">
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-								<li class="nav-item">
-							    	<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Egresos</button>
-							  	</li>
-							  	<li class="nav-item">
-							    	<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ingresos</button>
-							  	</li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-									<p class="fs-7 fw-bolder text-uppercase text-muted">
-										Listado de egresos del mes
-									</p>
-									<table class="table">
-										<tr>
-											<td>#</td>
-											<td>Descripción</td>
-											<td>Categoria</td>
-											<td>Fecha</td>
-											<td class="text-end">Importe</td>
-											<td class="text-end"></td>
-										</tr>
-										<?php 
-										$data = $bills->getDataBetween('Egreso', date('Y-m-01'), date('Y-m-t'));
-
-										foreach ($data as $row => $bill){
-											$parseDate = new dateTime($bill->date);
-											echo "<tr>";
-											echo "	<td>".($row + 1)."</td>";
-											echo "	<td>".$bill->description."</td>";
-											echo "	<td>".$bill->category."</td>";
-											echo "	<td>".$parseDate->format('d-m-Y')."</td>";
-											echo "	<td class='text-end'>$".number_format($bill->amount,2)."</td>";
-											echo '	<td>
-														<a href="#" id='.$bill->id.' class="btn-delete">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
-														</a>
-													</td>';
-											echo "</tr>";
-										}										
-										?>										
-									</table>
+					<div class="row mb-4">
+						<div class="col-md-5">
+							<div class="card rounded border border-custom shadow-sm mb-4">
+								<div class="card-header">
+									Spends by category
 								</div>
-							  	<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-								  	<p class="fs-7 fw-bolder text-uppercase text-muted">
-										Listado de ingresos del mes
-									</p>
-							  		<table class="table">
-										<tr>
-											<td>#</td>
-											<td>Descripción</td>
-											<td>Fecha</td>
-											<td class="text-end">Importe</td>
-											<td class="text-end"></td>
-										</tr>
-										<?php
-										$data = $bills->getDataBetween('Ingreso', date('Y-m-01'), date('Y-m-t'));
-										foreach ($data as $row => $value) {
-											echo "<tr>";
-											echo "	<td>".($row + 1)."</td>";
-											echo "	<td>".$value->description."</td>";
-											echo "	<td>".$value->date."</td>";
-											echo "	<td class='text-end'>$".number_format($value->amount,2)."</td>";
-											echo '	<td>
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
-													</td>';
-											echo "</tr>";
-										}										
-										?>
-									</table>
-							  	</div>
+								<div class="card-body">
+									<?php
+									$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
+
+									echo "<ol class='list-group list-group-numbered'>";
+									foreach ($data as $value) {
+										echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
+										echo '	<div class="ms-2 me-auto">';
+										echo '		<div class="fw-bold">'.$value->category.'</div>';
+										echo '	</div>';
+										echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
+										echo '</li>';
+									}
+									echo "</ol>";
+									?>
+								</div>
 							</div>
 						</div>
-					</div> <!-- Card -->
+					</div>
 
-				</div>	<!-- Col -->
-			</div>	<!-- Row -->	
-		
-			<div class="row mb-4">
-				<div class="col-md-5">
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							Spends by category
-						</div>
-						<div class="card-body">
-							<?php
-							$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
+				</div>
+			</div>
 
-							echo "<ol class='list-group list-group-numbered'>";
-							foreach ($data as $value) {
-								echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
-								echo '	<div class="ms-2 me-auto">';
-								echo '		<div class="fw-bold">'.$value->category.'</div>';
-								echo '	</div>';
-								echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
-								echo '</li>';
-							}
-							echo "</ol>";
-							?>
+
+			<div class="col">
+				<div class="card rounded border border-custom shadow-sm mb-4">
+					<div class="card-header">
+						<ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+							<li class="nav-item">
+								<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Egresos</button>
+							</li>
+							<li class="nav-item">
+								<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ingresos</button>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+								<p class="fs-7 fw-bolder text-uppercase text-muted">
+									Listado de egresos del mes
+								</p>
+								<table class="table">
+									<tr>
+										<td>#</td>
+										<td>Descripción</td>
+										<td>Categoria</td>
+										<td>Fecha</td>
+										<td class="text-end">Importe</td>
+										<td class="text-end"></td>
+									</tr>
+									<?php 
+									$data = $bills->getDataBetween('Egreso', date('Y-m-01'), date('Y-m-t'));
+
+									foreach ($data as $row => $bill){
+										$parseDate = new dateTime($bill->date);
+										echo "<tr>";
+										echo "	<td>".($row + 1)."</td>";
+										echo "	<td>".$bill->description."</td>";
+										echo "	<td>".$bill->category."</td>";
+										echo "	<td>".$parseDate->format('d-m-Y')."</td>";
+										echo "	<td class='text-end'>$".number_format($bill->amount,2)."</td>";
+										echo '	<td>
+													<a href="#" id='.$bill->id.' class="btn-delete">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+													</a>
+												</td>';
+										echo "</tr>";
+									}										
+									?>										
+								</table>
+							</div>
+							<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+								<p class="fs-7 fw-bolder text-uppercase text-muted">
+									Listado de ingresos del mes
+								</p>
+								<table class="table">
+									<tr>
+										<td>#</td>
+										<td>Descripción</td>
+										<td>Fecha</td>
+										<td class="text-end">Importe</td>
+										<td class="text-end"></td>
+									</tr>
+									<?php
+									$data = $bills->getDataBetween('Ingreso', date('Y-m-01'), date('Y-m-t'));
+									foreach ($data as $row => $value) {
+										echo "<tr>";
+										echo "	<td>".($row + 1)."</td>";
+										echo "	<td>".$value->description."</td>";
+										echo "	<td>".$value->date."</td>";
+										echo "	<td class='text-end'>$".number_format($value->amount,2)."</td>";
+										echo '	<td>
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+												</td>';
+										echo "</tr>";
+									}										
+									?>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-		</div> 	<!-- Container -->	
+		</div>
 	</body>
 </html>
 
