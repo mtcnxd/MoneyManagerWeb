@@ -36,75 +36,71 @@ if($_POST){
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5">
-					<div class="row">
-						<div class="card rounded border border-custom shadow-sm">
-							<div class="card-header">
-								<h6 class="card-header-title">Agregar movimiento</h6>
-								<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-							</div>				
-							<div class="card-body">
-								<form action="wallet.php" method="post">
-									<div class="mb-3">
-										<label for="" class="form-label">Fecha</label>
-										<input type="date" class="form-control" name="date" id="date" value="<?=date('Y-m-d')?>">
+					<div class="card rounded border border-custom shadow-sm">
+						<div class="card-header">
+							<h6 class="card-header-title">Agregar movimiento</h6>
+							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+						</div>				
+						<div class="card-body">
+							<form action="wallet.php" method="post">
+								<div class="mb-3">
+									<label for="" class="form-label">Fecha</label>
+									<input type="date" class="form-control" name="date" id="date" value="<?=date('Y-m-d')?>">
+								</div>
+								<div class="mb-3">
+									<label for="" class="form-label">Tipo</label>
+									<select class="form-select" name="type" id="type">
+										<option value="">Seleccionar tipo</option>
+										<option value="Ingreso">Ingreso</option>
+										<option value="Egreso">Egreso</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="" class="form-label">Categoria</label>
+									<select class="form-select" name="category" id="category">
+										<?php
+										$list = $categories->load('Ingreso');
+										foreach ($list as $value) {
+											echo "<option>".$value->category."</option>";
+										}
+										?>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="" class="form-label">Descripcion</label>
+									<input type="text" class="form-control" name="description" id="description">
+								</div>								
+								<div class="mb-3">
+									<label for="" class="form-label">Importe</label>
+									<div class="input-group">
+										<div class="input-group-text">$</div>
+										<input type="text" class="form-control" name="amount" placeholder="0.00">
 									</div>
-									<div class="mb-3">
-										<label for="" class="form-label">Tipo</label>
-										<select class="form-select" name="type" id="type">
-											<option value="">Seleccionar tipo</option>
-											<option value="Ingreso">Ingreso</option>
-											<option value="Egreso">Egreso</option>
-										</select>
-									</div>
-									<div class="mb-3">
-										<label for="" class="form-label">Categoria</label>
-										<select class="form-select" name="category" id="category">
-											<?php
-											$list = $categories->load('Ingreso');
-											foreach ($list as $value) {
-												echo "<option>".$value->category."</option>";
-											}
-											?>
-										</select>
-									</div>
-									<div class="mb-3">
-										<label for="" class="form-label">Descripcion</label>
-										<input type="text" class="form-control" name="description" id="description">
-									</div>								
-									<div class="mb-3">
-										<label for="" class="form-label">Importe</label>
-										<div class="input-group">
-											<div class="input-group-text">$</div>
-											<input type="text" class="form-control" name="amount" placeholder="0.00">
-										</div>
-									</div>
-									<button type="submit" class="btn btn-primary">Guardar</button>
-								</form>	
-							</div>	
-						</div>
+								</div>
+								<button type="submit" class="btn btn-primary">Guardar</button>
+							</form>	
+						</div>	
 					</div>
 
-					<div class="row">
-						<div class="card rounded border border-custom shadow-sm mb-4">
-							<div class="card-header">
-								Spends by category
-							</div>
-								<div class="card-body">
-									<?php
-									$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
+					<div class="card rounded border border-custom shadow-sm mb-4">
+						<div class="card-header">
+							Spends by category
+						</div>
+							<div class="card-body">
+								<?php
+								$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
 
-									echo "<ol class='list-group list-group-numbered'>";
-									foreach ($data as $value) {
-										echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
-										echo '	<div class="ms-2 me-auto">';
-										echo '		<div class="fw-bold">'.$value->category.'</div>';
-										echo '	</div>';
-										echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
-										echo '</li>';
-									}
-									echo "</ol>";
-									?>
-								</div>
+								echo "<ol class='list-group list-group-numbered'>";
+								foreach ($data as $value) {
+									echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
+									echo '	<div class="ms-2 me-auto">';
+									echo '		<div class="fw-bold">'.$value->category.'</div>';
+									echo '	</div>';
+									echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
+									echo '</li>';
+								}
+								echo "</ol>";
+								?>
 							</div>
 						</div>
 					</div>
