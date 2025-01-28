@@ -125,12 +125,12 @@ if($_POST){
 										</p>
 										<table class="table">
 											<tr>
-												<td>#</td>
-												<td>Descripción</td>
-												<td>Categoria</td>
-												<td>Fecha</td>
-												<td class="text-end">Importe</td>
-												<td class="text-end"></td>
+												<th scope="col">#</th>
+												<th scope="col">Descripción</th>
+												<th scope="col">Categoria</th>
+												<th scope="col">Fecha</th>
+												<th scope="col" class="text-end">Importe</th>
+												<th scope="col" class="text-end"></th>
 											</tr>
 											<?php 
 											$data = $bills->getDataBetween('Egreso', date('Y-m-01'), date('Y-m-t'));
@@ -160,11 +160,11 @@ if($_POST){
 										</p>
 										<table class="table">
 											<tr>
-												<td>#</td>
-												<td>Descripción</td>
-												<td>Fecha</td>
-												<td class="text-end">Importe</td>
-												<td class="text-end"></td>
+												<th scope="col">#</th>
+												<th scope="col">Descripción</th>
+												<th scope="col">Fecha</th>
+												<th scope="col" class="text-end">Importe</th>
+												<th scope="col" class="text-end"></th>
 											</tr>
 											<?php
 											$data = $bills->getDataBetween('Ingreso', date('Y-m-01'), date('Y-m-t'));
