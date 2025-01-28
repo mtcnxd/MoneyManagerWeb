@@ -110,84 +110,84 @@ if($_POST){
 							</div>
 						</div>
 					</div>
-				</div>
 
+					<div class="col">
+						<div class="card rounded border border-custom shadow-sm mb-4">
+							<div class="card-header">
+								<ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+									<li class="nav-item">
+										<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Egresos</button>
+									</li>
+									<li class="nav-item">
+										<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ingresos</button>
+									</li>
+								</ul>
+							</div>
+							<div class="card-body">
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+										<p class="fs-7 fw-bolder text-uppercase text-muted">
+											Listado de egresos del mes
+										</p>
+										<table class="table">
+											<tr>
+												<td>#</td>
+												<td>Descripción</td>
+												<td>Categoria</td>
+												<td>Fecha</td>
+												<td class="text-end">Importe</td>
+												<td class="text-end"></td>
+											</tr>
+											<?php 
+											$data = $bills->getDataBetween('Egreso', date('Y-m-01'), date('Y-m-t'));
 
-				<div class="col">
-					<div class="card rounded border border-custom shadow-sm mb-4">
-						<div class="card-header">
-							<ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-								<li class="nav-item">
-									<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Egresos</button>
-								</li>
-								<li class="nav-item">
-									<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ingresos</button>
-								</li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-									<p class="fs-7 fw-bolder text-uppercase text-muted">
-										Listado de egresos del mes
-									</p>
-									<table class="table">
-										<tr>
-											<td>#</td>
-											<td>Descripción</td>
-											<td>Categoria</td>
-											<td>Fecha</td>
-											<td class="text-end">Importe</td>
-											<td class="text-end"></td>
-										</tr>
-										<?php 
-										$data = $bills->getDataBetween('Egreso', date('Y-m-01'), date('Y-m-t'));
-
-										foreach ($data as $row => $bill){
-											$parseDate = new dateTime($bill->date);
-											echo "<tr>";
-											echo "	<td>".($row + 1)."</td>";
-											echo "	<td>".$bill->description."</td>";
-											echo "	<td>".$bill->category."</td>";
-											echo "	<td>".$parseDate->format('d-m-Y')."</td>";
-											echo "	<td class='text-end'>$".number_format($bill->amount,2)."</td>";
-											echo '	<td>
-														<a href="#" id='.$bill->id.' class="btn-delete">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
-														</a>
-													</td>';
-											echo "</tr>";
-										}										
-										?>										
-									</table>
-								</div>
-								<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-									<p class="fs-7 fw-bolder text-uppercase text-muted">
-										Listado de ingresos del mes
-									</p>
-									<table class="table">
-										<tr>
-											<td>#</td>
-											<td>Descripción</td>
-											<td>Fecha</td>
-											<td class="text-end">Importe</td>
-											<td class="text-end"></td>
-										</tr>
-										<?php
-										$data = $bills->getDataBetween('Ingreso', date('Y-m-01'), date('Y-m-t'));
-										foreach ($data as $row => $value) {
-											echo "<tr>";
-											echo "	<td>".($row + 1)."</td>";
-											echo "	<td>".$value->description."</td>";
-											echo "	<td>".$value->date."</td>";
-											echo "	<td class='text-end'>$".number_format($value->amount,2)."</td>";
-											echo '	<td>
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
-													</td>';
-											echo "</tr>";
-										}										
-										?>
-									</table>
+											foreach ($data as $row => $bill){
+												$parseDate = new dateTime($bill->date);
+												echo "<tr>";
+												echo "	<td>".($row + 1)."</td>";
+												echo "	<td>".$bill->description."</td>";
+												echo "	<td>".$bill->category."</td>";
+												echo "	<td>".$parseDate->format('d-m-Y')."</td>";
+												echo "	<td class='text-end'>$".number_format($bill->amount,2)."</td>";
+												echo '	<td>
+															<a href="#" id='.$bill->id.' class="btn-delete">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+															</a>
+														</td>';
+												echo "</tr>";
+											}										
+											?>										
+										</table>
+									</div>
+									
+									<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+										<p class="fs-7 fw-bolder text-uppercase text-muted">
+											Listado de ingresos del mes
+										</p>
+										<table class="table">
+											<tr>
+												<td>#</td>
+												<td>Descripción</td>
+												<td>Fecha</td>
+												<td class="text-end">Importe</td>
+												<td class="text-end"></td>
+											</tr>
+											<?php
+											$data = $bills->getDataBetween('Ingreso', date('Y-m-01'), date('Y-m-t'));
+											foreach ($data as $row => $value) {
+												echo "<tr>";
+												echo "	<td>".($row + 1)."</td>";
+												echo "	<td>".$value->description."</td>";
+												echo "	<td>".$value->date."</td>";
+												echo "	<td class='text-end'>$".number_format($value->amount,2)."</td>";
+												echo '	<td>
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+														</td>';
+												echo "</tr>";
+											}										
+											?>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
