@@ -36,7 +36,7 @@ if($_POST){
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5">
-					<div class="card rounded border border-custom shadow-sm">
+					<div class="card border-custom shadow-sm mb-4">
 						<div class="card-header">
 							<h6 class="card-header-title">Agregar movimiento</h6>
 							<svg class="card-header-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -82,28 +82,28 @@ if($_POST){
 						</div>	
 					</div>
 
-					<div class="card rounded border border-custom shadow-sm mb-4">
+					<div class="card border-custom shadow-sm mb-4">
 						<div class="card-header">
 							Spends by category
 						</div>
-							<div class="card-body">
-								<?php
-								$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
+						<div class="card-body">
+							<?php
+							$data = $bills->spendsByCategory(date('Y-m-01'), date('Y-m-t'));
 
-								echo "<ol class='list-group list-group-numbered'>";
-								foreach ($data as $value) {
-									echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
-									echo '	<div class="ms-2 me-auto">';
-									echo '		<div class="fw-bold">'.$value->category.'</div>';
-									echo '	</div>';
-									echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
-									echo '</li>';
-								}
-								echo "</ol>";
-								?>
-							</div>
+							echo "<ol class='list-group list-group-numbered'>";
+							foreach ($data as $value) {
+								echo '<li class="list-group-item d-flex justify-content-between align-items-start">';
+								echo '	<div class="ms-2 me-auto">';
+								echo '		<div class="fw-bold">'.$value->category.'</div>';
+								echo '	</div>';
+								echo '	<span class="text-bg-primary">'."$".number_format($value->amount, 2).'</span>';
+								echo '</li>';
+							}
+							echo "</ol>";
+							?>
 						</div>
 					</div>
+				</div>
 
 					<div class="col">
 						<div class="card rounded border border-custom shadow-sm mb-4">
